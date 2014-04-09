@@ -1,8 +1,8 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE weapons(name, valMin, valMax);
-CREATE TABLE armor(name, type, valMin, valMax);
+CREATE TABLE weapons(name TEXT, valMin INTEGER, valMax INTEGER);
 INSERT INTO "weapons" VALUES('Twig',NULL,NULL);
 INSERT INTO "weapons" VALUES('Wok',NULL,NULL);
 INSERT INTO "weapons" VALUES('Staff',NULL,NULL);
+CREATE TABLE armor(name TEXT, type, valMin INTEGER, valMax INTEGER);
 COMMIT;
