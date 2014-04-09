@@ -1,6 +1,7 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE weapons(name TEXT, valMin INTEGER, valMax INTEGER);
+CREATE TABLE weapons(name TEXT NOT NULL UNIQUE, valMin INTEGER CHECK(valMin>=0),
+valMax INTEGER CHECK(valMax>=0));
 INSERT INTO "weapons" VALUES('Twig',NULL,NULL);
 INSERT INTO "weapons" VALUES('Wok',NULL,NULL);
 INSERT INTO "weapons" VALUES('Staff',NULL,NULL);
@@ -8,5 +9,6 @@ INSERT INTO "weapons" VALUES('Skillet',NULL,NULL);
 INSERT INTO "weapons" VALUES('Dagger',NULL,NULL);
 INSERT INTO "weapons" VALUES('Shortsword',NULL,NULL);
 INSERT INTO "weapons" VALUES('Rapier',NULL,NULL);
-CREATE TABLE armor(name TEXT, type, valMin INTEGER, valMax INTEGER);
+CREATE TABLE armor(name TEXT NOT NULL UNIQUE, type TEXT, valMin INTEGER CHECK(valMin>=0), 
+valMax INTEGER CHECK(valMax>=0));
 COMMIT;
