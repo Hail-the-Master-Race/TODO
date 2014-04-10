@@ -4,20 +4,25 @@ BEGIN TRANSACTION;
 CREATE TABLE classes(name_class TEXT NOT NULL UNIQUE,
 name_character_default_m TEXT NOT NULL UNIQUE,
 name_character_default_f TEXT NOT NULL UNIQUE,
+descriptor TEXT NOT NULL UNIQUE,
 affin_str REAL NOT NULL,
 affin_frt REAL NOT NULL,
 affin_dex REAL NOT NULL);
 INSERT INTO "classes" VALUES('Warrior',
 'Duke Stabbington', 'Ella Stabbington',
+'IIIII HAAAAAVE THE POOOOWEEEEER.',
 0.5, 0.25, 0.25);
 INSERT INTO "classes" VALUES('Rogue',
 'Rynn Flider', 'Wynona Flider',
+'Feel my smolder. No, seriously.',
 0.25, 0.5, 0.5);
 INSERT INTO "classes" VALUES('Defender',
 'Brick Head', 'Brienne Head',
+'Does my shield make me look big? Good.',
 0.25, 0.25, 0.5);
 INSERT INTO "classes" VALUES('Peasant',
 'Dwight Nobody', 'Gertrude Nobody',
+'Nobody loves me :(',
 0.34, 0.33, 0.33);
 
 CREATE TABLE weapons(name TEXT NOT NULL UNIQUE,
