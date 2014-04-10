@@ -1,6 +1,11 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 
+CREATE TABLE achievements(name TEXT NOT NULL UNIQUE,
+description TEXT NOT NULL UNIQUE,
+img_path TEXT NOT NULL UNIQUE);
+-- TODO: add a "condition" column
+
 CREATE TABLE classes(name_class TEXT NOT NULL UNIQUE,
 name_character_default_m TEXT NOT NULL UNIQUE,
 name_character_default_f TEXT NOT NULL UNIQUE,
