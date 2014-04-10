@@ -1,6 +1,25 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 
+CREATE TABLE classes(name_class TEXT NOT NULL UNIQUE,
+name_character_default_m TEXT NOT NULL UNIQUE,
+name_character_default_f TEXT NOT NULL UNIQUE,
+affin_str REAL NOT NULL,
+affin_frt REAL NOT NULL,
+affin_dex REAL NOT NULL);
+INSERT INTO "classes" VALUES('Warrior',
+'Duke Stabbington', 'Ella Stabbington',
+0.5, 0.25, 0.25);
+INSERT INTO "classes" VALUES('Rogue',
+'Rynn Flider', 'Wynona Flider',
+0.25, 0.5, 0.5);
+INSERT INTO "classes" VALUES('Defender',
+'Brick Head', 'Brienne Head',
+0.25, 0.25, 0.5);
+INSERT INTO "classes" VALUES('Peasant',
+'Dwight Nobody', 'Gertrude Nobody',
+0.34, 0.33, 0.33);
+
 CREATE TABLE weapons(name TEXT NOT NULL UNIQUE,
 valMin INTEGER CHECK(valMin>=0),
 valMax INTEGER CHECK(valMax>=0));
