@@ -16,7 +16,7 @@ public class welcomeUI : MonoBehaviour
 				}
 
 				if (GUILayout.Button ("Settings")) {
-						Debug.Log ("TODO: settings");
+						Application.LoadLevel ("SettingScene");
 				}
 
 				if (GUILayout.Button ("High Score\nand\nAchievements")) {
