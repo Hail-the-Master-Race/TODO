@@ -53,6 +53,22 @@ INSERT INTO "mobs" VALUES('Gnome', 2, NULL, NULL, NULL, NULL, 10);
 INSERT INTO "mobs" VALUES('Goat', 2, NULL, NULL, NULL, NULL, 20);
 INSERT INTO "mobs" VALUES('Wolf', 5, NULL, NULL, NULL, NULL, 30);
 
+CREATE TABLE midbosses(name TEXT NOT NULL UNIQUE,
+lvl INTEGER CHECK(lvl>0),
+hp  INTEGER CHECK(hp>0),
+str INTEGER CHECK(str>0),
+frt INTEGER CHECK(frt>0),
+dex INTEGER CHECK(dex>0),
+expYield INTEGER CHECK(expYield>=0));
+
+CREATE TABLE bosses(name TEXT NOT NULL UNIQUE,
+lvl INTEGER CHECK(lvl>0),
+hp  INTEGER CHECK(hp>0),
+str INTEGER CHECK(str>0),
+frt INTEGER CHECK(frt>0),
+dex INTEGER CHECK(dex>0),
+expYield INTEGER CHECK(expYield>=0));
+
 CREATE TABLE scores(event_name TEXT NOT NULL UNIQUE,
 score_val INTEGER CHECK(score_val>=0));
 INSERT INTO "scores" VALUES('CONTAINER_BREAK', 10);
