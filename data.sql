@@ -49,12 +49,13 @@ str INTEGER CHECK(str>0),
 frt INTEGER CHECK(frt>0),
 dex INTEGER CHECK(dex>0),
 int INTEGER CHECK(int>0),
+aov INTEGER CHECK(aov>0),
 expYield INTEGER CHECK(expYield>=0));
-INSERT INTO "mobs" VALUES('Rat', 1, 5, 1, 1, 1, NULL, 5);
-INSERT INTO "mobs" VALUES('Stray Chicken', 1, 5, 2, 1, 2, NULL, 5);
-INSERT INTO "mobs" VALUES('Gnome', 2, NULL, NULL, NULL, NULL, NULL, 10);
-INSERT INTO "mobs" VALUES('Goat', 2, NULL, NULL, NULL, NULL, NULL, 20);
-INSERT INTO "mobs" VALUES('Wolf', 5, NULL, NULL, NULL, NULL, NULL, 30);
+INSERT INTO "mobs" VALUES('Rat', 1, 5, 1, 1, 1, NULL, 1, 5);
+INSERT INTO "mobs" VALUES('Stray Chicken', 1, 5, 2, 1, 2, NULL, 1, 5);
+INSERT INTO "mobs" VALUES('Gnome', 2, NULL, NULL, NULL, NULL, NULL, 10, 10);
+INSERT INTO "mobs" VALUES('Goat', 2, NULL, NULL, NULL, NULL, NULL, 10, 20);
+INSERT INTO "mobs" VALUES('Wolf', 5, NULL, NULL, NULL, NULL, NULL, 30, 30);
 
 CREATE TABLE midbosses(name TEXT NOT NULL UNIQUE,
 lvl INTEGER CHECK(lvl>0),
@@ -63,6 +64,7 @@ str INTEGER CHECK(str>0),
 frt INTEGER CHECK(frt>0),
 dex INTEGER CHECK(dex>0),
 int INTEGER CHECK(int>0),
+aov INTEGER CHECK(aov>0),
 expYield INTEGER CHECK(expYield>=0));
 
 CREATE TABLE bosses(name TEXT NOT NULL UNIQUE,
