@@ -8,7 +8,7 @@ public class welcomeUI : MonoBehaviour
 				GUILayout.Label ("TODO: Dungeon of Doom, Obviously");
 
 				if (GUILayout.Button ("New Game")) {
-						Debug.Log ("TODO: begin new game");
+						Application.LoadLevel ("StartScene");
 				}
 
 				if (GUILayout.Button ("Continue")) {
