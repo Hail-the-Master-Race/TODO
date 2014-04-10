@@ -7,23 +7,24 @@ name_character_default_f TEXT NOT NULL UNIQUE,
 descriptor TEXT NOT NULL UNIQUE,
 affin_str REAL NOT NULL,
 affin_frt REAL NOT NULL,
-affin_dex REAL NOT NULL);
+affin_dex REAL NOT NULL,
+affin_int REAL NOT NULL);
 INSERT INTO "classes" VALUES('Warrior',
 'Duke Stabbington', 'Ella Stabbington',
 'IIIII HAAAAAVE THE POOOOWEEEEER.',
-0.5, 0.25, 0.25);
+0.5, 0.25, 0.25, 0);
 INSERT INTO "classes" VALUES('Rogue',
 'Rynn Flider', 'Wynona Flider',
 'Feel my smolder. No, seriously.',
-0.25, 0.5, 0.5);
+0.25, 0.5, 0.5, 0);
 INSERT INTO "classes" VALUES('Defender',
 'Brick Head', 'Brienne Head',
 'Does my shield make me look big? Good.',
-0.25, 0.25, 0.5);
+0.25, 0.25, 0.5, 0);
 INSERT INTO "classes" VALUES('Peasant',
 'Dwight Nobody', 'Gertrude Nobody',
 'Nobody loves me :(',
-0.34, 0.33, 0.33);
+0.34, 0.33, 0.33, 0);
 
 CREATE TABLE weapons(name TEXT NOT NULL UNIQUE,
 valMin INTEGER CHECK(valMin>=0),
@@ -38,7 +39,8 @@ INSERT INTO "weapons" VALUES('Rapier',NULL,NULL);
 
 CREATE TABLE armor(name TEXT NOT NULL UNIQUE,
 type TEXT,
-valMin INTEGER CHECK(valMin>=0), valMax INTEGER CHECK(valMax>=0));
+valMin INTEGER CHECK(valMin>=0),
+valMax INTEGER CHECK(valMax>=0));
 
 CREATE TABLE mobs(name TEXT NOT NULL UNIQUE,
 lvl INTEGER CHECK(lvl>0),
@@ -46,12 +48,13 @@ hp  INTEGER CHECK(hp>0),
 str INTEGER CHECK(str>0),
 frt INTEGER CHECK(frt>0),
 dex INTEGER CHECK(dex>0),
+int INTEGER CHECK(int>0),
 expYield INTEGER CHECK(expYield>=0));
-INSERT INTO "mobs" VALUES('Rat', 1, 5, 1, 1, 1, 5);
-INSERT INTO "mobs" VALUES('Stray Chicken', 1, 5, 2, 1, 2, 5);
-INSERT INTO "mobs" VALUES('Gnome', 2, NULL, NULL, NULL, NULL, 10);
-INSERT INTO "mobs" VALUES('Goat', 2, NULL, NULL, NULL, NULL, 20);
-INSERT INTO "mobs" VALUES('Wolf', 5, NULL, NULL, NULL, NULL, 30);
+INSERT INTO "mobs" VALUES('Rat', 1, 5, 1, 1, 1, NULL, 5);
+INSERT INTO "mobs" VALUES('Stray Chicken', 1, 5, 2, 1, 2, NULL, 5);
+INSERT INTO "mobs" VALUES('Gnome', 2, NULL, NULL, NULL, NULL, NULL, 10);
+INSERT INTO "mobs" VALUES('Goat', 2, NULL, NULL, NULL, NULL, NULL, 20);
+INSERT INTO "mobs" VALUES('Wolf', 5, NULL, NULL, NULL, NULL, NULL, 30);
 
 CREATE TABLE midbosses(name TEXT NOT NULL UNIQUE,
 lvl INTEGER CHECK(lvl>0),
@@ -59,6 +62,7 @@ hp  INTEGER CHECK(hp>0),
 str INTEGER CHECK(str>0),
 frt INTEGER CHECK(frt>0),
 dex INTEGER CHECK(dex>0),
+int INTEGER CHECK(int>0),
 expYield INTEGER CHECK(expYield>=0));
 
 CREATE TABLE bosses(name TEXT NOT NULL UNIQUE,
@@ -67,6 +71,7 @@ hp  INTEGER CHECK(hp>0),
 str INTEGER CHECK(str>0),
 frt INTEGER CHECK(frt>0),
 dex INTEGER CHECK(dex>0),
+int INTEGER CHECK(int>0),
 expYield INTEGER CHECK(expYield>=0));
 
 CREATE TABLE scores(event_name TEXT NOT NULL UNIQUE,
