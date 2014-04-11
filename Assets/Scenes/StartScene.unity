@@ -84,6 +84,7 @@ GameObject:
   - 4: {fileID: 17571348}
   - 82: {fileID: 17571347}
   - 114: {fileID: 17571349}
+  - 114: {fileID: 17571350}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -169,6 +170,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3763d50a693f914cbc28967e7ce18d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &17571350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 17571346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c08bea4a8b5e54b8d45f08592e3dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &19428019
@@ -2659,8 +2671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4ff78123da3c4419c2c0213f9e65d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  MP: 100
+  currentHP: 0
+  maxHP: 0
+  currentMP: 0
+  maxMP: 0
   name: PC Placeholder Name
 --- !u!1 &1797486203
 GameObject:
