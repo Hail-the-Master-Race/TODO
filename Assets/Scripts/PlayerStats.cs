@@ -22,15 +22,4 @@ public class PlayerStats : MonoBehaviour
     public int currentEXP = 10;
     private int maxEXP = 100;
     public int MaxEXP { get { return maxEXP; } }
-
-    // Use this for initialization
-    void Start ()
-    {
-    }
-	
-    // Update is called once per frame
-    void Update ()
-    {
-
-    }
 }
