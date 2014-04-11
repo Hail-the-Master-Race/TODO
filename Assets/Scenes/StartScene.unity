@@ -185,6 +185,10 @@ Prefab:
       propertyPath: mHeight
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
   m_RootGameObject: {fileID: 1945654656}
@@ -296,9 +300,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 17571346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87c08bea4a8b5e54b8d45f08592e3dfc, type: 3}
+  m_Script: {fileID: 11500000, guid: fd049352e80767e43a3e65f89b29b110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 100
 --- !u!1 &19428019
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +588,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
       propertyPath: m_TagString
-      value: 'UI: MP Bar'
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
@@ -760,7 +765,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 20.8571434
+  aspectRatio: 24.333334
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Stripes 1
   mType: 2
@@ -975,7 +980,7 @@ GameObject:
   - 114: {fileID: 310514754}
   m_Layer: 8
   m_Name: Bar (HP)
-  m_TagString: 'UI: HP Bar'
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1048,7 +1053,7 @@ MonoBehaviour:
   mColor: {r: .91911763, g: .77807653, b: .513624549, a: 1}
   mPivot: 4
   mWidth: 300
-  mHeight: 12
+  mHeight: 20
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -1507,7 +1512,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 20.8571434
+  aspectRatio: 24.333334
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Stripes 1
   mType: 2
@@ -1558,7 +1563,7 @@ GameObject:
   - 114: {fileID: 570034117}
   m_Layer: 8
   m_Name: Score
-  m_TagString: Untagged
+  m_TagString: 'UI: Score'
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1570,7 +1575,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 570034115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 349.793701, z: 0}
+  m_LocalPosition: {x: 0, y: 340, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1756644896}
@@ -1586,30 +1591,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    target: {fileID: 1756644896}
+    relative: .5
+    absolute: -50
   rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    target: {fileID: 1756644896}
+    relative: .5
+    absolute: 50
   bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    target: {fileID: 1756644896}
+    relative: 1
+    absolute: -40
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1756644896}
     relative: 1
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 74
-  mHeight: 16
+  mWidth: 100
+  mHeight: 40
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.625
+  aspectRatio: 2.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -2065,7 +2070,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
       propertyPath: m_TagString
-      value: 'UI: HP Bar'
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
@@ -2191,7 +2196,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 20.8571434
+  aspectRatio: 24.333334
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Stripes 1
   mType: 2
@@ -2613,7 +2618,7 @@ GameObject:
   - 114: {fileID: 1368804935}
   m_Layer: 8
   m_Name: Bar (Hunger)
-  m_TagString: 'UI: Hunger Bar'
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2686,7 +2691,7 @@ MonoBehaviour:
   mColor: {r: .91911763, g: .77807653, b: .513624549, a: 1}
   mPivot: 4
   mWidth: 300
-  mHeight: 25
+  mHeight: 20
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -2839,7 +2844,7 @@ GameObject:
   - 114: {fileID: 1456665515}
   m_Layer: 8
   m_Name: Bar (MP)
-  m_TagString: 'UI: MP Bar'
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3048,7 +3053,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 20.8571434
+  aspectRatio: 24.333334
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Stripes 1
   mType: 2
@@ -3164,7 +3169,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647264305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 640, y: 350, z: 0}
+  m_LocalPosition: {x: 640, y: 340, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1756644896}
@@ -3180,34 +3185,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    target: {fileID: 1756644896}
+    relative: 1
+    absolute: -200
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1756644896}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    target: {fileID: 1756644896}
+    relative: 1
+    absolute: -40
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1756644896}
     relative: 1
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 5
-  mWidth: 275
-  mHeight: 20
+  mWidth: 200
+  mHeight: 40
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
-  keepAspectRatio: 0
-  aspectRatio: 13.75
+  keepAspectRatio: 1
+  aspectRatio: 5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
-  mText: 
+  mText: 'PC Info
+
+    goes here'
   mFontSize: 50
   mFontStyle: 0
   mAlignment: 0
@@ -3564,6 +3571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: PC Placeholder Name
+  characterClass: Rogue
   currentHP: 100
   currentMP: 100
   currentHunger: 100
@@ -3894,7 +3902,7 @@ GameObject:
   - 114: {fileID: 1945654658}
   m_Layer: 8
   m_Name: Bar (EXP)
-  m_TagString: 'UI: EXP Bar'
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3967,7 +3975,7 @@ MonoBehaviour:
   mColor: {r: .91911763, g: .77807653, b: .513624549, a: 1}
   mPivot: 4
   mWidth: 300
-  mHeight: 25
+  mHeight: 20
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -4027,7 +4035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
       propertyPath: m_TagString
-      value: 'UI: Hunger Bar'
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 793c76f66366a0f449413b1b733a0f60, type: 2}
       propertyPath: mText
