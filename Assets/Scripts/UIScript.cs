@@ -6,32 +6,51 @@ public class UIScript : MonoBehaviour
     private GameObject PC;
     private PlayerStats PCStats;
 
+    private GameStats GameStats;
+
     private UILabel LabelPCInfo;
+    private UILabel LabelScore;
     private GameObject BarHP, BarMP, BarHunger, BarEXP;
 
     // Use this for initialization
     void Start ()
     {
-        PC = GameObject.FindGameObjectWithTag ("Player");
+        PC = GameObject.Find ("Player");
         PCStats = PC.GetComponent<PlayerStats> ();
-        LabelPCInfo = GameObject.FindGameObjectWithTag ("UI: PC Info")
+
+        GameStats = GameObject.Find ("Game Controller")
+            .GetComponent<GameStats> ();
+
+        LabelPCInfo = GameObject.Find ("PC Info")
+            .GetComponent<UILabel> ();
+        LabelScore = GameObject.Find ("Score")
             .GetComponent<UILabel> ();
 
-        BarHP = GameObject.FindGameObjectWithTag ("UI: HP Bar");
-        BarMP = GameObject.FindGameObjectWithTag ("UI: MP Bar");
-        BarHunger = GameObject.FindGameObjectWithTag ("UI: Hunger Bar");
-        BarEXP = GameObject.FindGameObjectWithTag ("UI: EXP Bar");
+        BarHP = GameObject.Find ("Bar (HP)");
+        BarMP = GameObject.Find ("Bar (MP)");
+        BarHunger = GameObject.Find ("Bar (Hunger)");
+        BarEXP = GameObject.Find ("Bar (EXP)");
     }
 	
     // Update is called once per frame
     void Update ()
     {
         UpdateBars ();
-
-        LabelPCInfo.text = PCStats.name;
-        LabelPCInfo.text += (" Lvl." + PCStats.Lvl);
+        UpdatePCInfo ();
+        UpdateScore ();
     }
 
+    void UpdatePCInfo ()
+    {
+        LabelPCInfo.text = PCStats.name;
+        LabelPCInfo.text += ("\n Lvl." + PCStats.Lvl + " " + PCStats.characterClass);
+    }
+
+    void UpdateScore ()
+    {
+        LabelScore.text = "Score: " + GameStats.score.ToString ();
+    }
+    
     void UpdateBars ()
     {
         UpdateHPBar ();
