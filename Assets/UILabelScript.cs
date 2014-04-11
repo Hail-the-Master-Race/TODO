@@ -17,7 +17,7 @@ public class UILabelScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        labelPCName.text = PC.GetComponent<PlayerController> ().name;
-        labelPCName.text += (" Lvl." + PC.GetComponent<PlayerController> ().getLevel ());
+        labelPCName.text = PC.GetComponent<PlayerStats> ().name;
+        labelPCName.text += (" Lvl." + PC.GetComponent<PlayerStats> ().getLevel ());
     }
 }
