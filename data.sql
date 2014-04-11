@@ -31,22 +31,21 @@ INSERT INTO "classes" VALUES('Peasant',
 'Nobody loves me :(',
 0.34, 0.33, 0.33, 0);
 
-CREATE TABLE weapons(name TEXT NOT NULL UNIQUE,
+CREATE TABLE equipment(name TEXT NOT NULL UNIQUE,
+type TEXT CHECK(type IN ('HEAD', 'HAND', 'CHEST', 'LEG', 'FEET', 'ACCESSORY', 'WEAPON')),
+lvl INTEGER CHECK(lvl>0),
 valMin INTEGER CHECK(valMin>=0),
 valMax INTEGER CHECK(valMax>=0));
-INSERT INTO "weapons" VALUES('Twig',1,1);
-INSERT INTO "weapons" VALUES('Wok',3,5);
-INSERT INTO "weapons" VALUES('Staff',NULL,NULL);
-INSERT INTO "weapons" VALUES('Skillet',NULL,NULL);
-INSERT INTO "weapons" VALUES('Dagger',NULL,NULL);
-INSERT INTO "weapons" VALUES('Shortsword',NULL,NULL);
-INSERT INTO "weapons" VALUES('Rapier',NULL,NULL);
-
-CREATE TABLE armor(name TEXT NOT NULL UNIQUE,
-type TEXT,
-valMin INTEGER CHECK(valMin>=0),
-valMax INTEGER CHECK(valMax>=0));
-
+INSERT INTO "equipment" VALUES('Burlap Sack', 'HEAD', 1, NULL, NULL);
+INSERT INTO "equipment" VALUES('Cardboard Box', 'CHEST', 1, NULL, NULL);
+INSERT INTO "equipment" VALUES('Twig','WEAPON', 1, 1, 1);
+INSERT INTO "equipment" VALUES('Wok', 'WEAPON', NULL, 3, 5);
+INSERT INTO "equipment" VALUES('Staff', 'WEAPON', NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Skillet', 'WEAPON', NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Dagger', 'WEAPON', NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Shortsword', 'WEAPON', NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Rapier', 'WEAPON', NULL, NULL, NULL);
+ 
 CREATE TABLE mobs(name TEXT NOT NULL UNIQUE,
 lvl INTEGER CHECK(lvl>0),
 hp  INTEGER CHECK(hp>0),
