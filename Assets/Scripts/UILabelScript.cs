@@ -20,6 +20,6 @@ public class UILabelScript : MonoBehaviour
     void Update ()
     {
         labelPCName.text = PCStats.name;
-        labelPCName.text += (" Lvl." + PCStats.getLevel ());
+        labelPCName.text += (" Lvl." + PCStats.Lvl);
     }
 }

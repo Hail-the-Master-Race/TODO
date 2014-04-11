@@ -6,7 +6,7 @@ public class UIBarsScript : MonoBehaviour
     private GameObject PC;
     private PlayerStats PCStats;
 
-    private GameObject BarHP, BarMP, BarHunger;
+    private GameObject BarHP, BarMP, BarHunger, BarEXP;
 
     // Use this for initialization
     void Start ()
@@ -17,6 +17,7 @@ public class UIBarsScript : MonoBehaviour
         BarHP = GameObject.FindGameObjectWithTag ("UI: HP Bar");
         BarMP = GameObject.FindGameObjectWithTag ("UI: MP Bar");
         BarHunger = GameObject.FindGameObjectWithTag ("UI: Hunger Bar");
+        BarEXP = GameObject.FindGameObjectWithTag ("UI: EXP Bar");
     }
 	
     // Update is called once per frame
@@ -30,24 +31,31 @@ public class UIBarsScript : MonoBehaviour
         UpdateHPBar ();
         UpdateMPBar ();
         UpdateHungerBar ();
+        UpdateEXPBar ();
     }
 
     void UpdateHPBar ()
     {
         BarHP.GetComponent<UISlider> ().value 
-            = PCStats.currentHP / PCStats.maxHP;       
+            = (float)PCStats.currentHP / (float)PCStats.MaxHP;       
     }
     
     void UpdateMPBar ()
     {
         BarMP.GetComponent<UISlider> ().value
-            = PCStats.currentMP / PCStats.maxMP;
+            = (float)PCStats.currentMP / (float)PCStats.MaxMP;
     }
     
     void UpdateHungerBar ()
     {
         BarHunger.GetComponent<UISlider> ().value
-            = 50;//TODO
+            = (float)PCStats.currentHunger / (float)PCStats.MaxHunger;
+    }
+
+    void UpdateEXPBar ()
+    {
+        BarEXP.GetComponent<UISlider> ().value
+            = (float)PCStats.currentEXP / (float)PCStats.MaxEXP;
     }
 
 }
