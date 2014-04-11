@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameStatsScript : MonoBehaviour
+public class GameStats : MonoBehaviour
 {
     public int score = 100;
 }
