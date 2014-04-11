@@ -3,15 +3,19 @@ using System.Collections;
 
 public class PlayerStats : MonoBehaviour
 {
-    private int lvl = 1;
-    public int HP = 100;
-    public int MP = 100;
+    private int lvl;
+    public int currentHP, maxHP;
+    public int currentMP, maxMP;
 
     public string name = "PC Placeholder Name";
 
     // Use this for initialization
     void Start ()
     {
+        currentHP = 100;
+        currentMP = 100;
+
+        name = "PC Placeholder Name";
     }
 
     public int getLevel ()
