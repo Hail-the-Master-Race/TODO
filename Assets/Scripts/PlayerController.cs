@@ -1,22 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
-	public float pos;
-	Animator playerAnimator;
-	float speed = 0f;
-	float direction = 0f;
+public class PlayerController : MonoBehaviour
+{
+
+    public float pos;
+    Animator playerAnimator;
+    float speed = 0f;
+    float direction = 0f;
 	
-	void Start () {
-		speed = 0f;
-		playerAnimator = GetComponent<Animator>();
-	}
-	
-	void AddSpeed(float delta)
-	{
-		speed = Mathf.Clamp( speed + delta, -1f, 1f);
-		playerAnimator.SetFloat("Speed", speed);
-	}
+    void Start ()
+    {
+        speed = 0f;
+        playerAnimator = GetComponent<Animator> ();
+    }
+
+    void AddSpeed (float delta)
+    {
+        speed = Mathf.Clamp (speed + delta, -1f, 1f);
+        playerAnimator.SetFloat ("Speed", speed);
+    }
 	
 	void SetSpeed(float spd)
 	{
