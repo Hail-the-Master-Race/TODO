@@ -46,7 +46,8 @@ INSERT INTO "equipment" VALUES('Dagger', 'WEAPON', NULL, NULL, NULL);
 INSERT INTO "equipment" VALUES('Shortsword', 'WEAPON', NULL, NULL, NULL);
 INSERT INTO "equipment" VALUES('Rapier', 'WEAPON', NULL, NULL, NULL);
  
-CREATE TABLE mobs(name TEXT NOT NULL UNIQUE,
+CREATE TABLE enemies(name TEXT NOT NULL UNIQUE,
+type TEXT NOT NULL CHECK(type IN ('MOB', 'MIDBOSS', 'BOSS')),
 lvl INTEGER CHECK(lvl>0),
 hp  INTEGER CHECK(hp>0),
 str INTEGER CHECK(str>0),
@@ -55,30 +56,11 @@ dex INTEGER CHECK(dex>0),
 int INTEGER CHECK(int>0),
 aov INTEGER CHECK(aov>0),
 expYield INTEGER CHECK(expYield>=0));
-INSERT INTO "mobs" VALUES('Rat', 1, 5, 1, 1, 1, NULL, 1, 5);
-INSERT INTO "mobs" VALUES('Stray Chicken', 1, 5, 2, 1, 2, NULL, 1, 5);
-INSERT INTO "mobs" VALUES('Gnome', 2, NULL, NULL, NULL, NULL, NULL, 10, 10);
-INSERT INTO "mobs" VALUES('Goat', 2, NULL, NULL, NULL, NULL, NULL, 10, 20);
-INSERT INTO "mobs" VALUES('Wolf', 5, NULL, NULL, NULL, NULL, NULL, 30, 30);
-
-CREATE TABLE midbosses(name TEXT NOT NULL UNIQUE,
-lvl INTEGER CHECK(lvl>0),
-hp  INTEGER CHECK(hp>0),
-str INTEGER CHECK(str>0),
-frt INTEGER CHECK(frt>0),
-dex INTEGER CHECK(dex>0),
-int INTEGER CHECK(int>0),
-aov INTEGER CHECK(aov>0),
-expYield INTEGER CHECK(expYield>=0));
-
-CREATE TABLE bosses(name TEXT NOT NULL UNIQUE,
-lvl INTEGER CHECK(lvl>0),
-hp  INTEGER CHECK(hp>0),
-str INTEGER CHECK(str>0),
-frt INTEGER CHECK(frt>0),
-dex INTEGER CHECK(dex>0),
-int INTEGER CHECK(int>0),
-expYield INTEGER CHECK(expYield>=0));
+INSERT INTO "enemies" VALUES('Rat', 'MOB', 1, 5, 1, 1, 1, NULL, 1, 5);
+INSERT INTO "enemies" VALUES('Stray Chicken', 'MOB', 1, 5, 2, 1, 2, NULL, 1, 5);
+INSERT INTO "enemies" VALUES('Gnome', 'MOB', 2, NULL, NULL, NULL, NULL, NULL, 10, 10);
+INSERT INTO "enemies" VALUES('Goat', 'MOB', 2, NULL, NULL, NULL, NULL, NULL, 10, 20);
+INSERT INTO "enemies" VALUES('Wolf', 'MOB', 5, NULL, NULL, NULL, NULL, NULL, 30, 30);
 
 CREATE TABLE scores(event_name TEXT NOT NULL UNIQUE,
 score_val INTEGER CHECK(score_val>=0));
