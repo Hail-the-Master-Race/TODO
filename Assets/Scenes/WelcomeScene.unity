@@ -139,7 +139,10 @@ MonoBehaviour:
   pressedSprite: 
   disabledSprite: 
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 946751175}
+    mMethodName: OnClick
+    oneShot: 0
 --- !u!114 &106419259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,8 +671,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 946751174}
+  - 114: {fileID: 946751175}
   m_Layer: 0
-  m_Name: controller
+  m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,6 +690,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &946751175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 946751173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d90a3ca952942c4eba1b3c174f4f0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1171287804
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,7 +742,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 150, y: 10, z: 0}
+  m_Size: {x: 150, y: 40, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1171287807
 MonoBehaviour:
@@ -902,7 +917,6 @@ GameObject:
   - 114: {fileID: 1376135898}
   - 114: {fileID: 1376135897}
   - 54: {fileID: 1376135896}
-  - 114: {fileID: 1376135895}
   m_Layer: 8
   m_Name: UI Root
   m_TagString: Untagged
@@ -921,53 +935,12 @@ Transform:
   m_LocalScale: {x: .00326797389, y: .00326797389, z: .00326797389}
   m_Children:
   - {fileID: 618489024}
-  - {fileID: 1171287805}
   - {fileID: 1772268887}
+  - {fileID: 1171287805}
   - {fileID: 106419256}
   - {fileID: 192394097}
   - {fileID: 1595561248}
   m_Father: {fileID: 0}
---- !u!114 &1376135895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1376135893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
-  rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
-  topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  showInPanelTool: 1
-  generateNormals: 0
-  widgetsAreStatic: 0
-  cullWhileDragging: 0
-  alwaysOnScreen: 0
-  anchorOffset: 0
-  renderQueue: 0
-  startingRenderQueue: 3000
-  mAlpha: 1
-  mClipping: 0
-  mClipRange: {x: 0, y: 0, z: 300, w: 200}
-  mClipSoftness: {x: 4, y: 4}
-  mDepth: 0
-  mClipOffset: {x: 0, y: 0}
 --- !u!54 &1376135896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1012,9 +985,9 @@ MonoBehaviour:
     absolute: 0
   showInPanelTool: 1
   generateNormals: 0
-  widgetsAreStatic: 0
+  widgetsAreStatic: 1
   cullWhileDragging: 0
-  alwaysOnScreen: 0
+  alwaysOnScreen: 1
   anchorOffset: 0
   renderQueue: 0
   startingRenderQueue: 3000
@@ -1076,7 +1049,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_Size.y
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_Size.x
@@ -1384,6 +1357,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1376135894}
     m_Modifications:
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1439,6 +1416,14 @@ Prefab:
     - target: {fileID: 400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 946751175}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: OnClick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
