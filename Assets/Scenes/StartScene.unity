@@ -496,7 +496,7 @@ GameObject:
   - 114: {fileID: 310514754}
   m_Layer: 8
   m_Name: Bar (HP)
-  m_TagString: Untagged
+  m_TagString: 'UI: HP Bar'
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1218,7 +1218,7 @@ GameObject:
   - 114: {fileID: 783881360}
   m_Layer: 8
   m_Name: Bar (Hunger)
-  m_TagString: Untagged
+  m_TagString: 'UI: Hunger Bar'
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2671,11 +2671,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4ff78123da3c4419c2c0213f9e65d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 0
-  maxHP: 0
-  currentMP: 0
-  maxMP: 0
   name: PC Placeholder Name
+  currentHP: 100
+  maxHP: 100
+  currentMP: 100
+  maxMP: 100
 --- !u!1 &1797486203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,7 +2742,7 @@ GameObject:
   - 114: {fileID: 1836373009}
   m_Layer: 8
   m_Name: Bar (MP)
-  m_TagString: Untagged
+  m_TagString: 'UI: MP Bar'
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class UILabelScript : MonoBehaviour
 {
-    GameObject PC;
-    PlayerStats PCStats;
+    private GameObject PC;
+    private PlayerStats PCStats;
     UILabel labelPCName;
 
     // Use this for initialization

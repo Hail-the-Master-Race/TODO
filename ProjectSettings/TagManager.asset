@@ -4,6 +4,9 @@
 TagManager:
   tags:
   - 'UI: PC Info'
+  - 'UI: HP Bar'
+  - 'UI: MP Bar'
+  - 'UI: Hunger Bar'
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

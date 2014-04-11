@@ -3,19 +3,15 @@ using System.Collections;
 
 public class PlayerStats : MonoBehaviour
 {
-    private int lvl;
-    public int currentHP, maxHP;
-    public int currentMP, maxMP;
-
+    private int lvl = 1;
     public string name = "PC Placeholder Name";
+
+    public int currentHP = 100, maxHP = 100;
+    public int currentMP = 100, maxMP = 100;
 
     // Use this for initialization
     void Start ()
     {
-        currentHP = 100;
-        currentMP = 100;
-
-        name = "PC Placeholder Name";
     }
 
     public int getLevel ()
@@ -26,6 +22,6 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-	
+
     }
 }
