@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIBarsScript : MonoBehaviour
+public class UIScript : MonoBehaviour
 {
     private GameObject PC;
     private PlayerStats PCStats;
 
+    private UILabel LabelPCInfo;
     private GameObject BarHP, BarMP, BarHunger, BarEXP;
 
     // Use this for initialization
     void Start ()
     {
         PC = GameObject.FindGameObjectWithTag ("Player");
-        PCStats = PC.GetComponent<PlayerStats> ();        
+        PCStats = PC.GetComponent<PlayerStats> ();
+        LabelPCInfo = GameObject.FindGameObjectWithTag ("UI: PC Info")
+            .GetComponent<UILabel> ();
 
         BarHP = GameObject.FindGameObjectWithTag ("UI: HP Bar");
         BarMP = GameObject.FindGameObjectWithTag ("UI: MP Bar");
@@ -24,6 +27,9 @@ public class UIBarsScript : MonoBehaviour
     void Update ()
     {
         UpdateBars ();
+
+        LabelPCInfo.text = PCStats.name;
+        LabelPCInfo.text += (" Lvl." + PCStats.Lvl);
     }
 
     void UpdateBars ()
@@ -33,7 +39,7 @@ public class UIBarsScript : MonoBehaviour
         UpdateHungerBar ();
         UpdateEXPBar ();
     }
-
+    
     void UpdateHPBar ()
     {
         BarHP.GetComponent<UISlider> ().value 
@@ -51,11 +57,10 @@ public class UIBarsScript : MonoBehaviour
         BarHunger.GetComponent<UISlider> ().value
             = (float)PCStats.currentHunger / (float)PCStats.MaxHunger;
     }
-
+    
     void UpdateEXPBar ()
     {
         BarEXP.GetComponent<UISlider> ().value
             = (float)PCStats.currentEXP / (float)PCStats.MaxEXP;
     }
-
 }
