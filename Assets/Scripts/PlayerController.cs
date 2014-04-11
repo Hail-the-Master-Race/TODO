@@ -3,8 +3,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public string name = "PLACEHOLDER";
-    private int lvl;
 
     public float pos;
     Animator playerAnimator;
@@ -13,16 +11,10 @@ public class PlayerController : MonoBehaviour
 	
     void Start ()
     {
-        lvl = 1;
         speed = 0f;
         playerAnimator = GetComponent<Animator> ();
     }
 
-    public int getLevel ()
-    {
-        return lvl;
-    }
-	
     void AddSpeed (float delta)
     {
         speed = Mathf.Clamp (speed + delta, -1f, 1f);
