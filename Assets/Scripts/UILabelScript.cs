@@ -4,20 +4,22 @@ using System.Collections;
 public class UILabelScript : MonoBehaviour
 {
     GameObject PC;
+    PlayerStats PCStats;
     UILabel labelPCName;
-    int t = 0;
 
     // Use this for initialization
     void Start ()
     {
         PC = GameObject.FindGameObjectWithTag ("Player");
-        labelPCName = GetComponent<UILabel> ();
+        PCStats = PC.GetComponent<PlayerStats> ();
+        labelPCName = GameObject.FindGameObjectWithTag ("UI: PC Info")
+            .GetComponent<UILabel> ();
     }
 	
     // Update is called once per frame
     void Update ()
     {
-        labelPCName.text = PC.GetComponent<PlayerStats> ().name;
-        labelPCName.text += (" Lvl." + PC.GetComponent<PlayerStats> ().getLevel ());
+        labelPCName.text = PCStats.name;
+        labelPCName.text += (" Lvl." + PCStats.getLevel ());
     }
 }
