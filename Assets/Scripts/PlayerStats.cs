@@ -7,6 +7,8 @@ public class PlayerStats : MonoBehaviour
     public int Lvl { get { return lvl; } }
     public string name = "PC Placeholder Name";
 
+    public string characterClass = "Rogue";
+
     public int currentHP = 100;
     private int maxHP = 100;
     public int MaxHP { get { return maxHP; } }
