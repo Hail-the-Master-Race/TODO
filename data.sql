@@ -34,17 +34,19 @@ INSERT INTO "classes" VALUES('Peasant',
 CREATE TABLE equipment(name TEXT NOT NULL UNIQUE,
 type TEXT CHECK(type IN ('HEAD', 'HAND', 'CHEST', 'LEG', 'FEET', 'ACCESSORY', 'WEAPON')),
 lvl INTEGER CHECK(lvl>0),
-valMin INTEGER CHECK(valMin>=0),
-valMax INTEGER CHECK(valMax>=0));
-INSERT INTO "equipment" VALUES('Burlap Sack', 'HEAD', 1, NULL, NULL);
-INSERT INTO "equipment" VALUES('Cardboard Box', 'CHEST', 1, NULL, NULL);
-INSERT INTO "equipment" VALUES('Twig','WEAPON', 1, 1, 1);
-INSERT INTO "equipment" VALUES('Wok', 'WEAPON', NULL, 3, 5);
-INSERT INTO "equipment" VALUES('Staff', 'WEAPON', NULL, NULL, NULL);
-INSERT INTO "equipment" VALUES('Skillet', 'WEAPON', NULL, NULL, NULL);
-INSERT INTO "equipment" VALUES('Dagger', 'WEAPON', NULL, NULL, NULL);
-INSERT INTO "equipment" VALUES('Shortsword', 'WEAPON', NULL, NULL, NULL);
-INSERT INTO "equipment" VALUES('Rapier', 'WEAPON', NULL, NULL, NULL);
+str INTEGER CHECK(str>=0),
+frt INTEGER CHECK(frt>=0),
+dex INTEGER CHECK(dex>=0),
+int INTEGER CHECK(int>=0));
+INSERT INTO "equipment" VALUES('Burlap Sack', 'HEAD', 1, NULL, NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Cardboard Box', 'CHEST', 1, NULL, NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Twig','WEAPON', 1, 1, 1, NULL, NULL);
+INSERT INTO "equipment" VALUES('Wok', 'WEAPON', NULL, 3, 5, NULL, NULL);
+INSERT INTO "equipment" VALUES('Staff', 'WEAPON', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Skillet', 'WEAPON', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Dagger', 'WEAPON', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Shortsword', 'WEAPON', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "equipment" VALUES('Rapier', 'WEAPON', NULL, NULL, NULL, NULL, NULL);
  
 CREATE TABLE enemies(name TEXT NOT NULL UNIQUE,
 type TEXT NOT NULL CHECK(type IN ('MOB', 'MIDBOSS', 'BOSS')),
