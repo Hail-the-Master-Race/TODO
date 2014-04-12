@@ -3,44 +3,55 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public float pos;
-    Animator playerAnimator;
-    float speed = 0f;
-    float direction = 0f;
 	
-    void Start ()
-    {
-        speed = 0f;
-        playerAnimator = GetComponent<Animator> ();
-    }
-
-    void AddSpeed (float delta)
-    {
-        speed = Mathf.Clamp (speed + delta, -1f, 1f);
-        playerAnimator.SetFloat ("Speed", speed);
-    }
+	public float pos;
+	public float turnSmoothing = 15f;
+	public float speedDampTime = 0.1f;
 	
-    void SetSpeed (float spd)
-    {
-        speed = spd;
-        playerAnimator.SetFloat ("Speed", speed);
-    }
+	private HashIDs hash;
+	private Animator playerAnimator;
 	
-    void UpdateMovement ()
-    {
-        direction = Input.GetAxis ("Horizontal");
-
-        if (direction != 0)
-            AddSpeed (direction * 0.01f);
-        else
-            SetSpeed (0f);
+	void Awake ()
+	{
+		playerAnimator = GetComponent<Animator> ();
+		hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<HashIDs> ();
+	}
+	
+	void UpdateMovement (float horizontalMovement, float verticalMovement)
+	{
+		if (horizontalMovement != 0 || verticalMovement != 0) {
+			Rotating (horizontalMovement, verticalMovement);
+			playerAnimator.SetFloat (hash.speedFloat, 1.0f, speedDampTime, Time.deltaTime);
+		}
+		else
+			playerAnimator.SetFloat(hash.speedFloat, 0);
+	}
+	
+	void FixedUpdate ()
+	{
+		float h = Input.GetAxis ("Horizontal");
+		float v = Input.GetAxis ("Vertical");
 		
-        pos += speed * Time.deltaTime;
-    }
+		UpdateMovement (h, v);
+	}
 	
-    void Update ()
-    {
-        UpdateMovement ();
-    }
+	void Update()
+	{
+		playerAnimator.SetBool(hash.jumpingBool, false);
+		playerAnimator.SetBool(hash.attackBool, false);
+	}
+	
+	void Rotating(float horizontal, float vertical) {
+		// Create a new vector of the horizontal and vertical inputs.
+		Vector3 targetDirection = new Vector3 (horizontal, 0f, vertical);
+		
+		// Create a rotation based on this new vector assuming that up is the global y axis.
+		Quaternion targetRotation = Quaternion.LookRotation (targetDirection, Vector3.up);
+		
+		// Create a rotation that is an increment closer to the target rotation from the player's rotation.
+		Quaternion newRotation = Quaternion.Lerp (rigidbody.rotation, targetRotation, turnSmoothing * Time.deltaTime);
+		
+		// Change the players rotation to this new rotation.
+		rigidbody.MoveRotation (newRotation);
+	}
 }
