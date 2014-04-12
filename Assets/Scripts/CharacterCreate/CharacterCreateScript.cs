@@ -12,9 +12,11 @@ enum statIndex
 
 public class CharacterCreateScript : MonoBehaviour
 {
-    public int totalStatPoints = 15;
+    [Range(0,100)]
+    public int
+        totalStatPoints = 15;
 
-    private Dictionary<statIndex, int> statsCurr;
+    private Dictionary<statIndex, int> statsCurr;   
 
     void Start ()
     {
@@ -22,6 +24,7 @@ public class CharacterCreateScript : MonoBehaviour
     }
     private void InitStats ()
     {
+        totalStatPoints = Mathf.Clamp (totalStatPoints, 0, 100);
         if (statsCurr == null)
             statsCurr = new Dictionary<statIndex, int> ();
 
@@ -64,7 +67,7 @@ public class CharacterCreateScript : MonoBehaviour
     public void RerollStats ()
     {
         InitStats ();
-        // TODO
+        // TODO       
         for (int i=0; i< totalStatPoints; i++) {
             statsCurr [(statIndex)Random.Range (0, (int)statIndex.MAX)]++;
         }     
