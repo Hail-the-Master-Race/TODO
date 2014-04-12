@@ -49,6 +49,8 @@ public class CharacterCreateScript : MonoBehaviour
             .GetComponent<UIPopupList> ();
 
         ClassDescriptorLabel.text = "Descriptor of " + ClassSelector.value;
+
+        RerollStats ();
     }
 
     public void PCNameChange ()
