@@ -7,10 +7,28 @@ public class CharacterCreateScript : MonoBehaviour
     {
         UILabel ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
             .GetComponent<UILabel> ();
+        
         UIPopupList ClassSelector = GameObject.Find ("Class Select: List")
             .GetComponent<UIPopupList> ();
 
-        string ClassSelection = ClassSelector.value;
-        ClassDescriptorLabel.text = "Descriptor of " + ClassSelection;
+        ClassDescriptorLabel.text = "Descriptor of " + ClassSelector.value;
+    }
+
+    public void PCNameChange ()
+    {
+//        UIInput NameInput = GameObject.Find ("Name: Input")
+//            .GetComponent<UIInput> ();
+       
+       
+    }
+
+    public void RerollStats ()
+    {
+        return;
+    }
+
+    public void StartGame ()
+    {
+        return;
     }
 }
