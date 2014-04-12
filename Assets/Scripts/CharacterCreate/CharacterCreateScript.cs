@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PCParameterScript : MonoBehaviour
+public class CharacterCreateScript : MonoBehaviour
 {
     public void ClassSelectionChange ()
     {
