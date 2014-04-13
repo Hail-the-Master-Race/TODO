@@ -6,7 +6,7 @@ public class UIScript : MonoBehaviour
     private GameObject PC;
     private PlayerStats PCStats;
 
-    private GameStats GameStats;
+    private GameControllerScript GameController;
 
     private UILabel LabelPCName;
     private UILabel LabelPCLevelClass;
@@ -19,8 +19,8 @@ public class UIScript : MonoBehaviour
         PC = GameObject.Find ("Player");
         PCStats = PC.GetComponent<PlayerStats> ();
 
-        GameStats = GameObject.Find ("Game Controller")
-            .GetComponent<GameStats> ();
+        GameController = GameObject.Find ("Game Controller")
+            .GetComponent<GameControllerScript> ();
 
         LabelPCName = GameObject.Find ("PC Info: Name")
             .GetComponent<UILabel> ();
@@ -51,7 +51,7 @@ public class UIScript : MonoBehaviour
 
     void UpdateScore ()
     {
-        LabelScoreValue.text = GameStats.score.ToString ();
+        LabelScoreValue.text = GameController.score.ToString ();
     }
     
     void UpdateBars ()
