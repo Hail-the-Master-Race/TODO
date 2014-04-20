@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
 		{
 			// ... set the players rotation and set the speed parameter to 5.5f.
 			if(vertical >= 0) {
-				Rotate (horizontal, vertical);
 				playerAnimator.SetFloat(hash.speedFloat, 5.5f, speedDampTime, Time.deltaTime);
 			}
 			else if (vertical < 0) {
@@ -64,6 +63,9 @@ public class PlayerController : MonoBehaviour
 		else
 			// Otherwise set the speed parameter to 0.
 			playerAnimator.SetFloat(hash.speedFloat, 0);
+
+		float x = Input.GetAxis ("Mouse X");
+		Rotate (x, 0);
 	}
 	
 	
