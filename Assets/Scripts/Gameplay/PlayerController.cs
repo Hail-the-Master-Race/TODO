@@ -1,92 +1,64 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// Require a character controller to be attached to the same game object
-[RequireComponent(typeof (CharacterController))]
-[AddComponentMenu("Third Person Player/Third Person Controller")]
-
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+	public float turnSmoothing = 15f;   // A smoothing value for turning the player.
+	public float speedDampTime = 0.1f;  // The damping for the speed parameter
 	
-	public float rotationDamping = 0.5f;
-	public float pos;
-	public float runSpeed = 0f;
-	public int gravity = 20;
-	public float jumpSpeed = 0f;
-	float speed = 0f;
-
-	private Animator playerAnimator;
 	
-	bool canJump;
-	float moveSpeed;
-	float verticalVel; // Used for continuing momentum while in air
-	CharacterController controller;
+	private Animator playerAnimator;              // Reference to the animator component.
+	private HashIDs hash;               // Reference to the HashIDs.
 	
-	void Start()
+	
+	void Start ()
 	{
-		controller = (CharacterController)GetComponent(typeof(CharacterController));
+		// Setting up the references.
 		playerAnimator = GetComponent<Animator>();
-	}
-	void AddSpeed (float delta)
-	{
-		speed = Mathf.Clamp (speed + delta, -1f, 1f);
-		playerAnimator.SetFloat ("Speed", speed);
+		hash = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<HashIDs>();
 	}
 	
-	void SetSpeed (float spd)
+	void Update ()
 	{
-		speed = spd;
-		playerAnimator.SetFloat ("Speed", speed);
+		//will probably need later
 	}
-	float UpdateMovement()
+
+	void FixedUpdate ()
 	{
-		// Movement
-		float x = Input.GetAxis("Horizontal");
-		float z = Input.GetAxis("Vertical");
+		// Cache the inputs.
+		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis("Vertical");
 		
-		Vector3 inputVec = new Vector3(x, 0, z);
-		inputVec *= runSpeed;
-		
-		//controller.Move((inputVec + Vector3.up * -gravity + new Vector3(0, verticalVel, 0)) * Time.deltaTime);
-		
-		// Rotation
-		if (inputVec != Vector3.zero)
-			transform.rotation = Quaternion.Slerp(transform.rotation,
-			                                      Quaternion.LookRotation(inputVec),
-			                                      Time.deltaTime * rotationDamping);
-
-		if (Mathf.Abs(x) + Mathf.Abs(z) != 0)
-			AddSpeed (((Mathf.Abs(x) + (Mathf.Abs(z)))) * 0.01f);
-		else
-			SetSpeed (0f);
-		
-		pos += speed * Time.deltaTime;
-
-		return inputVec.magnitude;
+		UpdateMovement(h, v);
 	}
-	void Update()
+	
+	void UpdateMovement (float horizontal, float vertical)
 	{
-		// Check for jump
-		if (controller.isGrounded )
+		// If there is some axis input...
+		if(horizontal != 0f || vertical != 0f)
 		{
-			canJump = true;
-			if ( canJump && Input.GetKeyDown("space") )
-			{
-				// Apply the current movement to launch velocity
-				verticalVel = jumpSpeed;
-				canJump = false;
-			}
-		}else
-		{
-			// Apply gravity to our velocity to diminish it over time
-			verticalVel += Physics.gravity.y * Time.deltaTime;
+			// ... set the players rotation and set the speed parameter to 5.5f.
+			Rotating(horizontal, vertical);
+			playerAnimator.SetFloat(hash.speedFloat, 5.5f, speedDampTime, Time.deltaTime);
 		}
+		else
+			// Otherwise set the speed parameter to 0.
+			playerAnimator.SetFloat(hash.speedFloat, 0);
+	}
+	
+	
+	void Rotating (float horizontal, float vertical)
+	{
+		// Create a new vector of the horizontal and vertical inputs.
+		Vector3 targetDirection = new Vector3(horizontal, 0f, vertical);
 		
-		// Actually move the character
-		moveSpeed = UpdateMovement();
-
-		//AddSpeed (moveSpeed * 0.01f);
-
-		if ( controller.isGrounded )
-			verticalVel = 0f;// Remove any persistent velocity after landing
+		// Create a rotation based on this new vector assuming that up is the global y axis.
+		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+		
+		// Create a rotation that is an increment closer to the target rotation from the player's rotation.
+		Quaternion newRotation = Quaternion.Lerp(rigidbody.rotation, targetRotation, turnSmoothing * Time.deltaTime);
+		
+		// Change the players rotation to this new rotation.
+		rigidbody.MoveRotation(newRotation);
 	}
 }
