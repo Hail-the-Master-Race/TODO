@@ -48,8 +48,11 @@ public class PlayerController : MonoBehaviour
 		if (controller.isGrounded) {
 			Debug.Log ("On the ground!");
 		} else {
+			Debug.Log ("Falling!");
+			//playerAnimator.SetFloat(hash.speedFloat, 0);
 			verticalVel += Physics.gravity.y * Time.deltaTime;
-			return;
+			//controller.Move(new Vector3(0, verticalVel, 0) * Time.deltaTime);
+			//return;
 		}
 
 		// Check for forward/backward motion

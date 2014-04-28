@@ -432,6 +432,18 @@ Prefab:
       propertyPath: turnSmoothing
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
+      propertyPath: m_Center.y
+      value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
+      propertyPath: m_Height
+      value: 1.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
   m_RootGameObject: {fileID: 1790806253}
@@ -3115,13 +3127,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 114
+  mWidth: 200
   mHeight: 30
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.66666651
+  aspectRatio: 3.79999995
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -3592,7 +3604,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -3605,13 +3617,13 @@ CharacterController:
   m_PrefabInternal: {fileID: 96984713}
   m_GameObject: {fileID: 1790806253}
   serializedVersion: 2
-  m_Height: 1.29999995
+  m_Height: 1.20000005
   m_Radius: .5
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: .649999976, z: 0}
+  m_Center: {x: 0, y: .600000024, z: 0}
 --- !u!1 &1792538661
 GameObject:
   m_ObjectHideFlags: 0
