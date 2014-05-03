@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Camera mainCamera;
 
 	private float verticalVel = 0f;			// Player's vertical velocity
+	private float speed;
 	
 	
 	void Start ()
@@ -44,34 +45,49 @@ public class PlayerController : MonoBehaviour
 	
 	void UpdateMovement (float horizontal, float vertical, float rotation)
 	{
-		// Jumping will be implemented here
+		// keep the character grounded!
+		verticalVel += Physics.gravity.y * Time.deltaTime;
+		controller.Move (new Vector3 (0, verticalVel, 0) * Time.deltaTime);
+
+		if (Input.GetButtonDown ("Fire1")) {
+			playerAnimator.SetBool (hash.attackBool, true);
+			return;
+		}
+
 		if (controller.isGrounded) {
-			Debug.Log ("On the ground!");
-		} else {
+			Debug.Log ("Grounded!");
+
+			verticalVel = 0;
+			playerAnimator.SetBool (hash.jumpingBool, false);
+
+			if (vertical != 0f) {
+				if (vertical > 0) 
+					// We are moving forward
+					speed = 5.5f;
+				else 
+					// We are moving backward
+					speed = -5.5f; 
+
+				playerAnimator.SetFloat (hash.speedFloat, speed, speedDampTime, Time.deltaTime);
+				controller.Move (transform.forward * speed * Time.deltaTime);
+			} else
+				// Otherwise set the speed parameter to 0
+				playerAnimator.SetFloat (hash.speedFloat, 0);
+
+			// Roate based on mouse, independent of movement
+			Rotate (rotation);
+
+			// Check for jump
+			if (Input.GetButtonDown ("Jump")) {
+				playerAnimator.SetBool (hash.jumpingBool, true);
+				verticalVel -= 20;
+			}
+		}
+
+		// Check if we are falling
+		else {
 			Debug.Log ("Falling!");
-			//playerAnimator.SetFloat(hash.speedFloat, 0);
-			verticalVel += Physics.gravity.y * Time.deltaTime;
-			//controller.Move(new Vector3(0, verticalVel, 0) * Time.deltaTime);
-			//return;
 		}
-
-		// Check for forward/backward motion
-		if(vertical != 0f)
-		{
-			// We are moving forward
-			if(vertical > 0) {
-				playerAnimator.SetFloat(hash.speedFloat, 5.5f, speedDampTime, Time.deltaTime);
-			}
-			else { // We are moving backward
-				playerAnimator.SetFloat(hash.speedFloat, -5.5f, speedDampTime, Time.deltaTime);
-			}
-		}
-		else
-			// Otherwise set the speed parameter to 0
-			playerAnimator.SetFloat(hash.speedFloat, 0);
-
-		// Roate based on mouse, independent of movement
-		Rotate (rotation);
 	}
 	
 	
