@@ -434,7 +434,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 14300000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
       propertyPath: m_Center.y
-      value: .600000024
+      value: .620000005
       objectReference: {fileID: 0}
     - target: {fileID: 14300000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
       propertyPath: m_Height
@@ -442,7 +442,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
       propertyPath: m_UseGravity
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
+      propertyPath: m_SkinWidth
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
@@ -2937,7 +2945,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1597399175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 583.167358, y: 317.007751, z: 0}
+  m_LocalPosition: {x: 570.361511, y: 317.000671, z: 0}
   m_LocalScale: {x: 1.00007999, y: 1.00007999, z: 1.00007999}
   m_Children: []
   m_Father: {fileID: 1860036711}
@@ -2971,13 +2979,13 @@ MonoBehaviour:
     absolute: 3
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 5
-  mWidth: 585
+  mWidth: 572
   mHeight: 30
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 16.7333336
+  aspectRatio: 19.0666676
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -3027,7 +3035,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1600920826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -583.167358, y: 360, z: 0}
+  m_LocalPosition: {x: -570.361511, y: 360, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1945654657}
@@ -3182,7 +3190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647264305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 583.167358, y: 344.00177, z: 0}
+  m_LocalPosition: {x: 570.361511, y: 344.000122, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1860036711}
@@ -3216,13 +3224,13 @@ MonoBehaviour:
     absolute: -1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 5
-  mWidth: 585
+  mWidth: 572
   mHeight: 30
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 16.7333336
+  aspectRatio: 19.0666676
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -3604,7 +3612,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -3621,9 +3629,9 @@ CharacterController:
   m_Radius: .5
   m_SlopeLimit: 45
   m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
+  m_SkinWidth: .0500000007
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: .600000024, z: 0}
+  m_Center: {x: 0, y: .620000005, z: 0}
 --- !u!1 &1792538661
 GameObject:
   m_ObjectHideFlags: 0
