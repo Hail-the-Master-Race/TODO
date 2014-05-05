@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
 	public float turnSmoothing = 15f;   // A smoothing value for turning the player
 	public float speedDampTime = 0.1f;  // The damping for the speed parameter
-	
+	public bool attacking;
 	
 	private Animator playerAnimator;    	// Player's animator
 	private HashIDs hash;               	// HashIDs for GameController
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetButtonDown ("Fire1")) {
 			playerAnimator.SetBool (hash.attackBool, true);
+			attacking = true;
 			return;
 		}
 
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
 			verticalVel = 0;
 			playerAnimator.SetBool (hash.jumpingBool, false);
+			attacking = false;
 
 			if (vertical != 0f) {
 				if (vertical > 0) 

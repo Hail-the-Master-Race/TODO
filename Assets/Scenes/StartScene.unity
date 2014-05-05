@@ -3135,13 +3135,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 200
+  mWidth: 114
   mHeight: 30
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.79999995
+  aspectRatio: 6.66666651
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -3455,6 +3455,8 @@ GameObject:
   - 33: {fileID: 1777652615}
   - 23: {fileID: 1777652614}
   - 95: {fileID: 1777652613}
+  - 65: {fileID: 1777652616}
+  - 114: {fileID: 1777652617}
   m_Layer: 0
   m_Name: tresure_box
   m_TagString: Untagged
@@ -3520,6 +3522,29 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1265914926}
   m_GameObject: {fileID: 1777652611}
   m_Mesh: {fileID: 4300000, guid: ea6da4a0ebadb704691a6fa2d03f817b, type: 3}
+--- !u!65 &1777652616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1777652611}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .279073685, y: .300000012, z: .202384144}
+  m_Center: {x: -5.40339301e-12, y: .065550901, z: -.00290098437}
+--- !u!114 &1777652617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1777652611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d27eaaa6f7764c0499a3628b0323946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1790806253
 GameObject:
   m_ObjectHideFlags: 0
@@ -3583,6 +3608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSmoothing: 5
   speedDampTime: .100000001
+  attacking: 0
 --- !u!114 &1790806257
 MonoBehaviour:
   m_ObjectHideFlags: 0
