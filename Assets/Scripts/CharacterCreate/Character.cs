@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class Character : MonoBehaviour
 {       
     public string Name;
+    private CharacterClass Class;
     private Dictionary<statIndex, int> StartingStats;
     
     private const int totalStatPoints = 15;
 
-    // Use this for initialization
     void Start ()
     {
         Name = "";
@@ -46,9 +46,9 @@ public class Character : MonoBehaviour
         return;
     }
     
-    public int getStartingStat (statIndex index)
+    public Dictionary<statIndex,int> getStartingStats ()
     {
-        return StartingStats [index];
+        return StartingStats;
     }
     
     public void setName (string name)
