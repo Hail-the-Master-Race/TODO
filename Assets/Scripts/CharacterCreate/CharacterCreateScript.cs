@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-enum statIndex
+public enum statIndex
 {
     STR = 0,
     FRT,
@@ -10,83 +10,112 @@ enum statIndex
     MAX
 }
 
-public class CharacterCreateScript : MonoBehaviour
+public class Character
 {
-    [Range(0,100)]
-    public int
-        totalStatPoints = 15;
+    private string Name;
+    private Dictionary<statIndex, int> StartingStats;
 
-    private Dictionary<statIndex, int> statsCurr;   
-
-    void Start ()
+    private const int totalStatPoints = 15;
+    
+    public Character ()
     {
-        RerollStats ();
+        Name = "";
+       
+        StartingStats = new Dictionary<statIndex, int> ();
+
+        StartingStats.Add (statIndex.STR, 0);
+        StartingStats.Add (statIndex.FRT, 0);
+        StartingStats.Add (statIndex.DEX, 0);
+
+        StartingStats [statIndex.STR] = 0;
+        StartingStats [statIndex.FRT] = 0;
+        StartingStats [statIndex.DEX] = 0;
+        
     }
+    
     private void InitStats ()
     {
-        totalStatPoints = Mathf.Clamp (totalStatPoints, 0, 100);
-        if (statsCurr == null)
-            statsCurr = new Dictionary<statIndex, int> ();
-
-        if (!statsCurr.ContainsKey (statIndex.STR))
-            statsCurr.Add (statIndex.STR, 0);
-        if (!statsCurr.ContainsKey (statIndex.FRT))
-            statsCurr.Add (statIndex.FRT, 0);
-        if (!statsCurr.ContainsKey (statIndex.DEX))
-            statsCurr.Add (statIndex.DEX, 0);
-
-        if (statsCurr [statIndex.STR] != 0) 
-            statsCurr [statIndex.STR] = 0;
-        if (statsCurr [statIndex.FRT] != 0)
-            statsCurr [statIndex.FRT] = 0;
-        if (statsCurr [statIndex.DEX] != 0)
-            statsCurr [statIndex.DEX] = 0;
+        if (StartingStats == null)
+            StartingStats = new Dictionary<statIndex, int> ();
+        
+        if (!StartingStats.ContainsKey (statIndex.STR))
+            StartingStats.Add (statIndex.STR, 0);
+        if (!StartingStats.ContainsKey (statIndex.FRT))
+            StartingStats.Add (statIndex.FRT, 0);
+        if (!StartingStats.ContainsKey (statIndex.DEX))
+            StartingStats.Add (statIndex.DEX, 0);
+        
+        if (StartingStats [statIndex.STR] != 0) 
+            StartingStats [statIndex.STR] = 0;
+        if (StartingStats [statIndex.FRT] != 0)
+            StartingStats [statIndex.FRT] = 0;
+        if (StartingStats [statIndex.DEX] != 0)
+            StartingStats [statIndex.DEX] = 0;
     }
+    
+    public void RerollStats ()
+    {
+        InitStats ();
+        
+        for (int i=0; i< totalStatPoints; i++) {
+            StartingStats [(statIndex)Random.Range (0, (int)statIndex.MAX)]++;
+        }     
+        return;
+    }
+    
+    public int getStartingStat (statIndex index)
+    {
+        return StartingStats [index];
+    }
+
+    public void setName (string name)
+    {
+        Name = name;
+    }
+}
+
+public class CharacterCreateScript : MonoBehaviour
+{
+    private UIController UI;
+
+    private Character PC = new Character ();
+
+    public void Start ()
+    {
+        InitClasses ();
+        RerollStats ();
+    }
+
+    private void InitClasses ()
+    {
+        return;
+    }   
 
     public void ClassSelectionChange ()
     {
-        UILabel ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
-            .GetComponent<UILabel> ();
-        
-        UIPopupList ClassSelector = GameObject.Find ("Class Select: List")
-            .GetComponent<UIPopupList> ();
-
-        ClassDescriptorLabel.text = "Descriptor of " + ClassSelector.value;
+        UI = GetComponent<UIController> ();
+        UI.UpdateClassSelection ();
 
         RerollStats ();
     }
 
     public void PCNameChange ()
     {
-//        UIInput NameInput = GameObject.Find ("Name: Input")
-//            .GetComponent<UIInput> ();
-       
-       
+        UIInput NameInput = GameObject.Find ("Name: Input")
+            .GetComponent<UIInput> ();
+
+        PC.setName (NameInput.value);
     }
 
     public void RerollStats ()
     {
-        InitStats ();
-        // TODO       
-        for (int i=0; i< totalStatPoints; i++) {
-            statsCurr [(statIndex)Random.Range (0, (int)statIndex.MAX)]++;
-        }     
+        PC.RerollStats ();
+        UI = GetComponent<UIController> ();
 
-        UpdateStatTableValues ();
-    }
+        UI.UpdateStatTable (PC.getStartingStat (statIndex.STR),
+                            PC.getStartingStat (statIndex.DEX),
+                            PC.getStartingStat (statIndex.FRT));
 
-    private void UpdateStatTableValues ()
-    {
-        UILabel LabelSTR = GameObject.Find ("STR: Value")
-            .GetComponent<UILabel> ();
-        UILabel LabelFRT = GameObject.Find ("FRT: Value")
-            .GetComponent<UILabel> ();
-        UILabel LabelDEX = GameObject.Find ("DEX: Value")
-            .GetComponent<UILabel> ();
-
-        LabelSTR.text = statsCurr [statIndex.STR].ToString ();
-        LabelFRT.text = statsCurr [statIndex.FRT].ToString ();
-        LabelDEX.text = statsCurr [statIndex.DEX].ToString ();
     }
 
     public void StartGame ()
