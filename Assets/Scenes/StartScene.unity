@@ -3140,7 +3140,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 200
+  mWidth: 114
   mHeight: 30
   mDepth: 4
   autoResizeBoxCollider: 0
@@ -3564,6 +3564,8 @@ GameObject:
   - 114: {fileID: 1790806257}
   - 143: {fileID: 1790806259}
   - 54: {fileID: 1790806258}
+  - 114: {fileID: 1790806261}
+  - 114: {fileID: 1790806260}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3667,6 +3669,31 @@ CharacterController:
   m_SkinWidth: .0500000007
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: .639999986, z: 0}
+--- !u!114 &1790806260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1790806253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1814719fdad3944b1a70e3aa774d1288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1790806257}
+  collisions: {fileID: 1790806261}
+  controller: {fileID: 1790806256}
+--- !u!114 &1790806261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1790806253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181fa1d8badab457db4bb5cf6e2b15d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1792538661
 GameObject:
   m_ObjectHideFlags: 0
