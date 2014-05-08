@@ -1934,7 +1934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e03976f5c2bc7e43846465ec050529a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  totalStatPoints: 15
 --- !u!4 &878266863
 Transform:
   m_ObjectHideFlags: 0
@@ -2515,7 +2515,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.68421054
+  aspectRatio: .909090936
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Button
   mType: 1
@@ -2796,6 +2796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b39c6cd667a86469fee0d747c0ca36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RemainingRerolls: 15
 --- !u!4 &1447672591
 Transform:
   m_ObjectHideFlags: 0
