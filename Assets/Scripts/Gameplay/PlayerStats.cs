@@ -24,4 +24,17 @@ public class PlayerStats : MonoBehaviour
     public int currentEXP = 10;
     private int maxEXP = 100;
     public int MaxEXP { get { return maxEXP; } }
+
+    public int STR;
+    public int DEX;
+    public int FRT;
+
+    public void Init (Character packet)
+    {
+        name = packet.Name;
+
+        STR = packet.getStartingStats () [statIndex.STR];
+        DEX = packet.getStartingStats () [statIndex.DEX];
+        FRT = packet.getStartingStats () [statIndex.FRT];
+    }
 }

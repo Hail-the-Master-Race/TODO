@@ -3,16 +3,24 @@ using System.Collections;
 
 public class GameControllerScript : MonoBehaviour
 {
-
     public int score = 100;
 
-    // Use this for initialization
+    private Character PCPacket;
+
+    void Awake ()
+    {
+    }
+
     void Start ()
     {
+        PCPacket = GameObject.Find ("PC Packet").GetComponent<Character> ();
 	
+        PlayerStats PCStat = GameObject.Find ("Player")
+            .GetComponent<PlayerStats> ();
+
+        PCStat.Init (PCPacket);
     }
 	
-    // Update is called once per frame
     void Update ()
     {
 	
