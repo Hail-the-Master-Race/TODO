@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class Character : MonoBehaviour
 {       
-    public string Name;
+    private string name;
+    public string Name { set { name = value; } get { return name; } }
     private CharacterClass Class;
     private Dictionary<statIndex, int> StartingStats;
     
@@ -59,11 +60,6 @@ public class Character : MonoBehaviour
     public Dictionary<statIndex,int> getStartingStats ()
     {
         return StartingStats;
-    }
-    
-    public void setName (string name)
-    {
-        Name = name;
     }
 
     public void setClass (CharacterClass c)

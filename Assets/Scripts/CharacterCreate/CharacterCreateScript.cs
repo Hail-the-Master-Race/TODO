@@ -52,7 +52,7 @@ public class CharacterCreateScript : MonoBehaviour
             .GetComponent<UIInput> ();
 
         PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
-        PC.setName (NameInput.value);
+        PC.Name = NameInput.value;
     }
 
     public void RerollStats ()
@@ -69,6 +69,8 @@ public class CharacterCreateScript : MonoBehaviour
 
     public void StartGame ()
     {
+
+        Application.LoadLevel ("StartScene");
         return;
     }
 }
