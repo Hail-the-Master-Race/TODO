@@ -24,6 +24,11 @@ public class CharacterCreateScript : MonoBehaviour
         { CharacterClasses.Peasant.getName (), CharacterClasses.Peasant }
     };      
 
+    void Awake ()
+    {
+        Object.DontDestroyOnLoad (GameObject.Find ("PC Packet"));
+    }
+
     public void ClassSelectionChange ()
     {
         string ClassSelectionKey = 
@@ -32,7 +37,7 @@ public class CharacterCreateScript : MonoBehaviour
 
         CharacterClass ClassSelection = Classes [ClassSelectionKey];
 
-        PC = GetComponent<Character> ();
+        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
         PC.setClass (ClassSelection);
 
         UI = GetComponent<UIController> ();
@@ -46,12 +51,13 @@ public class CharacterCreateScript : MonoBehaviour
         UIInput NameInput = GameObject.Find ("Name: Input")
             .GetComponent<UIInput> ();
 
+        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
         PC.setName (NameInput.value);
     }
 
     public void RerollStats ()
     {
-        PC = GetComponent<Character> ();
+        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
         PC.RerollStats ();
 
         UI = GetComponent<UIController> ();

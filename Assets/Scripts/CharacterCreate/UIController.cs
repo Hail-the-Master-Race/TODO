@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
         ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
             .GetComponent<UILabel> ();
 
-        PC = GetComponent<Character> ();
+        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
 
         ClassDescriptorLabel.text = PC.getClass ().getDescription ();
     }
