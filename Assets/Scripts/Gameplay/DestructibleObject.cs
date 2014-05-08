@@ -3,6 +3,7 @@ using System.Collections;
 
 public class DestructibleObject : MonoBehaviour {
 
+	public int stamina;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,7 +18,10 @@ public class DestructibleObject : MonoBehaviour {
 		Debug.Log ("Colliding");
 		if(other.gameObject.CompareTag("Player")) {
 			PlayerController player = other.gameObject.transform.root.GetComponent<PlayerController>();
-			//if(player.attacking) 
+			if(player.attacking) 
+				stamina -= 10;
+			Debug.Log(stamina);
+			if(stamina == 0)
 				Destroy(this.gameObject);
 		}
 	}
