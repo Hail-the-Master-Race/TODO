@@ -16,7 +16,10 @@ public class Character : MonoBehaviour
         get { return _class; }
     }
 
-    private Dictionary<statIndex, int> StartingStats;
+    private Dictionary<statIndex, int> _startingStats;
+    public Dictionary<statIndex, int> StartingStats {
+        get { return _startingStats; }
+    }
 
     [Range(0,100)]
     public int
@@ -30,22 +33,22 @@ public class Character : MonoBehaviour
 
     private void InitStats ()
     {
-        if (StartingStats == null)
-            StartingStats = new Dictionary<statIndex, int> ();
+        if (_startingStats == null)
+            _startingStats = new Dictionary<statIndex, int> ();
         
-        if (!StartingStats.ContainsKey (statIndex.STR))
-            StartingStats.Add (statIndex.STR, 0);
-        if (!StartingStats.ContainsKey (statIndex.FRT))
-            StartingStats.Add (statIndex.FRT, 0);
-        if (!StartingStats.ContainsKey (statIndex.DEX))
-            StartingStats.Add (statIndex.DEX, 0);
+        if (!_startingStats.ContainsKey (statIndex.STR))
+            _startingStats.Add (statIndex.STR, 0);
+        if (!_startingStats.ContainsKey (statIndex.FRT))
+            _startingStats.Add (statIndex.FRT, 0);
+        if (!_startingStats.ContainsKey (statIndex.DEX))
+            _startingStats.Add (statIndex.DEX, 0);
         
-        if (StartingStats [statIndex.STR] != 0) 
-            StartingStats [statIndex.STR] = 0;
-        if (StartingStats [statIndex.FRT] != 0)
-            StartingStats [statIndex.FRT] = 0;
-        if (StartingStats [statIndex.DEX] != 0)
-            StartingStats [statIndex.DEX] = 0;
+        if (_startingStats [statIndex.STR] != 0) 
+            _startingStats [statIndex.STR] = 0;
+        if (_startingStats [statIndex.FRT] != 0)
+            _startingStats [statIndex.FRT] = 0;
+        if (_startingStats [statIndex.DEX] != 0)
+            _startingStats [statIndex.DEX] = 0;
     }
 
     public void RerollStats ()
@@ -66,10 +69,5 @@ public class Character : MonoBehaviour
             StartingStats [statAssignee]++;
         }     
         return;
-    }
-    
-    public Dictionary<statIndex,int> getStartingStats ()
-    {
-        return StartingStats;
     }
 }

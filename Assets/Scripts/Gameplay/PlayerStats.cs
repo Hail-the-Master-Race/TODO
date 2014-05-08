@@ -34,8 +34,8 @@ public class PlayerStats : MonoBehaviour
         name = packet.Name == "" ? "Nameless One" : packet.Name;
         characterClass = packet.Class.Name;
 
-        STR = packet.getStartingStats () [statIndex.STR];
-        DEX = packet.getStartingStats () [statIndex.DEX];
-        FRT = packet.getStartingStats () [statIndex.FRT];
+        STR = packet.StartingStats [statIndex.STR];
+        DEX = packet.StartingStats [statIndex.DEX];
+        FRT = packet.StartingStats [statIndex.FRT];
     }
 }

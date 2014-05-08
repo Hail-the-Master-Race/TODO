@@ -12,30 +12,38 @@ public class UIController : MonoBehaviour
 
     private Character PC;
 
-    public void UpdateClassSelection ()
+    public void Awake ()
     {
+        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();        
+
         ClassSelector = GameObject.Find ("Class Select: List")
             .GetComponent<UIPopupList> ();
-
+        
         ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
             .GetComponent<UILabel> ();
 
-        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
-
-        ClassDescriptorLabel.text = PC.Class.Description;
-    }
-
-    public void UpdateStatTable (int STR, int DEX, int FRT)
-    {
         LabelSTR = GameObject.Find ("STR: Value")
             .GetComponent<UILabel> ();
         LabelFRT = GameObject.Find ("FRT: Value")
             .GetComponent<UILabel> ();
         LabelDEX = GameObject.Find ("DEX: Value")
             .GetComponent<UILabel> ();
+    }
 
-        LabelSTR.text = STR.ToString ();
-        LabelDEX.text = DEX.ToString ();
-        LabelFRT.text = FRT.ToString ();
+    public void UpdateClassSelection ()
+    {
+        ClassDescriptorLabel.text = PC.Class.Description;
+    }
+
+    public void UpdateStatTable ()
+    {
+        LabelSTR.text = PC.StartingStats [statIndex.STR].ToString ();
+        LabelDEX.text = PC.StartingStats [statIndex.DEX].ToString ();
+        LabelFRT.text = PC.StartingStats [statIndex.FRT].ToString ();
+    }
+
+    public void UpdateRerollCounter ()
+    {
+        return;
     }
 }
