@@ -3,6 +3,10 @@ using System.Collections;
 
 public class UIController : MonoBehaviour
 {
+    private CharacterCreateController CharacterCreateController;
+
+    private Character PC;
+
     private UILabel ClassDescriptorLabel;
     private UIPopupList ClassSelector;
 
@@ -10,10 +14,11 @@ public class UIController : MonoBehaviour
     private UILabel LabelFRT;
     private UILabel LabelDEX;     
 
-    private Character PC;
 
     public void Awake ()
     {
+        CharacterCreateController = GetComponent<CharacterCreateController> ();
+
         PC = GameObject.Find ("PC Packet").GetComponent<Character> ();        
 
         ClassSelector = GameObject.Find ("Class Select: List")
@@ -28,6 +33,7 @@ public class UIController : MonoBehaviour
             .GetComponent<UILabel> ();
         LabelDEX = GameObject.Find ("DEX: Value")
             .GetComponent<UILabel> ();
+
     }
 
     public void UpdateClassSelection ()
