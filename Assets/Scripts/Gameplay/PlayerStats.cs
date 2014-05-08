@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour
     public int Lvl { get { return lvl; } }
     public string name = "PC Placeholder Name";
 
-    public string characterClass = "Rogue";
+    public string characterClass = "PC Placeholder Class";
 
     public int currentHP = 100;
     private int maxHP = 100;
@@ -32,6 +32,7 @@ public class PlayerStats : MonoBehaviour
     public void Init (Character packet)
     {
         name = packet.Name == "" ? "Nameless One" : packet.Name;
+        characterClass = packet.getClass ().getName ();
 
         STR = packet.getStartingStats () [statIndex.STR];
         DEX = packet.getStartingStats () [statIndex.DEX];

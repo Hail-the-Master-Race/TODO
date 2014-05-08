@@ -38,7 +38,7 @@ public class CharacterCreateScript : MonoBehaviour
         CharacterClass ClassSelection = Classes [ClassSelectionKey];
 
         PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
-        PC.setClass (ClassSelection);
+        PC.Class = ClassSelection;
 
         UI = GetComponent<UIController> ();
         UI.UpdateClassSelection ();

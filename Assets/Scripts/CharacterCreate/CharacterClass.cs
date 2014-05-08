@@ -3,8 +3,10 @@ using System.Collections;
 
 public class CharacterClass
 {
-    private string Name;
-    private string Description;
+    private string _name;
+    public string Name { get { return _name; } }
+    private string _description;
+    public string Description { get { return _description; } }
     
     private int AffinSTR;
     private int AffinDEX;
@@ -13,8 +15,8 @@ public class CharacterClass
     public CharacterClass (string name, string description,
                            int aS, int aD, int aF)
     {
-        Name = name;
-        Description = description;
+        _name = name;
+        _description = description;
         AffinSTR = aS;
         AffinDEX = aD;
         AffinFRT = aF;

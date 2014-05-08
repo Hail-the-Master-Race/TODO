@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public class Character : MonoBehaviour
 {       
-    private string name;
-    public string Name { set { name = value; } get { return name; } }
-    private CharacterClass Class;
+    private string _name;
+    public string Name { set { _name = value; } get { return _name; } }
+    private CharacterClass _class;
+    public CharacterClass Class { set { _class = value; } get { return _class; } }
     private Dictionary<statIndex, int> StartingStats;
     
     private const int totalStatPoints = 15;
@@ -60,11 +61,6 @@ public class Character : MonoBehaviour
     public Dictionary<statIndex,int> getStartingStats ()
     {
         return StartingStats;
-    }
-
-    public void setClass (CharacterClass c)
-    {
-        Class = c;
     }
 
     public CharacterClass getClass ()
