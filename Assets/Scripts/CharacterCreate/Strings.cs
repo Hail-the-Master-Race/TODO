@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Strings : MonoBehaviour
 {
-
     public static string ClassDescripWarrior 
         = "My big-ass sword bring all the boys to the yard.";
 
@@ -15,4 +14,7 @@ public class Strings : MonoBehaviour
 
     public static string ClassDescripPeasant 
             = "HELP I'M BEING OPPRESSED.";
+
+    public static string DefaultPCName
+        = "Nameless One";
 }

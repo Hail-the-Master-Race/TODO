@@ -13,7 +13,6 @@ public class UIScript : MonoBehaviour
     private UILabel LabelScoreValue;
     private GameObject BarHP, BarMP, BarHunger, BarEXP;
 
-    // Use this for initialization
     void Start ()
     {
         PC = GameObject.Find ("Player");
@@ -35,7 +34,6 @@ public class UIScript : MonoBehaviour
         BarEXP = GameObject.Find ("4. Bar (EXP)");
     }
 	
-    // Update is called once per frame
     void Update ()
     {
         UpdateBars ();
