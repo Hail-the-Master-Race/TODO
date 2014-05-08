@@ -13,12 +13,12 @@ public class DestructibleObject : MonoBehaviour {
 	
 	}
 
-	void OnControllerColliderHit(ControllerColliderHit hit) {
+	void OnTriggerEnter(Collider other) {
 		Debug.Log ("Colliding");
-		//if(other.gameObject.CompareTag("Player")) {
-			PlayerController player = hit.controller.gameObject.GetComponent<PlayerController>();
+		if(other.gameObject.CompareTag("Player")) {
+			PlayerController player = other.gameObject.transform.root.GetComponent<PlayerController>();
 			//if(player.attacking) 
-			Destroy(this);
-		//}
+				Destroy(this.gameObject);
+		}
 	}
 }

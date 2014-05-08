@@ -49,18 +49,22 @@ public class PlayerController : MonoBehaviour
 		verticalVel += Physics.gravity.y * Time.deltaTime;
 		controller.Move (new Vector3 (0, verticalVel, 0) * Time.deltaTime);
 
-		if (Input.GetButtonDown ("Fire1")) {
-			playerAnimator.SetBool (hash.attackBool, true);
-			attacking = true;
-			return;
-		}
-
 		if (controller.isGrounded) {
 			Debug.Log ("Grounded!");
 
+			if (Input.GetButtonDown ("Fire1")) {
+				playerAnimator.SetBool (hash.attackBool, true);
+				attacking = true;
+				return;
+			}
+			else {
+				if(!playerAnimator.GetBool(hash.attackBool))
+					attacking = false;
+			}
+
 			verticalVel = 0;
 			playerAnimator.SetBool (hash.jumpingBool, false);
-			attacking = false;
+
 
 			if (vertical != 0f) {
 				if (vertical > 0) 
