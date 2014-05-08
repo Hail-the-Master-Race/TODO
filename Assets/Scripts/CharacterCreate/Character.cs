@@ -41,7 +41,17 @@ public class Character : MonoBehaviour
         InitStats ();
         
         for (int i=0; i< totalStatPoints; i++) {
-            StartingStats [(statIndex)Random.Range (0, (int)statIndex.MAX)]++;
+            int roll = Random.Range (0, 9); // TODO: abstract out max affin ptVal
+
+            statIndex statAssignee;
+            if (roll < Class.getAffinSTR ())
+                statAssignee = statIndex.STR;
+            else if ((roll -= Class.getAffinSTR ()) < Class.getAffinDEX ())
+                statAssignee = statIndex.DEX;
+            else
+                statAssignee = statIndex.FRT;
+
+            StartingStats [statAssignee]++;
         }     
         return;
     }
@@ -54,5 +64,15 @@ public class Character : MonoBehaviour
     public void setName (string name)
     {
         Name = name;
+    }
+
+    public void setClass (CharacterClass c)
+    {
+        Class = c;
+    }
+
+    public CharacterClass getClass ()
+    {
+        return Class;
     }
 }

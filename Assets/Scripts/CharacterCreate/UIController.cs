@@ -8,34 +8,32 @@ public class UIController : MonoBehaviour
 
     private UILabel LabelSTR;
     private UILabel LabelFRT;
-    private UILabel LabelDEX;
+    private UILabel LabelDEX;     
 
-    void Start ()
-    {
-        ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
-            .GetComponent<UILabel> ();
-
-        ClassSelector = GameObject.Find ("Class Select: List")
-            .GetComponent<UIPopupList> ();
-
-        LabelSTR = GameObject.Find ("STR: Value")
-            .GetComponent<UILabel> ();
-        LabelFRT = GameObject.Find ("FRT: Value")
-            .GetComponent<UILabel> ();
-        LabelDEX = GameObject.Find ("DEX: Value")
-            .GetComponent<UILabel> ();
-    }
+    private Character PC;
 
     public void UpdateClassSelection ()
     {
         ClassSelector = GameObject.Find ("Class Select: List")
             .GetComponent<UIPopupList> ();
 
-        ClassDescriptorLabel.text = "Descriptor of " + ClassSelector.value;
+        ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
+            .GetComponent<UILabel> ();
+
+        PC = GetComponent<Character> ();
+
+        ClassDescriptorLabel.text = PC.getClass ().getDescription ();
     }
 
     public void UpdateStatTable (int STR, int DEX, int FRT)
     {
+        LabelSTR = GameObject.Find ("STR: Value")
+            .GetComponent<UILabel> ();
+        LabelFRT = GameObject.Find ("FRT: Value")
+            .GetComponent<UILabel> ();
+        LabelDEX = GameObject.Find ("DEX: Value")
+            .GetComponent<UILabel> ();
+
         LabelSTR.text = STR.ToString ();
         LabelDEX.text = DEX.ToString ();
         LabelFRT.text = FRT.ToString ();
