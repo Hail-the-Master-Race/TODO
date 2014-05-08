@@ -8,7 +8,8 @@ public class UIController : MonoBehaviour
     private Character PC;
 
     private UILabel ClassDescriptorLabel;
-    private UIPopupList ClassSelector;
+
+    private UILabel RerollCounter;
 
     private UILabel LabelSTR;
     private UILabel LabelFRT;
@@ -20,11 +21,11 @@ public class UIController : MonoBehaviour
         CharacterCreateController = GetComponent<CharacterCreateController> ();
 
         PC = GameObject.Find ("PC Packet").GetComponent<Character> ();        
-
-        ClassSelector = GameObject.Find ("Class Select: List")
-            .GetComponent<UIPopupList> ();
         
         ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
+            .GetComponent<UILabel> ();
+
+        RerollCounter = GameObject.Find ("Remaining Rerolls: Value")
             .GetComponent<UILabel> ();
 
         LabelSTR = GameObject.Find ("STR: Value")
@@ -50,6 +51,8 @@ public class UIController : MonoBehaviour
 
     public void UpdateRerollCounter ()
     {
+        RerollCounter.text 
+            = CharacterCreateController.RerollRemaining.ToString ();
         return;
     }
 }
