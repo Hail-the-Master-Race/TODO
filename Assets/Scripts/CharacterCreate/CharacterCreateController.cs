@@ -10,18 +10,22 @@ public enum statIndex
     MAX
 }
 
-public class CharacterCreateScript : MonoBehaviour
+public class CharacterCreateController : MonoBehaviour
 {
     private UIController UI;
     private Character PC;
 
+    [Range(0,100)]
+    public int
+        RemainingRerolls = 15;
+
     private Dictionary<string, CharacterClass> Classes
         = new Dictionary<string, CharacterClass> ()
     {
-        { CharacterClasses.Warrior.getName (), CharacterClasses.Warrior },
-        { CharacterClasses.Rogue.getName (), CharacterClasses.Rogue },
-        { CharacterClasses.Defender.getName (), CharacterClasses.Defender },
-        { CharacterClasses.Peasant.getName (), CharacterClasses.Peasant }
+        { CharacterClasses.Warrior.Name, CharacterClasses.Warrior },
+        { CharacterClasses.Rogue.Name, CharacterClasses.Rogue },
+        { CharacterClasses.Defender.Name, CharacterClasses.Defender },
+        { CharacterClasses.Peasant.Name, CharacterClasses.Peasant }
     };      
 
     void Awake ()

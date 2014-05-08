@@ -5,12 +5,22 @@ using System.Collections.Generic;
 public class Character : MonoBehaviour
 {       
     private string _name;
-    public string Name { set { _name = value; } get { return _name; } }
+    public string Name { 
+        set { _name = value; } 
+        get { return _name; }
+    }
+
     private CharacterClass _class;
-    public CharacterClass Class { set { _class = value; } get { return _class; } }
+    public CharacterClass Class { 
+        set { _class = value; } 
+        get { return _class; }
+    }
+
     private Dictionary<statIndex, int> StartingStats;
-    
-    private const int totalStatPoints = 15;
+
+    [Range(0,100)]
+    public int
+        totalStatPoints = 15;
 
     void Start ()
     {
@@ -43,12 +53,12 @@ public class Character : MonoBehaviour
         InitStats ();
         
         for (int i=0; i< totalStatPoints; i++) {
-            int roll = Random.Range (0, 9); // TODO: abstract out max affin ptVal
+            int roll = Random.Range (0, 9);
 
             statIndex statAssignee;
-            if (roll < Class.getAffinSTR ())
+            if (roll < Class.AffinSTR)
                 statAssignee = statIndex.STR;
-            else if ((roll -= Class.getAffinSTR ()) < Class.getAffinDEX ())
+            else if ((roll -= Class.AffinSTR) < Class.AffinDEX)
                 statAssignee = statIndex.DEX;
             else
                 statAssignee = statIndex.FRT;
@@ -61,10 +71,5 @@ public class Character : MonoBehaviour
     public Dictionary<statIndex,int> getStartingStats ()
     {
         return StartingStats;
-    }
-
-    public CharacterClass getClass ()
-    {
-        return Class;
     }
 }

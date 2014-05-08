@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
 
         PC = GameObject.Find ("PC Packet").GetComponent<Character> ();
 
-        ClassDescriptorLabel.text = PC.getClass ().getDescription ();
+        ClassDescriptorLabel.text = PC.Class.Description;
     }
 
     public void UpdateStatTable (int STR, int DEX, int FRT)

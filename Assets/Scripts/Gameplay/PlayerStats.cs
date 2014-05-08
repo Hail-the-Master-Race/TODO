@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour
     public void Init (Character packet)
     {
         name = packet.Name == "" ? "Nameless One" : packet.Name;
-        characterClass = packet.getClass ().getName ();
+        characterClass = packet.Class.Name;
 
         STR = packet.getStartingStats () [statIndex.STR];
         DEX = packet.getStartingStats () [statIndex.DEX];
