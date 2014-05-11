@@ -7,21 +7,35 @@ public class PlayerStats : MonoBehaviour
     public int Lvl { get { return lvl; } }
     public string name = "PC Placeholder Name";
 
-    public string characterClass = "Rogue";
+    public string characterClass = "PC Placeholder Class";
 
+    private int _maxHP = 100;
+    public int MaxHP { get { return _maxHP; } }
     public int currentHP = 100;
-    private int maxHP = 100;
-    public int MaxHP { get { return maxHP; } }
 
+    private int _maxMP = 100;
+    public int MaxMP { get { return _maxMP; } }
     public int currentMP = 100;
-    private int maxMP = 100;
-    public int MaxMP { get { return maxMP; } }
 
+    private int _maxHunger = 100;
+    public int MaxHunger { get { return _maxHunger; } }
     public int currentHunger = 100;
-    private int maxHunger = 100;
-    public int MaxHunger { get { return maxHunger; } }
 
+    private int _maxEXP = 100;
+    public int MaxEXP { get { return _maxEXP; } }
     public int currentEXP = 10;
-    private int maxEXP = 100;
-    public int MaxEXP { get { return maxEXP; } }
+
+    public int STR;
+    public int DEX;
+    public int FRT;
+
+    public void Init (Character packet)
+    {
+        name = packet.Name == "" ? Strings.DefaultPCName : packet.Name;
+        characterClass = packet.Class.Name;
+
+        STR = packet.StartingStats [statIndex.STR];
+        DEX = packet.StartingStats [statIndex.DEX];
+        FRT = packet.StartingStats [statIndex.FRT];
+    }
 }

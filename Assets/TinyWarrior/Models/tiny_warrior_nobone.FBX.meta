@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 5ebcc226ddceba34ab5e7f9e79658942
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 15
   fileIDToRecycleName:
     100000: body001
     100002: //RootNode
@@ -65,6 +65,18 @@ ModelImporter:
     4300018: Object005
     4300020: Object004
     4300022: Object007
+    6400000: body001
+    6400002: Object004
+    6400004: Object005
+    6400006: Object007
+    6400008: Object008
+    6400010: Object009
+    6400012: Object011
+    6400014: Object012
+    6400016: Object013
+    6400018: Object014
+    6400020: Object015
+    6400022: Object016
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -86,7 +98,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .00999999978
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -117,5 +129,4 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
-  additionalBone: 0
   userData: 
