@@ -159,8 +159,19 @@ public class UISlider : UIProgressBar
 	}
 
 	public void Update() {
-		if(type == "HP") {
+		if(type == "health") {
 			this.value = stats.currentHP / stats.MaxHP;
+		}
+
+		if (type == "magic") {
+			this.value = stats.currentMP / stats.MaxMP;
+		}
+
+		if (type == "food") {
+			this.value = stats.currentHunger / stats.MaxHunger;
+		}
+
+		if (type == "money") {
 		}
 	}
 

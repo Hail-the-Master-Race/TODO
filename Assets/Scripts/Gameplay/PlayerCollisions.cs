@@ -15,7 +15,9 @@ public class PlayerCollisions : MonoBehaviour
             // if(player.controller.defending) take less damage
             // if (player.controller.jumping) take more damage
 
-            player.stats.currentHP -= enemy.stats.damage;
+            if(enemy.attacking) {
+				player.stats.currentHP -= enemy.stats.damage;
+			}
 
             if (player.stats.currentHP <= 0) { /*run GameOver logic*/
             }

@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private float verticalVel = 0f;			// Player's vertical velocity
     private float speed;
+	private PlayerStats stats;
+	private bool hungerSet = false;
 	
 	
     void Start ()
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator> ();
         controller = (CharacterController)GetComponent (typeof(CharacterController));
         hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<HashIDs> ();
+		stats = this.gameObject.GetComponent<PlayerStats> ();
         mainCamera = Camera.main;
     }
 	
@@ -48,12 +51,14 @@ public class PlayerController : MonoBehaviour
         // keep the character grounded!
         verticalVel += Physics.gravity.y * Time.deltaTime;
         controller.Move (new Vector3 (0, verticalVel, 0) * Time.deltaTime);
+		ManageHunger (horizontal, vertical);
 
         if (controller.isGrounded) {
 
             if (Input.GetButtonDown ("Fire1")) {
                 playerAnimator.SetBool (hash.attackBool, true);
                 attacking = true;
+				stats.currentHunger--;
                 return;
             } else {
                 if (!playerAnimator.GetBool (hash.attackBool))
@@ -74,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
                 playerAnimator.SetFloat (hash.speedFloat, speed, speedDampTime, Time.deltaTime);
                 controller.Move (transform.forward * speed * Time.deltaTime);
+
 
             } else // Otherwise set the speed parameter to 0
                 playerAnimator.SetFloat (hash.speedFloat, 0);
@@ -121,4 +127,20 @@ public class PlayerController : MonoBehaviour
             rigidbody.MoveRotation (newRotation);
         }
     }
+
+	void ManageHunger(float h, float v){
+		if (h != 0 || v != 0) {
+			if (!hungerSet) {
+				InvokeRepeating ("DecreaseHunger", 2, 2f);
+				hungerSet = true;
+			}
+		} else {
+			CancelInvoke ("DecreaseHunger");
+			hungerSet = false;
+		}
+	}
+
+	void DecreaseHunger() {
+		stats.currentHunger -= 2;
+	}
 }
