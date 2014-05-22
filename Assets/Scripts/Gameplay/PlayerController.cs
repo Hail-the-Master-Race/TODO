@@ -76,9 +76,15 @@ public class PlayerController : MonoBehaviour
 
 				playerAnimator.SetFloat (hash.speedFloat, speed, speedDampTime, Time.deltaTime);
 				controller.Move (transform.forward * speed * Time.deltaTime);
-			} else
-				// Otherwise set the speed parameter to 0
+
+			} else // Otherwise set the speed parameter to 0
 				playerAnimator.SetFloat (hash.speedFloat, 0);
+
+			if (horizontal != 0f) {
+				speed = (horizontal > 0) ? 5.5f : -5.5f;
+				playerAnimator.SetFloat (hash.speedFloat, speed, speedDampTime, Time.deltaTime);
+				controller.Move (transform.right * speed * Time.deltaTime);
+			}
 
 			// Roate based on mouse, independent of movement
 			Rotate (rotation);
