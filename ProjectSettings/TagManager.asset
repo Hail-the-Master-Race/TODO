@@ -6,6 +6,9 @@ TagManager:
   - 
   - 'UI: Score'
   - 'UI: PC Info'
+  - Enemy
+  - 
+  - 'UI: EXP Bar'
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
