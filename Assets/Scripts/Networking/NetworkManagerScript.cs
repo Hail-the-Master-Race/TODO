@@ -28,7 +28,7 @@ public class NetworkManagerScript : MonoBehaviour {
 	void UpdateIsPasued () {
 		isPaused = !isPaused;
 		// Stop time when paused
-		Time.timeScale = isPaused ? 0 : 1;
+//		Time.timeScale = isPaused ? 0 : 1;
 	}
 	
 	// Update is called once per frame
@@ -63,17 +63,20 @@ public class NetworkManagerScript : MonoBehaviour {
 	}
 
 	void spawnPlayer () {
-		// need to hook-up player object and assign a spawn point
+		// I'm guessing we're using the same model for all players, and only need to send over
+		// stat data etc.
 		Network.Instantiate (playerPrefab, spawnObject.position, Quaternion.identity, 0);
 	}
 	
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
-		spawnPlayer ();
+		// Local player shouldn't require a server to play on
+		// spawnPlayer ();
 	}
 
 	void OnConnectedToServer () {
 		Debug.Log ("Connected to server");
+		// Spawn new player...
 		spawnPlayer ();
 	}
 	

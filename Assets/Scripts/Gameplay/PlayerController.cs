@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
 	
 	void UpdateMovement (float horizontal, float vertical, float rotation)
 	{
+		// This needs to be turned off when NOT in networking mode
+		if (!networkView.isMine)
+			return;
 		// keep the character grounded!
 		verticalVel += Physics.gravity.y * Time.deltaTime;
 		controller.Move (new Vector3 (0, verticalVel, 0) * Time.deltaTime);
@@ -105,6 +108,9 @@ public class PlayerController : MonoBehaviour
 	
 	void Rotate (float rotation)
 	{
+		// This needs to be turned off when NOT in networking mode
+		if (!networkView.isMine)
+			return;
 		Vector3 forward = mainCamera.transform.forward;
 		Vector3 right = mainCamera.transform.right;
 

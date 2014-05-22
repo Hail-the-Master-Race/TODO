@@ -583,6 +583,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 143: {fileID: 14300000}
   - 54: {fileID: 5400000}
+  - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1235,6 +1236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSmoothing: 15
   speedDampTime: .100000001
+  attacking: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1252,6 +1254,9 @@ MonoBehaviour:
   currentMP: 100
   currentHunger: 100
   currentEXP: 10
+  STR: 0
+  DEX: 0
+  FRT: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1332,6 +1337,18 @@ CharacterController:
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: .649999976, z: 0}
+--- !u!148 &14800000
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400076}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
