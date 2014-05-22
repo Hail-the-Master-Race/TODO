@@ -51,6 +51,7 @@ public class NetworkManagerScript : MonoBehaviour {
 	}
 
 	void spawnPlayer () {
+		// need to hook-up player object and assign a spawn point
 		Network.Instantiate (playerPrefab, spawnObject.position, Quaternion.identity, 0);
 	}
 	
@@ -73,6 +74,7 @@ public class NetworkManagerScript : MonoBehaviour {
 
 // GUI
 // -- This will need to be changed to use NGUI and only appear on pause menu
+// -- Shouldn't be that hard...
 	void OnGUI () {	
 		if (!Network.isClient && !Network.isServer) {
 			if (GUI.Button (new Rect (btnX, btnY, btnW, btnH), "Start Server")) {
