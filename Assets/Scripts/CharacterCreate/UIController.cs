@@ -3,23 +3,29 @@ using System.Collections;
 
 public class UIController : MonoBehaviour
 {
+    private CharacterCreateController CharacterCreateController;
+
+    private Character PC;
+
     private UILabel ClassDescriptorLabel;
-    private UIPopupList ClassSelector;
+
+    private UILabel RerollCounter;
 
     private UILabel LabelSTR;
     private UILabel LabelFRT;
     private UILabel LabelDEX;     
 
-    private Character PC;
 
     public void Awake ()
     {
-        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();        
+        CharacterCreateController = GetComponent<CharacterCreateController> ();
 
-        ClassSelector = GameObject.Find ("Class Select: List")
-            .GetComponent<UIPopupList> ();
+        PC = GameObject.Find ("PC Packet").GetComponent<Character> ();        
         
         ClassDescriptorLabel = GameObject.Find ("Class Descriptor")
+            .GetComponent<UILabel> ();
+
+        RerollCounter = GameObject.Find ("Remaining Rerolls: Value")
             .GetComponent<UILabel> ();
 
         LabelSTR = GameObject.Find ("STR: Value")
@@ -28,6 +34,7 @@ public class UIController : MonoBehaviour
             .GetComponent<UILabel> ();
         LabelDEX = GameObject.Find ("DEX: Value")
             .GetComponent<UILabel> ();
+
     }
 
     public void UpdateClassSelection ()
@@ -44,6 +51,8 @@ public class UIController : MonoBehaviour
 
     public void UpdateRerollCounter ()
     {
+        RerollCounter.text 
+            = CharacterCreateController.RerollRemaining.ToString ();
         return;
     }
 }

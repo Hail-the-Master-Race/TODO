@@ -17,9 +17,10 @@ public class CharacterCreateController : MonoBehaviour
     private UIInput NameInput;
     private UIPopupList ClassSelectList;
 
+    private const int RerollMax = 15;
     [Range(0,100)]
     public int
-        RemainingRerolls = 15;
+        RerollRemaining = RerollMax;
 
     void Awake ()
     {
@@ -40,7 +41,13 @@ public class CharacterCreateController : MonoBehaviour
 
         UI.UpdateClassSelection ();
 
+        RerollReset ();
         RerollStats ();
+    }
+
+    private void RerollReset ()
+    {
+        RerollRemaining = RerollMax;
     }
 
     public void PCNameChange ()
@@ -50,6 +57,11 @@ public class CharacterCreateController : MonoBehaviour
 
     public void RerollStats ()
     {
+        if (RerollRemaining == 0)
+            return;
+
+        RerollRemaining--;
+
         PC.RerollStats ();
 
         UI.UpdateStatTable ();
