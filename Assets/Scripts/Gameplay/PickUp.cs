@@ -25,7 +25,10 @@ public class PickUp : MonoBehaviour {
 					if(stats.currentHP > stats.MaxHP) stats.currentHP = stats.MaxHP;
 					break;
 				case "magic": break;
-				case "food": break;
+				case "food": 
+					stats.currentHunger += 10;
+					if(stats.currentHP > stats.MaxHunger) stats.currentHunger = stats.MaxHunger;
+				break;
 			}
 			Destroy (this.gameObject);
 		}
