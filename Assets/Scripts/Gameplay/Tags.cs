@@ -9,4 +9,5 @@ public class Tags : MonoBehaviour
 	public const string mainLight = "DirectionalLight";
 	public const string mainCamera = "MainCamera";
 	public const string enemy = "Enemy";
+	public const string pickup = "Pickup";
 }

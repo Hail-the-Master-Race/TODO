@@ -14,6 +14,9 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/NGUI Slider")]
 public class UISlider : UIProgressBar
 {
+	private PlayerStats stats;
+	public string type;
+
 	enum Direction
 	{
 		Horizontal,
@@ -153,5 +156,15 @@ public class UISlider : UIProgressBar
 				else if (key == KeyCode.UpArrow) value = mValue + step;
 			}
 		}
+	}
+
+	public void Update() {
+		if(type == "HP") {
+			this.value = stats.currentHP / stats.MaxHP;
+		}
+	}
+
+	public void Start() {
+		stats = GameObject.FindGameObjectWithTag(Tags.player).GetComponent<PlayerStats>();
 	}
 }

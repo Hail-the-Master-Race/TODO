@@ -456,6 +456,10 @@ Prefab:
       propertyPath: m_Radius
       value: .300000012
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
+      propertyPath: currentHP
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05a81d1fc2827472dadd632582bc00dc, type: 2}
   m_RootGameObject: {fileID: 1790806253}
@@ -888,6 +892,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
@@ -2505,6 +2510,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
@@ -2663,6 +2669,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
@@ -3288,6 +3295,104 @@ Transform:
   m_Children:
   - {fileID: 642558093}
   m_Father: {fileID: 906893672}
+--- !u!1 &1684988400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1684988405}
+  - 33: {fileID: 1684988404}
+  - 65: {fileID: 1684988403}
+  - 23: {fileID: 1684988402}
+  - 54: {fileID: 1684988401}
+  - 114: {fileID: 1684988406}
+  m_Layer: 0
+  m_Name: Pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &1684988401
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684988400}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!23 &1684988402
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684988400}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!65 &1684988403
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684988400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1684988404
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684988400}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1684988405
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684988400}
+  m_LocalRotation: {x: .461939812, y: .191341713, z: .191341713, w: .844623208}
+  m_LocalPosition: {x: -3.05300045, y: .5, z: -3.37889004}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1684988406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684988400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652614fde0e9946f58598e07b9edb36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: health
 --- !u!1 &1738782955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,7 +3736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: PC Placeholder Name
   characterClass: Rogue
-  currentHP: 100
+  currentHP: 90
   currentMP: 100
   currentHunger: 100
   currentEXP: 10
@@ -4123,6 +4228,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
