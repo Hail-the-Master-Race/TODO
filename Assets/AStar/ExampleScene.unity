@@ -1241,7 +1241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5dd50d64dbe43b9ab5cae6428ff096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugMode: 0
 --- !u!114 &610833157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,7 +1252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09b34fafc1b648efa0e1daf5bce2292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugMode: 0
 --- !u!1 &673305309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 610833151}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1409085058}
   floorTag: floor
 --- !u!114 &1096658842
 MonoBehaviour:
@@ -2934,7 +2932,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1409085058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ba002c5b6f14e0db1aba248c5def7f, type: 3}
+  m_Script: {fileID: 11500000, guid: deb7091f29a38480eb56938d89b2e760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
@@ -3000,7 +2998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09b34fafc1b648efa0e1daf5bce2292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugMode: 0
 --- !u!1 &1417259839
 GameObject:
   m_ObjectHideFlags: 0

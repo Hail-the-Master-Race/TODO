@@ -7,22 +7,21 @@ public class CameraControl : MonoBehaviour {
 	RaycastHit hit;
 	bool leftClickFlag = true;
 	
-	public GameObject actor;
+	public GameObject player;
 	public GameObject enemy;
 	public string floorTag;
 
-	Actor actorScript;
+	Player1 playerScript;
 	EnemyAI enemyScript; 
 
 	void Start()
 	{
-		if (actor != null){
-			actorScript = (Actor)actor.GetComponent(typeof(Actor));
+		if (player != null){
+			playerScript = (Player1)player.GetComponent(typeof(Player1));
 		}
-//		if (enemy != null){
-//			enemyScript = (EnemyAI)enemy.GetComponent(typeof(EnemyAI));
-//			Debug.Log("enemy not numll", enemy);
-//		}
+		if (enemy != null){
+			enemyScript = (EnemyAI)enemy.GetComponent(typeof(EnemyAI));
+		}
 //		else if(enemy == null) 
 //		{Debug.Log ("enemy null", enemy);}
 	}
@@ -41,13 +40,13 @@ public class CameraControl : MonoBehaviour {
 				{
 					float X = hit.point.x;
 					float Z = hit.point.z;
-					Vector3 target = new Vector3(X, actor.transform.position.y, Z);
+					Vector3 target = new Vector3(X, player.transform.position.y, Z);
 					Vector3 enemytarget = new Vector3(target.x, target.y, target.z);
-					actorScript.MoveOrder(target);
+					playerScript.MoveOrder(target);
 
-//					if(Vector3.Distance(enemytarget, target) < 5){
-//						enemyScript.MoveOrder(target);
-//					}
+					if(Vector3.Distance(enemytarget, target) < 5){
+						enemyScript.MoveOrder(target);
+					}
 
 				}
 			}
