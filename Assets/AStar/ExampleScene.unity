@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 610833151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5dd50d64dbe43b9ab5cae6428ff096, type: 3}
+  m_Script: {fileID: 11500000, guid: ec67e84c63e7f47b69d9590eadbbb73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &610833157
@@ -1249,9 +1249,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 610833151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09b34fafc1b648efa0e1daf5bce2292, type: 3}
+  m_Script: {fileID: 11500000, guid: dddc62c4fd82b4c23b27edceffbfdc77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugMode: 0
 --- !u!1 &673305309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,7 +2208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06b9901402084e75b80b1044d77f8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actor: {fileID: 610833151}
+  player: {fileID: 610833151}
   enemy: {fileID: 1409085058}
   floorTag: floor
 --- !u!114 &1096658842
@@ -2993,11 +2994,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1409085058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09b34fafc1b648efa0e1daf5bce2292, type: 3}
+  m_Script: {fileID: 11500000, guid: dddc62c4fd82b4c23b27edceffbfdc77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugMode: 0
 --- !u!1 &1417259839
 GameObject:
   m_ObjectHideFlags: 0
