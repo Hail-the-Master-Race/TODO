@@ -5,10 +5,6 @@ using System.Collections.Generic;
 public class EnemyAI : MonoBehaviour
 {
 	Transform target;
-	float MoveSpeed = 3;
-	float rotationSpeed = 3; 
-	float MaxDist = 10;
-	float MinDist = 5;
 	Transform myTransform; 
 	public float speed = 3f;
 

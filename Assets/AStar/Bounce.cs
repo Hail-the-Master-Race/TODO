@@ -1,95 +1,64 @@
 using UnityEngine;
 using System.Collections;
 
-public class Bounce : MonoBehaviour {
-	
-	public bool DebugMode;
-	
-	void Update () 
-	{
-		/***if to close to a wall move away***/
-		float distance = 0.5f;
-		RaycastHit hit;
-		if (Physics.Raycast(transform.position, new Vector3(-distance, 0, 0), out hit, distance))
+public class Bounce : MonoBehaviour
+{
+		public float dist = 0.5f;
+
+		void Update ()
 		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(-distance, 0, 0));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(resistPower, 0, 0);
-			}
+				RaycastHit hit;
+				//checking if colliding with the left wall
+				if (Physics.Raycast (transform.position, new Vector3 (-dist, 0, 0), out hit, dist)) {
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (resistPower, 0, 0);
+
+				}
+				//checking collisions with right wall
+				if (Physics.Raycast (transform.position, new Vector3 (dist, 0, 0), out hit, dist)) {
+
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (-resistPower, 0, 0);
+
+				}
+				//forward raycasting
+				if (Physics.Raycast (transform.position, new Vector3 (0, 0, dist), out hit, dist)) {
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (0, 0, -resistPower);
+
+				}
+				//backwards raycasting
+				if (Physics.Raycast (transform.position, new Vector3 (0, 0, -dist), out hit, dist)) {
+
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (0, 0, resistPower);
+			
+				}
+				//checking if hitting another enemy/player. make sure they don't overlap but instead "collide"
+				if (Physics.Raycast (transform.position, new Vector3 (dist, 0, dist), out hit, dist)) {
+			
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (-resistPower, 0, -resistPower);
+			
+				}
+				if (Physics.Raycast (transform.position, new Vector3 (dist, 0, -dist), out hit, dist)) {
+			
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (-resistPower, 0, resistPower);
+			
+				}
+				if (Physics.Raycast (transform.position, new Vector3 (-dist, 0, dist), out hit, dist)) {
+			
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (resistPower, 0, -resistPower);
+			
+				}
+				if (Physics.Raycast (transform.position, new Vector3 (-dist, 0, -dist), out hit, dist)) {
+			
+			
+						float resistPower = 0.08f - hit.distance / (dist * 10);
+						transform.position += new Vector3 (resistPower, 0, resistPower);
+			
+				}
 		}
-		if (Physics.Raycast(transform.position, new Vector3(distance, 0, 0), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(distance, 0, 0));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(-resistPower, 0, 0);
-			}
-		}
-		if (Physics.Raycast(transform.position, new Vector3(0, 0, distance), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, distance));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(0, 0, -resistPower);
-			}
-		}
-		if (Physics.Raycast(transform.position, new Vector3(0, 0, -distance), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, -distance));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(0, 0, resistPower);
-			}
-		}
-		
-		if (Physics.Raycast(transform.position, new Vector3(distance, 0, distance), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(distance, 0, distance));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(-resistPower, 0, -resistPower);
-			}
-		}
-		if (Physics.Raycast(transform.position, new Vector3(distance, 0, -distance), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(distance, 0, -distance));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(-resistPower, 0, resistPower);
-			}
-		}
-		if (Physics.Raycast(transform.position, new Vector3(-distance, 0, distance), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(-distance, 0, distance));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(resistPower, 0, -resistPower);
-			}
-		}
-		if (Physics.Raycast(transform.position, new Vector3(-distance, 0, -distance), out hit, distance))
-		{
-			if (hit.transform.tag != "con")
-			{
-				if (DebugMode)
-					Debug.DrawLine(transform.position, transform.position + new Vector3(-distance, 0, -distance));
-				float resistPower = 0.1f - hit.distance/(distance*10);
-				transform.position += new Vector3(resistPower, 0, resistPower);
-			}
-		}
-	}
 }
