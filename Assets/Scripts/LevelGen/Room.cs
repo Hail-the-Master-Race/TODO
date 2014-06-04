@@ -74,8 +74,8 @@ public class Room{//: MonoBehaviour {
 			while (current != end) {
 				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
 				cube.AddComponent<Rigidbody> ();
-				cube.transform.localScale = new Vector3(.5f,1f,.5f);
-				cube.transform.position = current;//+ .5f * inc;
+				cube.transform.localScale = new Vector3(.5f,3f,.5f);
+				cube.transform.position = current + Vector3.up * 1.5f;
 				cube.rigidbody.isKinematic = true;
 				current = current + inc*.5f;
 				//current = end;
