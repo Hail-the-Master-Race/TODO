@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
 	}
 	
 	public void Init() {
-		GameObject.Instantiate (playerPrefab, new Vector3 (1, 1, 0), Quaternion.identity);
+		if (playerPrefab) {
+			GameObject.Instantiate (playerPrefab, new Vector3 (1, 1, 0), Quaternion.identity);
+		}
 	}
 }
