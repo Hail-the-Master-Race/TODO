@@ -9,6 +9,11 @@ public class UIControllerWelcome : MonoBehaviour
         Application.LoadLevel ("CharacterCreateScene");
     }
 
+	public void OnClickPlayOnline () {
+		Debug.Log ("Loading ServerListScene");
+		Application.LoadLevel ("ServerListScene");
+	}
+
     public void OnClickHighScore ()
     { 
         Application.LoadLevel ("HighScoreAchievementsScene");
