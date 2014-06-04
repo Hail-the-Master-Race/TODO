@@ -14,7 +14,6 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/NGUI Slider")]
 public class UISlider : UIProgressBar
 {
-	private PlayerStats stats;
 	public string type;
 
 	enum Direction
@@ -156,26 +155,5 @@ public class UISlider : UIProgressBar
 				else if (key == KeyCode.UpArrow) value = mValue + step;
 			}
 		}
-	}
-
-	public void Update() {
-		if(type == "health") {
-			this.value = stats.currentHP / stats.MaxHP;
-		}
-
-		if (type == "magic") {
-			this.value = stats.currentMP / stats.MaxMP;
-		}
-
-		if (type == "food") {
-			this.value = stats.currentHunger / stats.MaxHunger;
-		}
-
-		if (type == "money") {
-		}
-	}
-
-	public void Start() {
-		stats = GameObject.FindGameObjectWithTag(Tags.player).GetComponent<PlayerStats>();
 	}
 }

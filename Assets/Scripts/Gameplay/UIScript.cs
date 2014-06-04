@@ -13,12 +13,14 @@ public class UIScript : MonoBehaviour
     private UILabel LabelScoreValue;
     private GameObject BarHP, BarMP, BarHunger, BarEXP;
 
+
+
     void Start ()
     {
-        PC = GameObject.Find ("Player");
+		PC = GameObject.FindGameObjectWithTag (Tags.player);
         PCStats = PC.GetComponent<PlayerStats> ();
 
-        GameController = GameObject.Find ("Game Controller")
+		GameController = GameObject.FindGameObjectWithTag (Tags.gameController)
             .GetComponent<GameControllerScript> ();
 
         LabelPCName = GameObject.Find ("PC Info: Name")

@@ -7,5 +7,15 @@ public class Player : MonoBehaviour {
 	public PlayerCollisions collisions;
 	public PlayerController controller;
 
+	public Transform playerPrefab;
+	
 	// add initialization logic here
+	
+	public void Start() {
+		Init ();
+	}
+	
+	public void Init() {
+		GameObject.Instantiate (playerPrefab, new Vector3 (1, 1, 0), Quaternion.identity);
+	}
 }
