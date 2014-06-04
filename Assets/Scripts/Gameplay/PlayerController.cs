@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxis ("Vertical");
         float rot = Input.GetAxis ("Mouse X");
 
+		// Disable this script if it doesn't belong to us.
+		if (networkManager.isOnline && !networkView.isMine)
+			enabled = false;
 		if (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine))
 			UpdateMovement (h, v, rot);
     }

@@ -5770,7 +5770,7 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 114
+  mWidth: 200
   mHeight: 30
   mDepth: 4
   autoResizeBoxCollider: 0
@@ -6250,6 +6250,7 @@ GameObject:
   - 95: {fileID: 1777652613}
   - 65: {fileID: 1777652616}
   - 114: {fileID: 1777652617}
+  - 148: {fileID: 1777652618}
   m_Layer: 0
   m_Name: tresure_box
   m_TagString: Untagged
@@ -6339,6 +6340,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stamina: 30
+--- !u!148 &1777652618
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1777652611}
+  m_Enabled: 1
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 0}
+  m_ViewID:
+    m_ID: 2
+    m_Type: 1
 --- !u!1 &1790806253
 GameObject:
   m_ObjectHideFlags: 0
@@ -6494,7 +6507,7 @@ NetworkView:
   m_StateSynchronization: 1
   m_Observed: {fileID: 1790806254}
   m_ViewID:
-    m_ID: 1
+    m_ID: 3
     m_Type: 1
 --- !u!1 &1792538661
 GameObject:
