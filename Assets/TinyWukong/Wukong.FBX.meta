@@ -74,10 +74,11 @@ ModelImporter:
     4300000: Knight
     4300002: Sword
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Knight
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 1
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -125,6 +126,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
