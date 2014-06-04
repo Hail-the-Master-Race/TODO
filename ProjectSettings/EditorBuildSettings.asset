@@ -10,4 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SettingScene.unity
   - enabled: 1
+    path: Assets/Scenes/CharacterCreateScene.unity
+  - enabled: 1
     path: Assets/Scenes/StartScene.unity
