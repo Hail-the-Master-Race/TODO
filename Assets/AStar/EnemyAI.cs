@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
 	Vector3 currNode;
 	int nodeIndex;
 	List<Vector3> path = new List<Vector3>();
-	NodeControl control;
+	Node control;
 	State state = State.IDLE;
 	float OldTime = 0;
 	float checkTime = 0;
@@ -30,7 +30,7 @@ public class EnemyAI : MonoBehaviour
 	{
 		myTransform = transform;
 		GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
-		control = (NodeControl)cam.GetComponent(typeof(NodeControl));
+		control = (Node)cam.GetComponent(typeof(Node));
 		target = GameObject.FindWithTag("Player").transform;
 
 	}
