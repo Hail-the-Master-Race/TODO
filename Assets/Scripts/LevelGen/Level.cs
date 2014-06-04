@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Level : MonoBehaviour {
 	public Room[] roomsList = new Room[1000];
+
+	public Rigidbody prefab;
 
 	public void BuildRooms(){
 		for (int i = 0; i < roomsList.Length; i++){
@@ -54,7 +57,7 @@ public class Level : MonoBehaviour {
 			Vector3 c2 = new Vector3 (cx+x, 0f, cy+y);
 			Vector3 c3 = new Vector3 (cx+x, 0f, cy-y);
 			Vector3 c4 = new Vector3 (cx-x, 0f, cy-y);
-			Room temp = new Room (c1,c2,c3,c4);
+			Room temp = new Room (prefab, c1,c2,c3,c4);
 			// first round culling
 			if (temp.area > minArea && temp.area < maxArea) {
 				roomsList[i] = temp;

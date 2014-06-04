@@ -1,62 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class Room{//: MonoBehaviour {
 
-//	public class Room
-//	{	
 		// corners of the room
 	public Vector3[] corners = new Vector3[4];
 	public Vector3[] incs = new Vector3[4];
 	public float area;
 	public float center;
+	public float height = 10; 
+
 
 	// used for intersection testing, saves recalculating
 	public float xMin;
 	public float xMax;
 	public float zMin;
 	public float zMax;
+
+	public Rigidbody wall_sec;
 	//public Rect rect;
 
 	public Room()
 	{
-//		int levelScale = 100;
-//		int roomScale = 5;
-//		//randomize
-//		float cent = Mathf.Round(Random.Range(-levelScale, levelScale));
-//		float xrad = Mathf.Round(Random.Range(-roomScale,roomScale));			
-//		float yrad = Mathf.Round(Random.Range(-roomScale,roomScale));
-//		//create the corners
-//		corners [0] = new Vector3 (center - xrad, 0, center + yrad);
-//		corners [1] = new Vector3 (center + xrad, 0, center + yrad);
-//		corners [2] = new Vector3 (center + xrad, 0, center - yrad);
-//		corners [3] = new Vector3 (center - xrad, 0, center - yrad);
-//		area = 4 * xrad * yrad;
-//		cent=cen
-//	
 		}
-		public Room(Vector3 nw, Vector3 ne, Vector3 se, Vector3 sw)
-		{
+	public Room(Rigidbody prefab, Vector3 nw, Vector3 ne, Vector3 se, Vector3 sw)
+	{
 			//initialize the corners
 			corners[0] = nw;
 			corners[1] = ne;
 			corners[2] = se;
 			corners[3] = sw;
-
+			
 			//translate into rect coords
 			xMin = sw.x;
 			zMin = sw.z;	
 			xMax = ne.x;
 			zMax = ne.z;
 
-			
 			//initialize the increiments
 			incs[0] = Vector3.right;
 			incs[1] = Vector3.back;
 			incs[2] = Vector3.left;
 			incs[3] = Vector3.forward;
 			area = Vector3.Distance (nw, ne) * Vector3.Distance(nw, sw);
+
+			wall_sec = prefab;
+
 
 		}
 		public bool IntersectsWithBuffer (Room r,float b){
@@ -72,12 +61,14 @@ public class Room{//: MonoBehaviour {
 
 			Vector3 current = start;
 			while (current != end) {
-				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
-				cube.AddComponent<Rigidbody> ();
-				cube.transform.localScale = new Vector3(.5f,3f,.5f);
-				cube.transform.position = current + Vector3.up * 1.5f;
-				cube.rigidbody.isKinematic = true;
-				current = current + inc*.5f;
+//				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
+//				cube.AddComponent<Rigidbody> ();
+//				cube.transform.localScale = new Vector3(1f,height,1f);
+//				cube.transform.position = current;//	 + Vector3.up * .5f* height;
+//				cube.rigidbody.isKinematic = true;
+				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
+				current = current + inc*1.0f;
+
 				//current = end;
 
 			}
