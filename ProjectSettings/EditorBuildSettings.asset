@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterCreateScene.unity
   - enabled: 1
     path: Assets/Scenes/ServerListScene.unity
+  - enabled: 1
+    path: Assets/Scenes/DeathScene.unity

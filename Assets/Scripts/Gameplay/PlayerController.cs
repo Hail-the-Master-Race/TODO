@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private float verticalVel = 0f;			// Player's vertical velocity
     private float speed;
-	private PlayerStats stats;
-	private bool hungerSet = false;
+    private PlayerStats stats;
+    private bool hungerSet = false;
 	
 	
     void Start ()
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator> ();
         controller = (CharacterController)GetComponent (typeof(CharacterController));
         hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<HashIDs> ();
-		stats = this.gameObject.GetComponent<PlayerStats> ();
+        stats = this.gameObject.GetComponent<PlayerStats> ();
         mainCamera = Camera.main;
     }
 	
@@ -44,6 +44,20 @@ public class PlayerController : MonoBehaviour
         float rot = Input.GetAxis ("Mouse X");
 
         UpdateMovement (h, v, rot);
+
+        if (IsTimeToDie ()) {
+            Die ();
+        }
+    }
+
+    bool IsTimeToDie ()
+    {
+        return stats.currentHP <= 0 || stats.currentHunger <= 0;
+    }
+
+    void Die ()
+    {
+        Application.LoadLevel ("DeathScene");
     }
 	
     void UpdateMovement (float horizontal, float vertical, float rotation)
@@ -51,14 +65,14 @@ public class PlayerController : MonoBehaviour
         // keep the character grounded!
         verticalVel += Physics.gravity.y * Time.deltaTime;
         controller.Move (new Vector3 (0, verticalVel, 0) * Time.deltaTime);
-		ManageHunger (horizontal, vertical);
+        ManageHunger (horizontal, vertical);
 
         if (controller.isGrounded) {
 
             if (Input.GetButtonDown ("Fire1")) {
                 playerAnimator.SetBool (hash.attackBool, true);
                 attacking = true;
-				stats.currentHunger--;
+                stats.currentHunger--;
                 return;
             } else {
                 if (!playerAnimator.GetBool (hash.attackBool))
@@ -128,19 +142,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	void ManageHunger(float h, float v){
-		if (h != 0 || v != 0) {
-			if (!hungerSet) {
-				InvokeRepeating ("DecreaseHunger", 2, 2f);
-				hungerSet = true;
-			}
-		} else {
-			CancelInvoke ("DecreaseHunger");
-			hungerSet = false;
-		}
-	}
+    void ManageHunger (float h, float v)
+    {
+        if (h != 0 || v != 0) {
+            if (!hungerSet) {
+                InvokeRepeating ("DecreaseHunger", 2, 2f);
+                hungerSet = true;
+            }
+        } else {
+            CancelInvoke ("DecreaseHunger");
+            hungerSet = false;
+        }
+    }
 
-	void DecreaseHunger() {
-		stats.currentHunger -= 2;
-	}
+    void DecreaseHunger ()
+    {
+        stats.currentHunger -= 2;
+    }
 }
