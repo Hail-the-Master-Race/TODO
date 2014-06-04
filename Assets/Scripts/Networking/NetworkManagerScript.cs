@@ -6,6 +6,7 @@ public class NetworkManagerScript : MonoBehaviour {
 	public Transform spawnObject;
 
 	// Janky janky janky...
+	public bool isOnline = false; 
 	private bool isPaused = false;
 	private bool refreshing;
 	private HostData[] hostData = null;
@@ -70,12 +71,15 @@ public class NetworkManagerScript : MonoBehaviour {
 	
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
+		isOnline = true;
 		// Local player shouldn't require a server to play on
 		// spawnPlayer ();
 	}
 
 	void OnConnectedToServer () {
-		Debug.Log ("Connected to server");
+		Debug.Log ("Connected to server...");
+		Debug.Log ("Spawning your character...");
+		isOnline = true;
 		// Spawn new player...
 		spawnPlayer ();
 	}
