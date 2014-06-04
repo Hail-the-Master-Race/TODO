@@ -1,62 +1,55 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class Room{//: MonoBehaviour {
+	// room index number
+	public int index;
 
-//	public class Room
-//	{	
-		// corners of the room
+	public Rigidbody wall_sec;
+	//public Rect rect;
+
+	// corners of the room
 	public Vector3[] corners = new Vector3[4];
 	public Vector3[] incs = new Vector3[4];
 	public float area;
 	public float center;
+	public float height = 10; 
+
 
 	// used for intersection testing, saves recalculating
 	public float xMin;
 	public float xMax;
 	public float zMin;
 	public float zMax;
-	//public Rect rect;
+
+	//pathway graphs
+	public ArrayList[] doorsList;
 
 	public Room()
 	{
-//		int levelScale = 100;
-//		int roomScale = 5;
-//		//randomize
-//		float cent = Mathf.Round(Random.Range(-levelScale, levelScale));
-//		float xrad = Mathf.Round(Random.Range(-roomScale,roomScale));			
-//		float yrad = Mathf.Round(Random.Range(-roomScale,roomScale));
-//		//create the corners
-//		corners [0] = new Vector3 (center - xrad, 0, center + yrad);
-//		corners [1] = new Vector3 (center + xrad, 0, center + yrad);
-//		corners [2] = new Vector3 (center + xrad, 0, center - yrad);
-//		corners [3] = new Vector3 (center - xrad, 0, center - yrad);
-//		area = 4 * xrad * yrad;
-//		cent=cen
-//	
 		}
-		public Room(Vector3 nw, Vector3 ne, Vector3 se, Vector3 sw)
-		{
+	public Room(Rigidbody prefab, Vector3 nw, Vector3 ne, Vector3 se, Vector3 sw)
+	{
 			//initialize the corners
 			corners[0] = nw;
 			corners[1] = ne;
 			corners[2] = se;
 			corners[3] = sw;
-
+			
 			//translate into rect coords
 			xMin = sw.x;
 			zMin = sw.z;	
 			xMax = ne.x;
 			zMax = ne.z;
 
-			
 			//initialize the increiments
 			incs[0] = Vector3.right;
 			incs[1] = Vector3.back;
 			incs[2] = Vector3.left;
 			incs[3] = Vector3.forward;
 			area = Vector3.Distance (nw, ne) * Vector3.Distance(nw, sw);
+
+			wall_sec = prefab;
 
 		}
 		public bool IntersectsWithBuffer (Room r,float b){
@@ -72,18 +65,15 @@ public class Room{//: MonoBehaviour {
 
 			Vector3 current = start;
 			while (current != end) {
-				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
-				GameObject myGameObject = new GameObject ();
-				cube.AddComponent<Rigidbody> ();
-				cube.transform.localScale = new Vector3(.5f,1f,.5f);
-				cube.transform.position = current;//+ .5f * inc;
-				myGameObject.transform.position = current;
-				myGameObject.tag = "point";
-				
-				cube.rigidbody.isKinematic = true;
-				current = current + inc*.5f;
-				//current = end;
-
+			// not for use with prefab
+//				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
+//				cube.AddComponent<Rigidbody> ();
+//				cube.transform.localScale = new Vector3(1f,height,1f);
+//				cube.transform.position = current;//	 + Vector3.up * .5f* height;
+//				cube.rigidbody.isKinematic = true;
+			//prefab generation
+				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
+				current = current + inc*1.0f;
 			}
 		}
 		public void BuildWalls(){
@@ -95,31 +85,20 @@ public class Room{//: MonoBehaviour {
 				}
 
 			}
+	//todo
+//		public void InsertPath(int wall, float distance){
+//	}
+		
 
 
 
-	// Use this for initialization
-	void Start () {
-//		float x = 100f;
-//		Vector3 c1 = new Vector3 (-x, 0f, x);
-//		Vector3 c2 = new Vector3 (x, 0f, x);
-//		Vector3 c3 = new Vector3 (x, 0f, -x);
-//		Vector3 c4 = new Vector3 (-x, 0f, -x);
-//		Room test = new Room(c1,c2,c3,c4);
-//		test.BuildWalls();
-
-//      test.BuildWall (c1, c2, test.incs [0]);
-//		test.BuildWall (c2, c3, test.incs [1]);
-//		test.BuildWall (c1, c2, test.incs [0]);
-//		test.BuildWall (c1, c2, test.incs [0]);
-//
-//
-
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+//	// Use this for initialization
+//	void Start () {
+//	
+//	}
+//	
+//	// Update is called once per frame
+//	void Update () {
+//	
+//	}
 }
