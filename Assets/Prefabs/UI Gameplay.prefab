@@ -787,6 +787,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
@@ -1272,6 +1273,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
@@ -1343,6 +1345,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
@@ -1692,6 +1695,7 @@ MonoBehaviour:
   mFill: 0
   numberOfSteps: 0
   onChange: []
+  type: 
   foreground: {fileID: 0}
   rawValue: 1
   direction: 2
