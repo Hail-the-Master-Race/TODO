@@ -2,8 +2,13 @@
 using System.Collections;
 
 public class Room{//: MonoBehaviour {
+	// room index number
+	public int index;
 
-		// corners of the room
+	public Rigidbody wall_sec;
+	//public Rect rect;
+
+	// corners of the room
 	public Vector3[] corners = new Vector3[4];
 	public Vector3[] incs = new Vector3[4];
 	public float area;
@@ -17,8 +22,8 @@ public class Room{//: MonoBehaviour {
 	public float zMin;
 	public float zMax;
 
-	public Rigidbody wall_sec;
-	//public Rect rect;
+	//pathway graphs
+	public ArrayList[] doorsList;
 
 	public Room()
 	{
@@ -46,7 +51,6 @@ public class Room{//: MonoBehaviour {
 
 			wall_sec = prefab;
 
-
 		}
 		public bool IntersectsWithBuffer (Room r,float b){
 			bool t1 = (xMax + b >= r.xMin);
@@ -61,16 +65,15 @@ public class Room{//: MonoBehaviour {
 
 			Vector3 current = start;
 			while (current != end) {
+			// not for use with prefab
 //				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
 //				cube.AddComponent<Rigidbody> ();
 //				cube.transform.localScale = new Vector3(1f,height,1f);
 //				cube.transform.position = current;//	 + Vector3.up * .5f* height;
 //				cube.rigidbody.isKinematic = true;
+			//prefab generation
 				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
 				current = current + inc*1.0f;
-
-				//current = end;
-
 			}
 		}
 		public void BuildWalls(){
@@ -82,31 +85,20 @@ public class Room{//: MonoBehaviour {
 				}
 
 			}
+	//todo
+//		public void InsertPath(int wall, float distance){
+//	}
+		
 
 
 
-	// Use this for initialization
-	void Start () {
-//		float x = 100f;
-//		Vector3 c1 = new Vector3 (-x, 0f, x);
-//		Vector3 c2 = new Vector3 (x, 0f, x);
-//		Vector3 c3 = new Vector3 (x, 0f, -x);
-//		Vector3 c4 = new Vector3 (-x, 0f, -x);
-//		Room test = new Room(c1,c2,c3,c4);
-//		test.BuildWalls();
-
-//      test.BuildWall (c1, c2, test.incs [0]);
-//		test.BuildWall (c2, c3, test.incs [1]);
-//		test.BuildWall (c1, c2, test.incs [0]);
-//		test.BuildWall (c1, c2, test.incs [0]);
-//
-//
-
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+//	// Use this for initialization
+//	void Start () {
+//	
+//	}
+//	
+//	// Update is called once per frame
+//	void Update () {
+//	
+//	}
 }

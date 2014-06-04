@@ -3,7 +3,7 @@ using System.Collections;
 
 
 public class Level : MonoBehaviour {
-	public Room[] roomsList = new Room[1000];
+	public Room[] roomsList;
 
 	public Rigidbody prefab;
 
@@ -22,9 +22,9 @@ public class Level : MonoBehaviour {
 				rtest = roomsList[i];
 				for (int j = 0; j < i; j++){
 					if (roomsList[j] != null){
-						print("Checking rooms:"+i+" and "+j);
+						//print("Checking rooms:"+i+" and "+j);
 						if (rtest.IntersectsWithBuffer(roomsList[j],2f)){
-							print ("Culling "+j);
+							//print ("Culling "+j);
 							counter++;
 							roomsList[j] = null;
 						}
@@ -32,14 +32,32 @@ public class Level : MonoBehaviour {
 				}
 			}
 		}
-		print ("Culled " + counter + " rooms!");
+		print ("Culled " + counter + " rooms!"); 
 	}
+	public void IndexRooms(){
+		Room[] temp = new Room[1000];
+		int j = 0;
+		for (int i = 0; i < roomsList.Length; i++)
+			if (roomsList[i] != null){
+				temp[j] = roomsList[i];
+				temp[j].index = j;
+				j++;
+		}
+		System.Array.Resize (ref temp, j);
+		roomsList = temp;
+	}
+
+//  todo
+//	public void BuildPaths(){
+//
+//	}
 
 
 	// Use this for initialization
 	void Start () {
 		//room building info
 		//hardcoded for now
+		roomsList = new Room[1000];
 		int maxRooms = 100;
 		int levelScale = 50;
 		int roomMin = 3;
@@ -63,8 +81,11 @@ public class Level : MonoBehaviour {
 				roomsList[i] = temp;
 			}
 		}
-		CullRooms ();
-		BuildRooms ();
+		CullRooms (); // Removes overlapping rooms
+		IndexRooms (); // Indexes the rooms, fits array size to room numbers
+		BuildRooms (); // generates all the rooms
+
+		
 	}
 
 	// Update is called once per frame
