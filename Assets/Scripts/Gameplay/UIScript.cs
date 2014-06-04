@@ -18,8 +18,8 @@ public class UIScript : MonoBehaviour
     void Start ()
     {
 		PC = GameObject.FindGameObjectWithTag (Tags.player);
-        PCStats = PC.GetComponent<PlayerStats> ();
-
+		PCStats = PC.GetComponent<PlayerStats> ();
+	
 		GameController = GameObject.FindGameObjectWithTag (Tags.gameController)
             .GetComponent<GameControllerScript> ();
 

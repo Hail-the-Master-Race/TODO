@@ -11,11 +11,11 @@ public class Player : MonoBehaviour {
 	
 	// add initialization logic here
 	
-	public void Start() {
+	void Awake() {
 		Init ();
 	}
 	
-	public void Init() {
+	private void Init() {
 		if (playerPrefab) {
 			GameObject.Instantiate (playerPrefab, new Vector3 (1, 1, 0), Quaternion.identity);
 		}
