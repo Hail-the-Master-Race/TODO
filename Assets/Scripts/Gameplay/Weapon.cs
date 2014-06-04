@@ -23,8 +23,10 @@ public class Weapon : MonoBehaviour {
 		Debug.Log ("Player Collision");
 		if (other.gameObject.CompareTag ("Enemy")) {
 			Enemy enemy = other.gameObject.transform.root.GetComponent<Enemy> ();
+			Debug.Log(enemy);
 			Player player = this.gameObject.transform.root.GetComponent<Player> ();
 			enemy.stats.currentHP -= player.stats.STR;
+			Debug.Log(enemy.stats.currentHP);
 		}
 
 	}
@@ -32,8 +34,8 @@ public class Weapon : MonoBehaviour {
 	void damagePlayer(Collider other) {
 		Debug.Log ("Enemy Collision");
 		if (other.gameObject.CompareTag ("Player")) {
-			Player player = other.gameObject.transform.root.GetComponent<Player> ();
-			Enemy enemy = this.gameObject.transform.root.GetComponent<Enemy> ();
+			Player player = (Player)other.gameObject.transform.root.GetComponent<Player> ();
+			Enemy enemy = (Enemy)this.gameObject.transform.root.GetComponent<Enemy> ();
 			player.stats.currentHP -= enemy.stats.damage;
 		}
 	}

@@ -16,10 +16,12 @@ public class GameControllerScript : MonoBehaviour
         // TODO: insure against empty/non-existent packet object
         PCPacket = GameObject.Find ("PC Packet").GetComponent<Character> ();
 	
-        PlayerStats PCStat = GameObject.Find ("Player")
+        PlayerStats PCStat = GameObject.FindGameObjectWithTag (Tags.player)
             .GetComponent<PlayerStats> ();
 
         PCStat.Init (PCPacket);
+
+
     }
 	
     void Update ()
