@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyWeapon : MonoBehaviour {
+public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +14,7 @@ public class EnemyWeapon : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+
 		if(this.gameObject.CompareTag("Enemy")) damagePlayer (other);
 		else damageEnemy (other);
 	}
@@ -32,7 +33,7 @@ public class EnemyWeapon : MonoBehaviour {
 		Debug.Log ("Enemy Collision");
 		if (other.gameObject.CompareTag ("Player")) {
 			Player player = other.gameObject.transform.root.GetComponent<Player> ();
-			Enemy enemy = other.gameObject.transform.root.GetComponent<Enemy> ();
+			Enemy enemy = this.gameObject.transform.root.GetComponent<Enemy> ();
 			player.stats.currentHP -= enemy.stats.damage;
 		}
 	}

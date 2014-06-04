@@ -81,7 +81,7 @@ public class EnemyAI : MonoBehaviour
 	
 	void MoveToward()
 	{
-		
+		Debug.Log ("moving");
 		Vector3 newPos = transform.position;
 		
 		float Xdistance = newPos.x - currNode.x;
