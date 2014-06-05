@@ -20,8 +20,6 @@ public class NetworkManagerScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find ("PlayerSpawn").GetComponent<Player> ();
-		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();
 		btnX = Screen.width  * (float) 0.2;
 		btnY = Screen.height * (float) 0.2;
 		btnW = Screen.width  * (float) 0.15;
@@ -65,6 +63,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		Debug.Log ("Spawning your character...");
 		isOnline = true;
 		// Spawn new player...
+		player = GameObject.Find ("PlayerSpawn").GetComponent<Player> ();
 		player.Spawn ();
 	}
 	
@@ -79,6 +78,7 @@ public class NetworkManagerScript : MonoBehaviour {
 // -- This will need to be changed to use NGUI and only appear on pause menu
 // -- Shouldn't be that hard...
 	void OnGUI () {	
+		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();
 		if (ui.isPaused) {
 			if (!Network.isClient && !Network.isServer) {
 				if (GUI.Button (new Rect (btnX, btnY, btnW, btnH), "Start Server")) {

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         controller = (CharacterController)GetComponent (typeof(CharacterController));
         hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<HashIDs> ();
 		stats = this.gameObject.GetComponent<PlayerStats> ();
-        mainCamera = Camera.main;
+		mainCamera = this.GetComponentInChildren<Camera>();
 		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();
     }
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 		// Disable the script if it doesn't belong to the player
 		if (networkManager.isOnline && !networkView.isMine)
 			enabled = false;
-		if (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine))
+//		if (!ui.isPaused || (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine)))
         	UpdateMovement (h, v, rot);
 
         if (IsTimeToDie ()) {
