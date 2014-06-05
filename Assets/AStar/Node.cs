@@ -15,83 +15,84 @@ public class Node : MonoBehaviour {
 	
 	class Point
 	{
-		Vector3 m_pos;
-		char m_state = 'u';
-		float m_score = 0;
-		Point m_prevPoint;
+		Vector3 enemy_pos;
+		char curr_state = 'u';
+		float path_score = 0;
+		Point enemy_prevPoint;
 		
-		List<Point> m_connectedPoints = new List<Point>();
-		List<Point> m_potentialPrevPoints = new List<Point>();
+		List<Point> m_connectedpath_points = new List<Point>();
+		List<Point> m_potentialPrevpath_points = new List<Point>();
 		
 		public Point(Vector3 pos, char state = 'u')
 		{
-			m_pos = pos;
-			m_state = state;
+			enemy_pos = pos;
+			curr_state = state;
 		}
 		
 		public char GetState()
 		{
-			return m_state;
+			return curr_state;
 		}
 		
 		public Vector3 GetPos()
 		{
-			return m_pos;
+			return enemy_pos;
 		}
 		
-		public List<Point> GetConnectedPoints()
+		public List<Point> GetConnectedpath_points()
 		{
-			return m_connectedPoints;
+			return m_connectedpath_points;
 		}
 		
 		public Point GetPrevPoint()
 		{
-			return m_prevPoint;
+			return enemy_prevPoint;
 		}
 		
 		public float GetScore()
 		{
-			return m_score;
+			return path_score;
 		}
 		
-		public List<Point> GetPotentialPrevPoints()
+		public List<Point> GetPotentialPrevpath_points()
 		{
-			return m_potentialPrevPoints;
+			return m_potentialPrevpath_points;
 		}
 		
 		public void AddConnectedPoint(Point point)
 		{
-			m_connectedPoints.Add(point);
+			m_connectedpath_points.Add(point);
 		}
 		
 		public void AddPotentialPrevPoint(Point point)
 		{
-			m_potentialPrevPoints.Add(point);
+			m_potentialPrevpath_points.Add(point);
 		}
 		
 		public void SetPrevPoint(Point point)
 		{
-			m_prevPoint = point;
+			enemy_prevPoint = point;
 		}
 		
 		public void SetState(char newState)
 		{
-			m_state = newState;
+			curr_state = newState;
 		}
 		
 		public void SetScore(float newScore)
 		{
-			m_score = newScore;
+			path_score = newScore;
 		}
 	}
 	
 	public List<Vector3> Path(Vector3 startPos, Vector3 targetPos)
 	{
-		//Can I see the exit
-		float exitDistance = Vector3.Distance(startPos, targetPos);
-		if (exitDistance > .7f)
-			exitDistance -= .7f;
-		if (!Physics.Raycast(startPos, targetPos - startPos, exitDistance))
+		//Can I see the target
+		float targetDistance = Vector3.Distance(startPos, targetPos);
+		if (targetDistance > .7f)
+			targetDistance -= .7f;
+		//if the target and start are the same then just return path with the two nodes
+		if (!Physics.Raycast(startPos, targetPos - startPos, targetDistance))
 		{
 			List<Vector3> path = new List<Vector3>();
 			path.Add(startPos);
@@ -100,42 +101,38 @@ public class Node : MonoBehaviour {
 		}
 		
 		GameObject[] nodes = GameObject.FindGameObjectsWithTag(nodeTag);
-		List<Point> points = new List<Point>();
+		List<Point> path_points = new List<Point>();
 		foreach (GameObject node in nodes)
 		{
 			Point currNode = new Point(node.transform.position);
-			points.Add(currNode);
+			path_points.Add(currNode);
 		}
 		
 		Point endPoint = new Point(targetPos, 'e');
-		
-		/***Connect them together***/
-		foreach(Point point in points) //Could be optimized to not go through each connection twice
+
+		foreach(Point point in path_points) 
 		{
-			foreach (Point point2 in points)
+			foreach (Point point2 in path_points)
 			{
 				float distance = Vector3.Distance(point.GetPos(), point2.GetPos());
 				if (!Physics.Raycast(point.GetPos(), point2.GetPos() - point.GetPos(), distance))
 				{
-					//Debug.DrawRay(point.GetPos(), point2.GetPos() - point.GetPos(), Color.white, 1);
 					point.AddConnectedPoint(point2);
 				}
 			}
 			float distance2 = Vector3.Distance(targetPos, point.GetPos());
 			if (!Physics.Raycast(targetPos, point.GetPos() - targetPos, distance2))
 			{
-				//Debug.DrawRay(targetPos, point.GetPos() - targetPos, Color.white, 1);
 				point.AddConnectedPoint(endPoint);
 			}
 		}
 		
-		//points startPos can see
-		foreach (Point point in points)
+		//path_points startPos can see
+		foreach (Point point in path_points)
 		{
 			float distance = Vector3.Distance(startPos, point.GetPos());
 			if (!Physics.Raycast(startPos, point.GetPos() - startPos, distance))
 			{
-				//Debug.DrawRay(startPos, point.GetPos() - startPos, Color.white, 1);
 				Point startPoint = new Point(startPos, 's');
 				point.SetPrevPoint(startPoint);
 				point.SetState('o');
@@ -151,12 +148,12 @@ public class Node : MonoBehaviour {
 		{
 			searchedAll = true;
 			List<Point> foundConnections = new List<Point>();
-			foreach (Point point in points)
+			foreach (Point point in path_points)
 			{
 				if (point.GetState() == 'o')
 				{
 					searchedAll = false;
-					List<Point> potentials = point.GetConnectedPoints();
+					List<Point> potentials = point.GetConnectedpath_points();
 					
 					foreach (Point potentialPoint in potentials)
 					{
@@ -178,23 +175,22 @@ public class Node : MonoBehaviour {
 			foreach (Point connection in foundConnections)
 			{
 				connection.SetState('o');
-				//Find lowest scoring prev point
 				float lowestScore = 0;
 				Point bestPrevPoint = null;
 				bool first = true;
-				foreach (Point prevPoints in connection.GetPotentialPrevPoints())
+				foreach (Point prevpath_points in connection.GetPotentialPrevpath_points())
 				{
 					if (first)
 					{
-						lowestScore = prevPoints.GetScore();
-						bestPrevPoint = prevPoints;
+						lowestScore = prevpath_points.GetScore();
+						bestPrevPoint = prevpath_points;
 						first = false;
 					} else
 					{
-						if (lowestScore > prevPoints.GetScore())
+						if (lowestScore > prevpath_points.GetScore())
 						{
-							lowestScore = prevPoints.GetScore();
-							bestPrevPoint = prevPoints;
+							lowestScore = prevpath_points.GetScore();
+							bestPrevPoint = prevpath_points;
 						}
 					}
 				}
@@ -204,12 +200,11 @@ public class Node : MonoBehaviour {
 		
 		if (foundEnd)
 		{
-			//trace back finding shortest route (lowest score)
 			List<Point> shortestRoute = null;
 			float lowestScore = 0;
 			bool firstRoute = true;
 			
-			foreach (Point point in endPoint.GetConnectedPoints())
+			foreach (Point point in endPoint.GetConnectedpath_points())
 			{
 				float score = 0;
 				bool tracing = true;
