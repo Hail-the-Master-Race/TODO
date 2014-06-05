@@ -1389,6 +1389,7 @@ MonoBehaviour:
   stats: {fileID: 11400002}
   collisions: {fileID: 11400006}
   controller: {fileID: 11400000}
+  levelGen: {fileID: 0}
   playerPrefab: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:

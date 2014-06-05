@@ -7,17 +7,33 @@ public class Player : MonoBehaviour {
 	public PlayerCollisions collisions;
 	public PlayerController controller;
 
+	public Level levelGen;
+
 	public Transform playerPrefab;
 	
 	// add initialization logic here
 	
 	void Awake() {
-		Init ();
+
 	}
 	
-	private void Init() {
-		if (playerPrefab) {
-			GameObject.Instantiate (playerPrefab, new Vector3 (1, 1, 0), Quaternion.identity);
-		}
+
+	public void Spawn() {
+		levelGen = GameObject.FindGameObjectWithTag (Tags.levelGen).GetComponent<Level>();
+
+		if (!playerPrefab)
+			return;
+
+		Vector3 playerSpawnLocation = levelGen.GetRandomRoom().getCenterSpawnPoint();
+
+		GameObject.Instantiate (playerPrefab, playerSpawnLocation, Quaternion.identity);	
+
+		// TODO: insure against empty/non-existent packet object
+		Character PCPacket = GameObject.Find ("PC Packet").GetComponent<Character> ();
+		
+		PlayerStats PCStat = GameObject.FindGameObjectWithTag (Tags.player)
+			.GetComponent<PlayerStats> ();
+		
+		PCStat.Init (PCPacket);
 	}
 }

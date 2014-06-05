@@ -8,13 +8,13 @@ public class EnemyAI : MonoBehaviour
 	public Transform target;
 	Transform myTransform; 
 	public float speed = 3f;
-
+	
 	enum State
 	{ 
-	 IDLE,
-	 MOVING,
+		IDLE,
+		MOVING,
 	}
-
+	
 	float m_speed;
 	bool onNode = true;
 	Vector3 m_target = new Vector3(0, 0, 0);
@@ -27,18 +27,18 @@ public class EnemyAI : MonoBehaviour
 	float OldTime = 0;
 	float checkTime = 0;
 	float elapsedTime = 0;
-
+	
 	//how to move our character
 	Animation enemyAnimator;
-
-	void Awake()
+	
+	public void LateAwake()
 	{
 		myTransform = transform;
 		GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
 		control = (Node)cam.GetComponent(typeof(Node));
 		target = GameObject.FindWithTag("Player").transform;
 		enemyAnimator = this.gameObject.GetComponent<Animation> ();
-
+		
 	}
 	
 	void Update () 
@@ -46,25 +46,25 @@ public class EnemyAI : MonoBehaviour
 		//rotate to look at the player
 		transform.LookAt(new Vector3(target.position.x, 0, target.position.z));
 		//transform.Rotate(new Vector3(0,-90,0),Space.Self); //correcting the original rotation
-
+		
 		float distance = Vector3.Distance (new Vector3(transform.position.x,0,transform.position.z), new Vector3(target.position.x,0,target.position.z));
-
+		
 		if (distance >= 10f) {
 			enemyAnimator.Play("Idle");
 			return;
 		}
-
+		
 		if (distance < 2f && distance >= 1f){//move if distance from target is greater than 1
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 			enemyAnimator.Play ("Walk");
 		}
-
+		
 		if (distance < 1f) {
 			speed = 0f;
 			enemyAnimator.Play("Lumbering");
 			return;
 		}
-
+		
 		m_speed = Time.deltaTime * 5.0f;
 		elapsedTime += Time.deltaTime;
 		
@@ -125,7 +125,7 @@ public class EnemyAI : MonoBehaviour
 		Vector3 motion = currNode - newPos;
 		motion.Normalize();
 		newPos += motion * m_speed;
-
+		
 		newPos = new Vector3 (newPos.x, 0, newPos.z);
 		transform.position = newPos;
 	}
@@ -136,7 +136,7 @@ public class EnemyAI : MonoBehaviour
 		nodeIndex = 0;
 		onNode = true;
 	}
-
+	
 	public void MoveOrder(Vector3 pos)
 	{
 		m_target = pos;
@@ -150,6 +150,5 @@ public class EnemyAI : MonoBehaviour
 	}
 }
 
-	
-	
-	
+
+

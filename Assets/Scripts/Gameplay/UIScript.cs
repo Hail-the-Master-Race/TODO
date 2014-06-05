@@ -12,10 +12,8 @@ public class UIScript : MonoBehaviour
     private UILabel LabelPCLevelClass;
     private UILabel LabelScoreValue;
     private GameObject BarHP, BarMP, BarHunger, BarEXP;
-
-
-
-    void Start ()
+	
+    public void LateStart ()
     {
 		PC = GameObject.FindGameObjectWithTag (Tags.player);
 		PCStats = PC.GetComponent<PlayerStats> ();
@@ -36,8 +34,13 @@ public class UIScript : MonoBehaviour
         BarEXP = GameObject.Find ("4. Bar (EXP)");
     }
 	
-    void Update ()
+    public void OurUpdate ()
     {
+		if ((PC = GameObject.FindGameObjectWithTag (Tags.player)) == null)
+			return;
+		if (PCStats == null)
+			PCStats = PC.GetComponent<PlayerStats> ();
+
         UpdateBars ();
         UpdatePCInfo ();
         UpdateScore ();
