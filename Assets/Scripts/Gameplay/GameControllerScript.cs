@@ -9,32 +9,24 @@ public class GameControllerScript : MonoBehaviour
 	private UIScript OurUIScript;
 	private Player OurPlayerSpawner;
 	private EnemyGenerate enemyGenerator;
-	private NetworkManagerScript networkManager;
+	private ItemSpawn itemSpawner;
 
     void Awake ()
     {
 		OurUIScript      = GetComponent<UIScript> ();
 		OurPlayerSpawner = GameObject.Find("PlayerSpawn").GetComponent<Player> ();
 		enemyGenerator   = GameObject.Find("Enemy Generator").GetComponent<EnemyGenerate> ();
-		networkManager   = GameObject.Find("NetworkManager").GetComponent<NetworkManagerScript> ();
+		itemSpawner      = GameObject.Find ("Item Spawner").GetComponent<ItemSpawn> ();
     }
 
     void Start ()
     {
-        // TODO: insure against empty/non-existent packet object
-        //PCPacket = GameObject.Find ("PC Packet").GetComponent<Character> ();
-	
-        //PlayerStats PCStat = GameObject.FindGameObjectWithTag (Tags.player)
-         //   .GetComponent<PlayerStats> ();
-
-        //PCStat.Init (PCPacket);
-
-		if (!networkManager.isOnline || (networkManager.isOnline && !Network.isClient))
-			OurPlayerSpawner.Spawn ();
+		OurPlayerSpawner.Spawn ();
 
 		OurUIScript.LateStart ();
 
 		enemyGenerator.LateStart ();
+		itemSpawner.LateStart ();
     }
 	
     void Update ()

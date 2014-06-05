@@ -3,246 +3,253 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Node : MonoBehaviour {
-	
+	/* Pathfinding Algorithm: 
+	 * are there nodes in the set? if no -> return failer 
+	 * if so, get node with the lowest "score". if it is the target 
+	 * then return best path to this node. add this node to the set.
+	 * find all of the walkable nodes of this node. and then for each neighbor, calculate the cost
+	 * of reaching the neighbor via the current node. Update the score for the node and store
+	 * it in the set. 
+	 */
 	public string nodeTag;
 	
 	class Point
 	{
-		Vector3 m_pos;
-		char m_state = 'u';
-		float m_score = 0;
-		Point m_prevPoint;
+		Vector3 enemy_pos;
+		string curr_state = "unset";
+		float path_score = 0;
+		Point enemy_prevPoint;
 		
-		List<Point> m_connectedPoints = new List<Point>();
-		List<Point> m_potentialPrevPoints = new List<Point>();
+		List<Point> ConnectedPathPoints = new List<Point>();
+		List<Point> PotentialPathPoints = new List<Point>();
 		
-		public Point(Vector3 pos, char state = 'u')
+		public Point(Vector3 pos, string state = "unset")
 		{
-			m_pos = pos;
-			m_state = state;
+			enemy_pos = pos;
+			curr_state = state;
 		}
 		
-		public char GetState()
+		public string GetState()
 		{
-			return m_state;
+			return curr_state;
 		}
 		
 		public Vector3 GetPos()
 		{
-			return m_pos;
+			return enemy_pos;
 		}
 		
-		public List<Point> GetConnectedPoints()
+		public List<Point> GetConnectedpath_points()
 		{
-			return m_connectedPoints;
+			return ConnectedPathPoints;
 		}
 		
 		public Point GetPrevPoint()
 		{
-			return m_prevPoint;
+			return enemy_prevPoint;
 		}
 		
 		public float GetScore()
 		{
-			return m_score;
+			return path_score;
 		}
 		
-		public List<Point> GetPotentialPrevPoints()
+		public List<Point> GetPotentialPrevpath_points()
 		{
-			return m_potentialPrevPoints;
+			return PotentialPathPoints;
 		}
 		
 		public void AddConnectedPoint(Point point)
 		{
-			m_connectedPoints.Add(point);
+			ConnectedPathPoints.Add(point);
 		}
 		
 		public void AddPotentialPrevPoint(Point point)
 		{
-			m_potentialPrevPoints.Add(point);
+			PotentialPathPoints.Add(point);
 		}
 		
 		public void SetPrevPoint(Point point)
 		{
-			m_prevPoint = point;
+			enemy_prevPoint = point;
 		}
 		
-		public void SetState(char newState)
+		public void SetState(string newState)
 		{
-			m_state = newState;
+			curr_state = newState;
 		}
 		
 		public void SetScore(float newScore)
 		{
-			m_score = newScore;
+			path_score = newScore;
 		}
 	}
 	
 	public List<Vector3> Path(Vector3 startPos, Vector3 targetPos)
 	{
-		//Can I see the exit
-		float exitDistance = Vector3.Distance(startPos, targetPos);
-		if (exitDistance > .7f)
-			exitDistance -= .7f;
-		if (!Physics.Raycast(startPos, targetPos - startPos, exitDistance))
+		//Can I see the target
+		float targetDistance = Vector3.Distance(startPos, targetPos);
+		if (targetDistance > .7f)
+			targetDistance -= .7f;
+		//if the target and start are the same then just return path with the two nodes
+		if (!Physics.Raycast(startPos, targetPos - startPos, targetDistance))
 		{
 			List<Vector3> path = new List<Vector3>();
 			path.Add(startPos);
 			path.Add(targetPos);
 			return path;
 		}
-		
+
+		//find all the nodes with the specified nodeTag
 		GameObject[] nodes = GameObject.FindGameObjectsWithTag(nodeTag);
-		List<Point> points = new List<Point>();
-		foreach (GameObject node in nodes)
+
+		//create new class list
+		List<Point> path_points = new List<Point>();
+
+		foreach (GameObject n in nodes)
 		{
-			Point currNode = new Point(node.transform.position);
-			points.Add(currNode);
+			Point currNode = new Point(n.transform.position);
+			path_points.Add(currNode);
 		}
 		
-		Point endPoint = new Point(targetPos, 'e');
-		
-		/***Connect them together***/
-		foreach(Point point in points) //Could be optimized to not go through each connection twice
+		Point endPoint = new Point(targetPos, "end");
+
+		foreach(Point p in path_points) 
 		{
-			foreach (Point point2 in points)
+			foreach (Point p2 in path_points)
 			{
-				float distance = Vector3.Distance(point.GetPos(), point2.GetPos());
-				if (!Physics.Raycast(point.GetPos(), point2.GetPos() - point.GetPos(), distance))
+				float distance = Vector3.Distance(p.GetPos(), p2.GetPos());
+				if (!Physics.Raycast(p.GetPos(), p2.GetPos() - p.GetPos(), distance))
 				{
-					//Debug.DrawRay(point.GetPos(), point2.GetPos() - point.GetPos(), Color.white, 1);
-					point.AddConnectedPoint(point2);
+					p.AddConnectedPoint(p2);
 				}
 			}
-			float distance2 = Vector3.Distance(targetPos, point.GetPos());
-			if (!Physics.Raycast(targetPos, point.GetPos() - targetPos, distance2))
+			float distance2 = Vector3.Distance(targetPos, p.GetPos());
+			if (!Physics.Raycast(targetPos, p.GetPos() - targetPos, distance2))
 			{
-				//Debug.DrawRay(targetPos, point.GetPos() - targetPos, Color.white, 1);
-				point.AddConnectedPoint(endPoint);
+				p.AddConnectedPoint(endPoint);
 			}
 		}
 		
-		//points startPos can see
-		foreach (Point point in points)
+		//path_points startPos can see
+		foreach (Point p in path_points)
 		{
-			float distance = Vector3.Distance(startPos, point.GetPos());
-			if (!Physics.Raycast(startPos, point.GetPos() - startPos, distance))
+			float distance = Vector3.Distance(startPos, p.GetPos());
+			if (!Physics.Raycast(startPos, p.GetPos() - startPos, distance))
 			{
-				//Debug.DrawRay(startPos, point.GetPos() - startPos, Color.white, 1);
-				Point startPoint = new Point(startPos, 's');
-				point.SetPrevPoint(startPoint);
-				point.SetState('o');
-				point.SetScore(distance + Vector3.Distance(targetPos, point.GetPos()));
+				Point startPoint = new Point(startPos, "start");
+				p.SetPrevPoint(startPoint);
+				p.SetState("nb");
+				p.SetScore(distance + Vector3.Distance(targetPos, p.GetPos()));
 			}
 		}
 		
 		//Go through until we find the exit or run out of connections
 		bool searchedAll = false;
-		bool foundEnd = false;
+		bool targetFound = false;
 		
 		while(!searchedAll)
 		{
 			searchedAll = true;
 			List<Point> foundConnections = new List<Point>();
-			foreach (Point point in points)
+			foreach (Point point in path_points)
 			{
-				if (point.GetState() == 'o')
+				if (point.GetState() == "nb")
 				{
 					searchedAll = false;
-					List<Point> potentials = point.GetConnectedPoints();
+					List<Point> potentials = point.GetConnectedpath_points();
 					
 					foreach (Point potentialPoint in potentials)
 					{
-						if (potentialPoint.GetState() == 'u')
+						if (potentialPoint.GetState() == "unset")
 						{
 							potentialPoint.AddPotentialPrevPoint(point);
 							foundConnections.Add(potentialPoint);
 							potentialPoint.SetScore(Vector3.Distance(startPos, potentialPoint.GetPos()) + Vector3.Distance(targetPos, potentialPoint.GetPos()));
-						} else if (potentialPoint.GetState() == 'e')
+						} else if (potentialPoint.GetState() == "end")
 						{
 							//Found the exit
-							foundEnd = true;
+							targetFound = true;
 							endPoint.AddConnectedPoint(point);
 						}
 					}
-					point.SetState('c');
+					point.SetState("useless");
 				}
 			}
-			foreach (Point connection in foundConnections)
+			foreach (Point c in foundConnections)
 			{
-				connection.SetState('o');
-				//Find lowest scoring prev point
+				c.SetState("nb");
 				float lowestScore = 0;
 				Point bestPrevPoint = null;
 				bool first = true;
-				foreach (Point prevPoints in connection.GetPotentialPrevPoints())
+				foreach (Point prevpath_points in c.GetPotentialPrevpath_points())
 				{
 					if (first)
 					{
-						lowestScore = prevPoints.GetScore();
-						bestPrevPoint = prevPoints;
+						lowestScore = prevpath_points.GetScore();
+						bestPrevPoint = prevpath_points;
 						first = false;
 					} else
 					{
-						if (lowestScore > prevPoints.GetScore())
+						if (lowestScore > prevpath_points.GetScore())
 						{
-							lowestScore = prevPoints.GetScore();
-							bestPrevPoint = prevPoints;
+							lowestScore = prevpath_points.GetScore();
+							bestPrevPoint = prevpath_points;
 						}
 					}
 				}
-				connection.SetPrevPoint(bestPrevPoint);
+				c.SetPrevPoint(bestPrevPoint);
 			}
 		}
 		
-		if (foundEnd)
+		if (targetFound)
 		{
-			//trace back finding shortest route (lowest score)
-			List<Point> shortestRoute = null;
+			List<Point> bestPath = null;
 			float lowestScore = 0;
 			bool firstRoute = true;
 			
-			foreach (Point point in endPoint.GetConnectedPoints())
+			foreach (Point p in endPoint.GetConnectedpath_points())
 			{
 				float score = 0;
-				bool tracing = true;
-				Point currPoint = point;
+				bool finding = true;
+				Point c_Point = p;
 				List<Point> route = new List<Point>();
 				route.Add(endPoint);
-				while(tracing)
+				while(finding)
 				{
-					route.Add(currPoint);
-					if (currPoint.GetState() == 's')
+					route.Add(c_Point);
+					if (c_Point.GetState() == "start")
 					{
 						if (firstRoute)
 						{
-							shortestRoute = route;
+							bestPath = route;
 							lowestScore = score;
 							firstRoute = false;
 						} else
 						{
 							if (lowestScore > score)
 							{
-								shortestRoute = route;
+								bestPath = route;
 								lowestScore = score;
 							}
 						}
-						tracing = false;
+						finding = false;
 						break;
 					}
-					score += currPoint.GetScore();
-					currPoint = currPoint.GetPrevPoint();
+					score += c_Point.GetScore();
+					c_Point = c_Point.GetPrevPoint();
 				}
 			}
 			
-			shortestRoute.Reverse();
+			bestPath.Reverse();
 			List<Vector3> path = new List<Vector3>();
-			foreach (Point point in shortestRoute)
+			foreach (Point p in bestPath)
 			{
-				path.Add(point.GetPos());
+				path.Add(p.GetPos());
 			}
 			return path;
-		} else
+		} 
+		else
 		{
 			return null;
 		}

@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-	private NetworkManagerScript networkManager;
 
 	public PlayerStats stats;
 	public PlayerCollisions collisions;
@@ -13,12 +12,9 @@ public class Player : MonoBehaviour {
 	public Transform playerPrefab;
 	
 	// add initialization logic here
-	void Start () {
-
-	}
 	
 	void Awake() {
-		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
+
 	}
 	
 
@@ -30,9 +26,14 @@ public class Player : MonoBehaviour {
 
 		Vector3 playerSpawnLocation = levelGen.GetRandomRoom().getCenterSpawnPoint();
 
-		if (networkManager.isOnline)
-			Network.Instantiate (playerPrefab, playerSpawnLocation, Quaternion.identity, 1);
-		else
-			GameObject.Instantiate (playerPrefab, playerSpawnLocation, Quaternion.identity);	
+		GameObject.Instantiate (playerPrefab, playerSpawnLocation, Quaternion.identity);	
+
+		// TODO: insure against empty/non-existent packet object
+		Character PCPacket = GameObject.Find ("PC Packet").GetComponent<Character> ();
+		
+		PlayerStats PCStat = GameObject.FindGameObjectWithTag (Tags.player)
+			.GetComponent<PlayerStats> ();
+		
+		PCStat.Init (PCPacket);
 	}
 }
