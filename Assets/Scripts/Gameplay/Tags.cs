@@ -10,4 +10,5 @@ public class Tags : MonoBehaviour
 	public const string mainCamera = "MainCamera";
 	public const string enemy = "Enemy";
 	public const string pickup = "Pickup";
+	public const string levelGen = "Level Generator";
 }
