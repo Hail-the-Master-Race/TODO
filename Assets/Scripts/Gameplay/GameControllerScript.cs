@@ -9,12 +9,14 @@ public class GameControllerScript : MonoBehaviour
 	private UIScript OurUIScript;
 	private Player OurPlayerSpawner;
 	private EnemyGenerate enemyGenerator;
+	private NetworkManagerScript networkManager;
 
     void Awake ()
     {
 		OurUIScript      = GetComponent<UIScript> ();
 		OurPlayerSpawner = GameObject.Find("PlayerSpawn").GetComponent<Player> ();
 		enemyGenerator   = GameObject.Find("Enemy Generator").GetComponent<EnemyGenerate> ();
+		networkManager   = GameObject.Find("NetworkManager").GetComponent<NetworkManagerScript> ();
     }
 
     void Start ()
@@ -27,7 +29,8 @@ public class GameControllerScript : MonoBehaviour
 
         //PCStat.Init (PCPacket);
 
-		OurPlayerSpawner.Spawn ();
+		if (!networkManager.isOnline || (networkManager.isOnline && !Network.isClient))
+			OurPlayerSpawner.Spawn ();
 
 		OurUIScript.LateStart ();
 

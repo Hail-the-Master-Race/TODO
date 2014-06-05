@@ -1415,7 +1415,7 @@ NetworkView:
   m_StateSynchronization: 0
   m_Observed: {fileID: 0}
   m_ViewID:
-    m_ID: 3
+    m_ID: 1
     m_Type: 1
 --- !u!1 &931752193
 GameObject:
@@ -1740,7 +1740,7 @@ NetworkView:
   m_StateSynchronization: 0
   m_Observed: {fileID: 0}
   m_ViewID:
-    m_ID: 1
+    m_ID: 2
     m_Type: 1
 --- !u!1 &1186151183
 GameObject:
@@ -2026,7 +2026,7 @@ NetworkView:
   m_StateSynchronization: 0
   m_Observed: {fileID: 0}
   m_ViewID:
-    m_ID: 2
+    m_ID: 3
     m_Type: 1
 --- !u!1 &1333035075
 GameObject:
@@ -2495,7 +2495,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 29.7000008
+  aspectRatio: 16.1333332
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -2645,13 +2645,13 @@ MonoBehaviour:
     absolute: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 200
+  mWidth: 114
   mHeight: 30
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.79999995
+  aspectRatio: 6.66666651
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -2715,8 +2715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9096088c1b3014ae19551fa4e7e0ab13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numItemsBase: 20
-  Prefab: {fileID: 400000, guid: fdc6c1c0abef84d9cb3c044950f9614b, type: 2}
 --- !u!1 &1647264305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,7 +2778,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 29.7000008
+  aspectRatio: 16.1333332
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
