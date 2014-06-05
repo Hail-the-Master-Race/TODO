@@ -12,6 +12,8 @@ TagManager:
   - Enemy Generator
   - Player1
   - Player2
+  - NetworkManagerServer
+  - NetworkManagerClient
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

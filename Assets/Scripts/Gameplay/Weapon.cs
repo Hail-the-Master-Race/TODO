@@ -35,7 +35,8 @@ public class Weapon : MonoBehaviour {
 
 	void damagePlayer(Collider other) {
 		Debug.Log ("Enemy Collision");
-		if (other.gameObject.CompareTag (networkManager.playerTag)) {
+		string playerTag = (Network.isClient) ? "Player2" : "Player1";
+		if (other.gameObject.CompareTag (playerTag)) {
 			Player player = (Player)other.gameObject.transform.root.GetComponent<Player> ();
 			Enemy enemy = (Enemy)this.gameObject.transform.root.GetComponent<Enemy> ();
 			player.stats.currentHP -= enemy.stats.damage;

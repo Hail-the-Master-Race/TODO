@@ -12,6 +12,7 @@ public enum statIndex
 
 public class CharacterCreateController : MonoBehaviour
 {
+	private NetworkManagerScript networkManager;
     private UIController UI;
     private Character PC;
     private UIInput NameInput;
@@ -31,6 +32,10 @@ public class CharacterCreateController : MonoBehaviour
             .GetComponent<UIPopupList> ();
         NameInput = GameObject.Find ("Name: Input")
             .GetComponent<UIInput> ();
+
+		networkManager = GameObject.Find ("NetworkManager") == null ? null : GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
+		if (networkManager != null)
+			Object.DontDestroyOnLoad (GameObject.Find ("NetworkManager"));
     }
 
     public void ClassSelectionChange ()
@@ -71,6 +76,9 @@ public class CharacterCreateController : MonoBehaviour
     public void StartGame ()
     {
 		Debug.Log ("Loading Start Scene");
+		if (networkManager != null)
+			Network.Connect (networkManager.hostData [networkManager.getHostIdx()]);
+
         Application.LoadLevel ("StartScene");
         return;
     }

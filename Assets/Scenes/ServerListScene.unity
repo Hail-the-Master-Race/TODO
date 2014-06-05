@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOnline: 0
+  playerTag: 
   gameName: UChicago_GameConstruction_TODO
 --- !u!4 &807856299
 Transform:

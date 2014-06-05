@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour
         float rot = Input.GetAxis ("Mouse X");
 
 		// Disable the script if it doesn't belong to the player
-		if (networkManager.isOnline && !networkView.isMine)
-			enabled = false;
-//		if (!ui.isPaused || (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine)))
+//		if (networkManager.isOnline && !networkView.isMine)
+//			enabled = false;
+		if (!ui.isPaused || (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine)))
         	UpdateMovement (h, v, rot);
 
         if (IsTimeToDie ()) {

@@ -6,17 +6,18 @@ public class PickUp : MonoBehaviour {
 	public string type;
 
 	// Use this for initialization
-	void Start () {
-		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
+	void Awake () {
+		networkManager = GameObject.Find ("Game Controller").transform.Find ("Network Manager").gameObject.GetComponent<NetworkManagerScript> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag(networkManager.playerTag)) {
+		string playerTag = (Network.isClient) ? "Player2" : "Player1";
+		if (other.gameObject.CompareTag(playerTag)) {
 			PlayerStats stats = other.GetComponent<PlayerStats>();
 
 			switch(type) {
@@ -30,10 +31,10 @@ public class PickUp : MonoBehaviour {
 					if(stats.currentHunger > stats.MaxHunger) stats.currentHunger = stats.MaxHunger;
 				break;
 			}
-			Debug.Log(networkManager.isOnline);
-			if (networkManager.isOnline)
-				Network.Destroy (this.gameObject);
-			else
+//			Debug.Log(networkManager.isOnline);
+//			if (networkManager.isOnline)
+//				Network.Destroy (this.gameObject);
+//			else
 				Destroy (this.gameObject);
 		}
 	}

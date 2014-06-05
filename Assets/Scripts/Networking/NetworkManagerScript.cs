@@ -8,9 +8,9 @@ public class NetworkManagerScript : MonoBehaviour {
 	// Janky janky janky...
 	public bool isOnline = false; 
 	public string playerTag;
-	private bool isPaused = false;
 	private bool refreshing;
 	public HostData[] hostData = null;
+	private int hostIdx = 0;
 
 	// Start Server Button
 	private float btnX;
@@ -38,6 +38,14 @@ public class NetworkManagerScript : MonoBehaviour {
 		}
 	}
 
+	public int getHostIdx () {
+		return hostIdx;
+	}
+
+	public void setHostIdx (int i) {
+		hostIdx = i;
+	}
+
 	// Start Server
 	public void startServer () {
 		Network.InitializeServer (4, 25001, !Network.HavePublicAddress());
@@ -56,8 +64,6 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
-
-		playerTag = "Player1";
 		isOnline = true;
 	}
 
@@ -82,32 +88,19 @@ public class NetworkManagerScript : MonoBehaviour {
 // -- This will need to be changed to use NGUI and only appear on pause menu
 // -- Shouldn't be that hard...
 	void OnGUI () {	
-		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();
-		if (ui.isPaused) {
+		GameObject gameController = GameObject.Find ("Game Controller");
+		bool isPaused = false;
+		if (gameController != null) {
+			ui = gameController.GetComponent<UIScript> ();
+			isPaused = ui.isPaused;
+		}
+		if (isPaused) {
 			if (!Network.isClient && !Network.isServer) {
 				if (GUI.Button (new Rect (btnX, btnY, btnW, btnH), "Start Server")) {
 					Debug.Log ("Starting server");
 					startServer ();
 					ui.UpdateIsPasued();
 				}	
-				/*
-				if (GUI.Button (new Rect (btnX, btnY * (float)2.5, btnW, btnH), "Refresh Hosts")) {
-					Debug.Log ("Refreshing hosts list");
-					refreshHostList ();
-				}
-				if (hostData != null) {
-					for (int i = 0; i < hostData.Length; ++i) {
-						if (GUI.Button (new Rect (
-							btnX * (float)1.5 + btnW, 
-							btnY * (float)2.5 + (btnH * i),
-							btnW * (float)3,
-							btnH * (float)0.25),
-							hostData [i].gameName)) {
-								Network.Connect (hostData [i]);
-						}
-					}
-				}
-				*/
 			}
 		}
 	}
