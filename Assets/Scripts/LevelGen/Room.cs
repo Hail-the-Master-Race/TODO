@@ -17,13 +17,15 @@ public class Room{//: MonoBehaviour {
 
 
 	// used for intersection testing, saves recalculating
+	public float[] bounds;
 	public float xMin;
 	public float xMax;
 	public float zMin;
 	public float zMax;
 
-	//pathway graphs
-	//public ArrayList[] doorsList;
+	//Corridor Edges
+	//ArrayList[] Corridors = new ArrayList[4];
+	public Corridor[] corridors = new Corridor[4];
 
 	public Room()
 	{
@@ -41,8 +43,8 @@ public class Room{//: MonoBehaviour {
 			zMin = sw.z;	
 			xMax = ne.x;
 			zMax = ne.z;
-
-		center = new Vector3 (xMax - xMin, 0.0f, zMax - zMin);
+			bounds = new float[4] {zMax, xMax, zMin, xMin};
+			center = new Vector3 (xMax - xMin, 0.0f, zMax - zMin);
 			//initialize the increiments
 			incs[0] = Vector3.right;
 			incs[1] = Vector3.back;
@@ -51,6 +53,7 @@ public class Room{//: MonoBehaviour {
 			area = Vector3.Distance (nw, ne) * Vector3.Distance(nw, sw);
 
 			wall_sec = prefab;
+
 
 		}
 		public bool IntersectsWithBuffer (Room r,float b){
@@ -84,22 +87,6 @@ public class Room{//: MonoBehaviour {
 				if (i == 3) {j = 0;}
 				BuildWall (corners [i], corners [j], incs [i]);
 				}
-
 			}
-	//todo
-//		public void InsertPath(int wall, float distance){
-//	}
-		
 
-
-
-//	// Use this for initialization
-//	void Start () {
-//	
-//	}
-//	
-//	// Update is called once per frame
-//	void Update () {
-//	
-//	}
 }
