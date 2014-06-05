@@ -28,6 +28,10 @@ public class Weapon : MonoBehaviour {
 			enemy.stats.currentHP -= player.stats.STR;
 			Debug.Log(enemy.stats.currentHP);
 			Debug.Log(player.stats.STR);
+			if(enemy.stats.currentHP <= 0) {
+				Destroy(other.gameObject);
+				player.stats.currentEXP += 5;
+			}
 		}
 
 	}
