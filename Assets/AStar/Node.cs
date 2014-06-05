@@ -20,8 +20,8 @@ public class Node : MonoBehaviour {
 		float path_score = 0;
 		Point enemy_prevPoint;
 		
-		List<Point> m_connectedpath_points = new List<Point>();
-		List<Point> m_potentialPrevpath_points = new List<Point>();
+		List<Point> ConnectedPathPoints = new List<Point>();
+		List<Point> PotentialPathPoints = new List<Point>();
 		
 		public Point(Vector3 pos, string state = "unset")
 		{
@@ -41,7 +41,7 @@ public class Node : MonoBehaviour {
 		
 		public List<Point> GetConnectedpath_points()
 		{
-			return m_connectedpath_points;
+			return ConnectedPathPoints;
 		}
 		
 		public Point GetPrevPoint()
@@ -56,17 +56,17 @@ public class Node : MonoBehaviour {
 		
 		public List<Point> GetPotentialPrevpath_points()
 		{
-			return m_potentialPrevpath_points;
+			return PotentialPathPoints;
 		}
 		
 		public void AddConnectedPoint(Point point)
 		{
-			m_connectedpath_points.Add(point);
+			ConnectedPathPoints.Add(point);
 		}
 		
 		public void AddPotentialPrevPoint(Point point)
 		{
-			m_potentialPrevpath_points.Add(point);
+			PotentialPathPoints.Add(point);
 		}
 		
 		public void SetPrevPoint(Point point)
@@ -208,17 +208,17 @@ public class Node : MonoBehaviour {
 			float lowestScore = 0;
 			bool firstRoute = true;
 			
-			foreach (Point point in endPoint.GetConnectedpath_points())
+			foreach (Point p in endPoint.GetConnectedpath_points())
 			{
 				float score = 0;
-				bool tracing = true;
-				Point currPoint = point;
+				bool finding = true;
+				Point c_Point = p;
 				List<Point> route = new List<Point>();
 				route.Add(endPoint);
-				while(tracing)
+				while(finding)
 				{
-					route.Add(currPoint);
-					if (currPoint.GetState() == "start")
+					route.Add(c_Point);
+					if (c_Point.GetState() == "start")
 					{
 						if (firstRoute)
 						{
@@ -233,11 +233,11 @@ public class Node : MonoBehaviour {
 								lowestScore = score;
 							}
 						}
-						tracing = false;
+						finding = false;
 						break;
 					}
-					score += currPoint.GetScore();
-					currPoint = currPoint.GetPrevPoint();
+					score += c_Point.GetScore();
+					c_Point = c_Point.GetPrevPoint();
 				}
 			}
 			
