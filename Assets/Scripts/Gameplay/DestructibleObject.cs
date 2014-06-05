@@ -2,27 +2,22 @@
 using System.Collections;
 
 public class DestructibleObject : MonoBehaviour {
-
 	public int stamina;
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	void OnTriggerEnter(Collider other) {
-		Debug.Log ("Colliding");
+	void DestroyObject (Collider other) {
+		Debug.Log ("Destroying object");
 		if(other.gameObject.CompareTag("Player")) {
 			Player player = other.gameObject.transform.root.GetComponent<Player>();
 			//if(player.attacking) 
-				stamina -= 10;
+			stamina -= 10;
 			Debug.Log(stamina);
 			if(stamina == 0)
 				Network.Destroy(this.gameObject);
 		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		Debug.Log ("Colliding");
+		DestroyObject (other);
 	}
 }

@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothing = 15f;   // A smoothing value for turning the player
     public float speedDampTime = 0.1f;  // The damping for the speed parameter
     public bool attacking;
-	
+
+	private NetworkManagerScript networkManager;
     private Animator playerAnimator;    	// Player's animator
     private HashIDs hash;               	// HashIDs for GameController
     private CharacterController controller; // Player's character controller
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator> ();
         controller = (CharacterController)GetComponent (typeof(CharacterController));
         hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<HashIDs> ();
-        stats = this.gameObject.GetComponent<PlayerStats> ();
+		stats = this.gameObject.GetComponent<PlayerStats> ();
         mainCamera = Camera.main;
 		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();

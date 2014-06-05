@@ -6,7 +6,8 @@ public class NetworkManagerScript : MonoBehaviour {
 	private Player player;
 
 	// Janky janky janky...
-	public bool isOnline = false;
+	public bool isOnline = false; 
+	private bool isPaused = false;
 	private bool refreshing;
 	public HostData[] hostData = null;
 
@@ -61,6 +62,11 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	void OnConnectedToServer () {
 		Debug.Log ("Connected to server");
+	}
+
+	void OnConnectedToServer () {
+		Debug.Log ("Connected to server...");
+		Debug.Log ("Spawning your character...");
 		isOnline = true;
 		// Spawn new player...
 		player.spawnPlayer (new Vector3 (1, 1, 0));
