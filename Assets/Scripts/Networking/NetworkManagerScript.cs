@@ -61,10 +61,6 @@ public class NetworkManagerScript : MonoBehaviour {
 	}
 
 	void OnConnectedToServer () {
-		Debug.Log ("Connected to server");
-	}
-
-	void OnConnectedToServer () {
 		Debug.Log ("Connected to server...");
 		Debug.Log ("Spawning your character...");
 		isOnline = true;
