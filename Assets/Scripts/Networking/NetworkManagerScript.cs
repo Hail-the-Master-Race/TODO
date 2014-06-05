@@ -2,52 +2,44 @@
 using System.Collections;
 
 public class NetworkManagerScript : MonoBehaviour {
-	public GameObject playerPrefab;
-	public Transform spawnObject;
+	private UIScript ui;
+	private Player player;
 
 	// Janky janky janky...
-	private bool isPaused = false;
+	public bool isOnline = false;
 	private bool refreshing;
-	private HostData[] hostData = null;
+	public HostData[] hostData = null;
 
 	// Start Server Button
 	private float btnX;
 	private float btnY;
 	private float btnW;
 	private float btnH;
-	private string gameName = "UChicago_GameConstruction_TODO";
+	public string gameName = "UChicago_GameConstruction_TODO";
 	
 	// Use this for initialization
 	void Start () {
+		player = GameObject.Find ("PlayerSpawn").GetComponent<Player> ();
+		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();
 		btnX = Screen.width  * (float) 0.2;
 		btnY = Screen.height * (float) 0.2;
 		btnW = Screen.width  * (float) 0.15;
 		btnH = Screen.width  * (float) 0.15;
 	}
 
-	void UpdateIsPasued () {
-		isPaused = !isPaused;
-		// Stop time when paused
-//		Time.timeScale = isPaused ? 0 : 1;
-	}
-	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Escape)) {
-			UpdateIsPasued();
-
-			if (refreshing) {
-				if (MasterServer.PollHostList ().Length > 0) {
-					refreshing = false;
-					Debug.Log (MasterServer.PollHostList ().Length);
-					hostData = MasterServer.PollHostList ();
-				}
+		if (refreshing) {
+			if (MasterServer.PollHostList ().Length > 0) {
+				refreshing = false;
+				Debug.Log (MasterServer.PollHostList ().Length);
+				hostData = MasterServer.PollHostList ();
 			}
 		}
 	}
 
 	// Start Server
-	void startServer () {
+	public void startServer () {
 		Network.InitializeServer (4, 25001, !Network.HavePublicAddress());
 		
 		// Register game to Unity Master server
@@ -57,27 +49,21 @@ public class NetworkManagerScript : MonoBehaviour {
 	}
 
 	// Refresh Host List
-	void refreshHostList () {
+	public void refreshHostList () {
 		MasterServer.RequestHostList (gameName);
 		refreshing = true;
 	}
 
-	void spawnPlayer () {
-		// I'm guessing we're using the same model for all players, and only need to send over
-		// stat data etc.
-		Network.Instantiate (playerPrefab, spawnObject.position, Quaternion.identity, 0);
-	}
-	
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
-		// Local player shouldn't require a server to play on
-		// spawnPlayer ();
+		isOnline = true;
 	}
 
 	void OnConnectedToServer () {
 		Debug.Log ("Connected to server");
+		isOnline = true;
 		// Spawn new player...
-		spawnPlayer ();
+		player.spawnPlayer (new Vector3 (1, 1, 0));
 	}
 	
 	void OnMasterServerEvent (MasterServerEvent mse) {
@@ -91,14 +77,14 @@ public class NetworkManagerScript : MonoBehaviour {
 // -- This will need to be changed to use NGUI and only appear on pause menu
 // -- Shouldn't be that hard...
 	void OnGUI () {	
-		if (isPaused) {
+		if (ui.isPaused) {
 			if (!Network.isClient && !Network.isServer) {
 				if (GUI.Button (new Rect (btnX, btnY, btnW, btnH), "Start Server")) {
 					Debug.Log ("Starting server");
 					startServer ();
-					UpdateIsPasued();
+					ui.UpdateIsPasued();
 				}	
-
+				/*
 				if (GUI.Button (new Rect (btnX, btnY * (float)2.5, btnW, btnH), "Refresh Hosts")) {
 					Debug.Log ("Refreshing hosts list");
 					refreshHostList ();
@@ -115,6 +101,7 @@ public class NetworkManagerScript : MonoBehaviour {
 						}
 					}
 				}
+				*/
 			}
 		}
 	}

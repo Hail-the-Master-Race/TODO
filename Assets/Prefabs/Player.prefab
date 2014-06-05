@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 148: {fileID: 14800002}
   m_Layer: 0
   m_Name: Camera Positioner
   m_TagString: Untagged
@@ -323,6 +324,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400042}
+  - 148: {fileID: 14800006}
   m_Layer: 0
   m_Name: mixamorig:Hips
   m_TagString: Untagged
@@ -586,6 +588,7 @@ GameObject:
   - 148: {fileID: 14800000}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
+  - 148: {fileID: 14800008}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -632,6 +635,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400082}
   - 137: {fileID: 13700000}
+  - 148: {fileID: 14800004}
   m_Layer: 0
   m_Name: Object007
   m_TagString: Untagged
@@ -1520,6 +1524,54 @@ NetworkView:
   m_Enabled: 1
   m_StateSynchronization: 1
   m_Observed: {fileID: 400076}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14800002
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400000}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14800004
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100082}
+  m_Enabled: 0
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400082}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14800006
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 0
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 400042}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14800008
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 11400002}
   m_ViewID:
     m_ID: 0
     m_Type: 0

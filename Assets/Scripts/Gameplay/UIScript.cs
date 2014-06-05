@@ -13,7 +13,10 @@ public class UIScript : MonoBehaviour
     private UILabel LabelScoreValue;
     private GameObject BarHP, BarMP, BarHunger, BarEXP;
 
-
+	public bool isPaused = false;
+	public void UpdateIsPasued () {
+		isPaused = !isPaused;
+	}
 
     void Start ()
     {
@@ -41,6 +44,8 @@ public class UIScript : MonoBehaviour
         UpdateBars ();
         UpdatePCInfo ();
         UpdateScore ();
+		if (Input.GetKeyDown(KeyCode.Escape))
+			UpdateIsPasued();
     }
 
     void UpdatePCInfo ()

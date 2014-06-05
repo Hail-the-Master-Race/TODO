@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private HashIDs hash;               	// HashIDs for GameController
     private CharacterController controller; // Player's character controller
     private Camera mainCamera;
+	private NetworkManagerScript networkManager;
+	private UIScript ui;
 
     private float verticalVel = 0f;			// Player's vertical velocity
     private float speed;
@@ -29,6 +31,8 @@ public class PlayerController : MonoBehaviour
         hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<HashIDs> ();
         stats = this.gameObject.GetComponent<PlayerStats> ();
         mainCamera = Camera.main;
+		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
+		ui = GameObject.Find ("Game Controller").GetComponent<UIScript> ();
     }
 	
     void Update ()
@@ -43,7 +47,10 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxis ("Vertical");
         float rot = Input.GetAxis ("Mouse X");
 
-        UpdateMovement (h, v, rot);
+		if (networkManager.isOnline && !networkView.isMine)
+			enabled = false;
+		if (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine))
+        	UpdateMovement (h, v, rot);
 
         if (IsTimeToDie ()) {
             Die ();

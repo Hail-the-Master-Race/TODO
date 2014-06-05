@@ -30,7 +30,7 @@ public class PickUp : MonoBehaviour {
 					if(stats.currentHunger > stats.MaxHunger) stats.currentHunger = stats.MaxHunger;
 				break;
 			}
-			Destroy (this.gameObject);
+			Network.Destroy (this.gameObject);
 		}
 	}
 }

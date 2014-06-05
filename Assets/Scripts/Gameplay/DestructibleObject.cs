@@ -22,7 +22,7 @@ public class DestructibleObject : MonoBehaviour {
 				stamina -= 10;
 			Debug.Log(stamina);
 			if(stamina == 0)
-				Destroy(this.gameObject);
+				Network.Destroy(this.gameObject);
 		}
 	}
 }
