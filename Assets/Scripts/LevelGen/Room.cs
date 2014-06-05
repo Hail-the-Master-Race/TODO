@@ -8,6 +8,8 @@ public class Room{//: MonoBehaviour {
 	public Rigidbody wall_sec;
 	//public Rect rect;
 	// corners of the room
+	public Vector3 centern;
+
 	public Vector3[] corners = new Vector3[4];
 	public Vector3[] incs = new Vector3[4];
 	public float area;
@@ -101,10 +103,10 @@ public class Room{//: MonoBehaviour {
 					current = current + inc*1.0f;
 				}
 			}
-			        GameObject empty = new GameObject("roomnodes");
-        empty.tag = "node";
-        centern = new Vector3(center.x, center.y, center.z);
-        empty.transform.position = centern;
+			GameObject empty = new GameObject("roomnodes");
+        	empty.tag = "node";
+        	centern = new Vector3(center.x, center.y, center.z);
+       		empty.transform.position = centern;
 		}
 		public void BuildWalls(){
 			// cycle through each wall
