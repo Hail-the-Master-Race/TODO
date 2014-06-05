@@ -7,7 +7,6 @@ public class Room{//: MonoBehaviour {
 
 	public Rigidbody wall_sec;
 	//public Rect rect;
-
 	// corners of the room
 	public Vector3[] corners = new Vector3[4];
 	public Vector3[] incs = new Vector3[4];
@@ -54,7 +53,7 @@ public class Room{//: MonoBehaviour {
 			xMax = ne.x;
 			zMax = ne.z;
 			bounds = new float[4] {zMax, xMax, zMin, xMin};
-			center = new Vector3 (xMax - xMin, 0.0f, zMax - zMin);
+			center = new Vector3 ((xMax + xMin)/2, 0.0f, (zMax + zMin)/2);
 			//initialize the increiments
 			incs[0] = Vector3.right;
 			incs[1] = Vector3.back;

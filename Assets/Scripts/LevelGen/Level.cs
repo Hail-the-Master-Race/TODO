@@ -75,20 +75,21 @@ public class Level : MonoBehaviour {
 	}
 
 	public void CreateIntervals(){
+		print ("Creating Intervals!");
 		int j= roomsList.Length;
 		for (int i = 0; i < 4; i++){
 			roomIntervals[i] = new Room[0];
 			System.Array.Resize(ref roomIntervals[i],j);
 		}
-		roomIntervals[0] = roomsList.OrderByDescending (r => r.zMin).ToArray();
-		roomIntervals[1] = roomsList.OrderByDescending (r => r.xMin).ToArray();
-		roomIntervals[2] = roomsList.OrderBy (r => r.zMax).ToArray();
-		roomIntervals[3] = roomsList.OrderBy (r => r.xMax).ToArray();
+		roomIntervals[0] = roomsList.OrderBy (r => r.zMin).ToArray();
+		roomIntervals[1] = roomsList.OrderBy (r => r.xMin).ToArray();
+		roomIntervals[2] = roomsList.OrderByDescending (r => r.zMax).ToArray();
+		roomIntervals[3] = roomsList.OrderByDescending (r => r.xMax).ToArray();
 		int derp = roomIntervals[3][5].index;
 		var test = roomIntervals [3].Single (item => item.index == derp);
-		print ("Test: " + test.index +":"+derp);
+		//print ("Test: " + test.index +":"+derp);
 	}
-	private bool TestEdge(ref float sMaxC, ref float sMinC, float eMaxC, float eMinC){
+	public bool TestEdge(ref float sMaxC, ref float sMinC, float eMaxC, float eMinC){
 		if ((sMaxC - eMinC) > delta && (eMaxC - sMinC) > delta){
 			sMaxC = Mathf.Min(sMaxC,eMaxC);
 			sMinC = Mathf.Max(sMinC,eMinC);
@@ -104,9 +105,10 @@ public class Level : MonoBehaviour {
 			return false;
 		}
 	}
-	private void SearchEdges(Room room, Room[][] intervals, int wall){
-		var interval = intervals[wall];
-		int i = interval.ToList ().IndexOf (room);
+	public void SearchEdges(Room room, int wall){
+		var interval = roomIntervals[wall];
+		int i = 1+interval.ToList ().IndexOf (room);
+		//print ("Starting search for room:" + room.index+" at "+(i-1));
 		Room temp;
 		int maxI, minI;
 		// set up the walls
@@ -120,17 +122,33 @@ public class Level : MonoBehaviour {
 		}
 		float max = room.bounds [maxI];
 		float min = room.bounds [minI];
+		print (max + "/" + min);
+		print ("x:" + room.xMax + "/" + room.xMin);
+		print ("z:" + room.zMax + "/" + room.zMin);
+
 		bool search = true;
-		while (search){
-			i+=1;
+		print ("Room center 1:" + room.center);
+		while (search && i < interval.Length){
+			//print("Searching interval:"+i);
 			temp = interval[i];
 			// first test for corners?
 			var test = TestEdge (ref max, ref min,temp.bounds[maxI],temp.bounds[minI]);
+			//print ("Room center "+i+":" + temp.center);
+
 			if (test){
 				//if (room.Corridors[wall] != null){ write update later?
-				room.corridors[i] = new Corridor(room.index,temp.index,
+				roomsList[room.index].corridors[wall] = new Corridor(room.index,temp.index,
 				                              max, min, room.bounds[wall],
 				                              temp.bounds[(wall+2)%4],wall);
+				print ("found it");
+				//roomsList[room.index].corridors[wall].BuildCorridor();
+				var thi = roomsList[room.index].corridors[wall];
+				thi.BuildCorridor();
+//				print("Room: "+room.index+" to "+temp.index);
+//				print ("centers; " + room.center + "/" +temp.center);
+//				
+				print("Cord:" + thi.start + "/"+thi.end+"-"+thi.inc);
+//				print ("min/max:"+min+"/"+max);
 				search = false;
 			}
 			else{
@@ -138,22 +156,19 @@ public class Level : MonoBehaviour {
 					search = false; 
 				} // else keep searching
 			}
+			i+=1;
 		}
+		//print ("ending search for "+ room.index+"with b:" + search + "and i:" + i);
 	}
 
 
 	public void CreateEdges(){
-
-//		ArrayList derp = new ArrayList();
-//		// for each room find closest in each direction, push onto list of edges
-//		// if an edge is overwritten, go to next back up and propagate
-//		for (int i = 0; i<roomsList.Length; i++){
-//			for (int j = 0; j<
-
-// create edge function in Room.cs
-//
-//		}
+		for (int j = 0; j < 4; j++){
+			for (int i = 0; i < roomsList.Length; i++){
+			SearchEdges (roomsList [i], j);
+			}
 		}
+	}
 
 	// Use this for initialization
 	void GenerateRooms () {
@@ -161,11 +176,11 @@ public class Level : MonoBehaviour {
 		//hardcoded for now
 		roomsList = new Room[1000];
 		int maxRooms = 100;
-		int levelScale = 50;
+		int levelScale = 100;
 		int roomMin = 3;
-		int roomMax = 5;
+		int roomMax = 10;
 		float maxArea = 500.0f;
-		float minArea = 10.0f;
+		float minArea = 50.0f;
 		for (int i = 0; i<maxRooms; i++){
 
 			float x = Mathf.Round (Random.Range (roomMin, roomMax));
@@ -184,7 +199,10 @@ public class Level : MonoBehaviour {
 			}
 		}
 		CullRooms (); // Removes overlapping rooms
+		//print ("center:" + roomsList[0].center);
 		IndexRooms (); // Indexes the rooms, fits array size to room numbers
+		//print ("center:" + roomsList[0].center);
+
 		BuildRooms (); // generates all the rooms
 		CreateIntervals ();
 		CreateEdges ();
