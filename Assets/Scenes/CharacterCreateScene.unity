@@ -816,7 +816,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 535288042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -106, y: 222, z: 0}
+  m_LocalPosition: {x: -106, y: 196.499969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124398845}
@@ -850,7 +850,7 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 52
-  mHeight: 20
+  mHeight: 50
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1363,11 +1363,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -64
+      value: -64.0000076
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 175.937622
+      value: 150.462219
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1674,11 +1674,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.52587891e-05
+      value: -1.52587891e-05
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -156.5
+      value: -143.75
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1754,7 +1754,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_Size.y
-      value: 183
+      value: 158
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: bottomAnchor.relative
@@ -1999,7 +1999,7 @@ Transform:
   m_GameObject: {fileID: 952993538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .105715752, z: -9.07602692}
-  m_LocalScale: {x: .0036764706, y: .0036764706, z: .0036764706}
+  m_LocalScale: {x: .00405679503, y: .00405679503, z: .00405679503}
   m_Children:
   - {fileID: 1201991829}
   - {fileID: 2124398845}
@@ -2286,7 +2286,7 @@ Transform:
   m_PrefabInternal: {fileID: 648939515}
   m_GameObject: {fileID: 1063841745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64, y: 175.937622, z: 0}
+  m_LocalPosition: {x: -64.0000076, y: 150.462219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 697133859}
@@ -2436,7 +2436,7 @@ Transform:
   m_PrefabInternal: {fileID: 697311284}
   m_GameObject: {fileID: 1241305998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.52587891e-05, y: -156.5, z: 0}
+  m_LocalPosition: {x: -1.52587891e-05, y: -143.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1736367965}
@@ -2452,7 +2452,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 160, y: 183, z: 0}
+  m_Size: {x: 160, y: 158, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1241306001
 MonoBehaviour:
@@ -2511,7 +2511,7 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 160
-  mHeight: 183
+  mHeight: 158
   mDepth: 4
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -2661,7 +2661,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1389888536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0078125, y: 116.157028, z: 0}
+  m_LocalPosition: {x: 2.0078125, y: 91.3586273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124398845}
@@ -2750,7 +2750,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1420766376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -105.055573, y: -4.96875191, z: 0}
+  m_LocalPosition: {x: -105, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 34964703}
@@ -2929,7 +2929,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400040, guid: d955657ccb0f3ba4abbc7c38ca02daf0, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1475263580}
-  m_LocalRotation: {x: .00243725069, y: -.000506300421, z: .0118691605, w: .999926448}
+  m_LocalRotation: {x: .00243725092, y: -.000506300479, z: .0118691614, w: .999926507}
   m_LocalPosition: {x: .00249641994, y: .022172017, z: -3.84906107e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3313,7 +3313,7 @@ Transform:
   m_PrefabInternal: {fileID: 2060687301}
   m_GameObject: {fileID: 1694525869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64, y: 241, z: 0}
+  m_LocalPosition: {x: -64, y: 215.499985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 616224551}
@@ -3591,7 +3591,7 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 152
-  mHeight: 175
+  mHeight: 150
   mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -3674,7 +3674,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1796090992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -160.299988, y: 230.875244, z: 0}
+  m_LocalPosition: {x: -160.299988, y: 205.46225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 952993539}
@@ -3787,7 +3787,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400024, guid: d955657ccb0f3ba4abbc7c38ca02daf0, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1836808186}
-  m_LocalRotation: {x: -.0144421188, y: .19729583, z: -.0225418024, w: .979978383}
+  m_LocalRotation: {x: -.0144421197, y: .197295845, z: -.0225418042, w: .979978442}
   m_LocalPosition: {x: -2.63114336e-10, y: .111407451, z: -1.84288829e-09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3844,7 +3844,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1941366383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.0077057, y: 116.157028, z: 0}
+  m_LocalPosition: {x: 69.0078125, y: 91.3586273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124398845}
@@ -3993,7 +3993,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1950554990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0078125, y: 134.657028, z: 0}
+  m_LocalPosition: {x: 2.0078125, y: 109.358627, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2124398845}
@@ -4184,7 +4184,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 241
+      value: 215.499985
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4445,7 +4445,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2124398844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 321.055573, y: -5.03125, z: 0}
+  m_LocalPosition: {x: 190, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1950554992}
@@ -4488,12 +4488,12 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 315
-  mHeight: 544
+  mHeight: 493
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .579044104
+  aspectRatio: .638945222
   mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
   mSpriteName: Window
   mType: 1
@@ -4537,9 +4537,9 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 320
-  mHeight: 546
+  mHeight: 495
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .586080611
+  aspectRatio: .646464646

@@ -14,6 +14,8 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/NGUI Slider")]
 public class UISlider : UIProgressBar
 {
+	public string type;
+
 	enum Direction
 	{
 		Horizontal,

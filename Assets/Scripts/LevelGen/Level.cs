@@ -9,6 +9,9 @@ public class Level : MonoBehaviour {
 	// array of rooms, to be ordered by starting interval
 	public Room[][] roomIntervals = new Room[4][];
 	// 0 = South Wall, 1 = West Wall,
+	private Room[] temp;
+
+	public int maxNumRooms = 1000;
 	// 2 = North Wall, 3 = East Wall
 	// used for corridor and intersection testing.
 
@@ -16,6 +19,20 @@ public class Level : MonoBehaviour {
 
 
 	public Rigidbody prefab;
+
+	void Awake()
+	{
+		roomsList = new Room[maxNumRooms];
+		temp = new Room[maxNumRooms];
+
+		GenerateRooms ();
+	}
+
+	public Room GetRandomRoom()
+	{
+		return roomsList [Random.Range (0, roomsList.Length)];
+	}
+
 
 	public void BuildRooms(){
 		for (int i = 0; i < roomsList.Length; i++){
@@ -45,7 +62,6 @@ public class Level : MonoBehaviour {
 		print ("Culled " + counter + " rooms!"); 
 	}
 	public void IndexRooms(){
-		Room[] temp = new Room[1000];
 		int j = 0;
 		for (int i = 0; i < roomsList.Length; i++)
 			if (roomsList[i] != null){
@@ -140,7 +156,7 @@ public class Level : MonoBehaviour {
 		}
 
 	// Use this for initialization
-	void Start () {
+	void GenerateRooms () {
 		//room building info
 		//hardcoded for now
 		roomsList = new Room[1000];

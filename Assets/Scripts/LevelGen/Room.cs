@@ -15,6 +15,16 @@ public class Room{//: MonoBehaviour {
 	public Vector3 center;
 	public float height = 10; 
 
+	public Vector3 getCenterSpawnPoint()
+	{
+		float hOffset = (corners [1].x - corners [0].x) / 2.0f;
+		float vOffset = (corners [3].z - corners [0].z) / 2.0f;
+
+		return new Vector3 (Mathf.FloorToInt(corners[0].x + hOffset), 
+		                    1, 
+		                    Mathf.FloorToInt(corners[0].z + vOffset));
+	}
+
 
 	// used for intersection testing, saves recalculating
 	public float[] bounds;
@@ -70,13 +80,13 @@ public class Room{//: MonoBehaviour {
 			Vector3 current = start;
 			while (current != end) {
 			// not for use with prefab
-//				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
-//				cube.AddComponent<Rigidbody> ();
-//				cube.transform.localScale = new Vector3(1f,height,1f);
-//				cube.transform.position = current;//	 + Vector3.up * .5f* height;
-//				cube.rigidbody.isKinematic = true;
+				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
+				cube.AddComponent<Rigidbody> ();
+				cube.transform.localScale = new Vector3(1f,height,1f);
+				cube.transform.position = current;//	 + Vector3.up * .5f* height;
+				cube.rigidbody.isKinematic = true;
 			//prefab generation
-				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
+//				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
 				current = current + inc*1.0f;
 			}
 		}

@@ -25,9 +25,9 @@ public class PlayerStats : MonoBehaviour
     public int MaxEXP { get { return _maxEXP; } }
     public int currentEXP = 10;
 
-    public int STR;
-    public int DEX;
-    public int FRT;
+    public int STR = 10;
+    public int DEX = 10;
+    public int FRT = 10;
 
     public void Init (Character packet)
     {

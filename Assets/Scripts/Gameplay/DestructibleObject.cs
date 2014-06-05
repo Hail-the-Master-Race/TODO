@@ -17,8 +17,8 @@ public class DestructibleObject : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		Debug.Log ("Colliding");
 		if(other.gameObject.CompareTag("Player")) {
-			PlayerController player = other.gameObject.transform.root.GetComponent<PlayerController>();
-			if(player.attacking) 
+			Player player = other.gameObject.transform.root.GetComponent<Player>();
+			//if(player.attacking) 
 				stamina -= 10;
 			Debug.Log(stamina);
 			if(stamina == 0)

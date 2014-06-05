@@ -70,6 +70,7 @@ public class CharacterCreateController : MonoBehaviour
 
     public void StartGame ()
     {
+		Debug.Log ("Loading Start Scene");
         Application.LoadLevel ("StartScene");
         return;
     }

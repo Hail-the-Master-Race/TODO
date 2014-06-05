@@ -6,6 +6,10 @@ TagManager:
   - 
   - 'UI: Score'
   - 'UI: PC Info'
+  - Pickup
+  - Enemy
+  - Level Generator
+  - Enemy Generator
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
