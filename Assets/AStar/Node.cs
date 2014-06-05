@@ -146,7 +146,7 @@ public class Node : MonoBehaviour {
 		
 		//Go through until we find the exit or run out of connections
 		bool searchedAll = false;
-		bool foundEnd = false;
+		bool targetFound = false;
 		
 		while(!searchedAll)
 		{
@@ -169,7 +169,7 @@ public class Node : MonoBehaviour {
 						} else if (potentialPoint.GetState() == "end")
 						{
 							//Found the exit
-							foundEnd = true;
+							targetFound = true;
 							endPoint.AddConnectedPoint(point);
 						}
 					}
@@ -202,9 +202,9 @@ public class Node : MonoBehaviour {
 			}
 		}
 		
-		if (foundEnd)
+		if (targetFound)
 		{
-			List<Point> shortestRoute = null;
+			List<Point> bestPath = null;
 			float lowestScore = 0;
 			bool firstRoute = true;
 			
@@ -222,14 +222,14 @@ public class Node : MonoBehaviour {
 					{
 						if (firstRoute)
 						{
-							shortestRoute = route;
+							bestPath = route;
 							lowestScore = score;
 							firstRoute = false;
 						} else
 						{
 							if (lowestScore > score)
 							{
-								shortestRoute = route;
+								bestPath = route;
 								lowestScore = score;
 							}
 						}
@@ -241,9 +241,9 @@ public class Node : MonoBehaviour {
 				}
 			}
 			
-			shortestRoute.Reverse();
+			bestPath.Reverse();
 			List<Vector3> path = new List<Vector3>();
-			foreach (Point p in shortestRoute)
+			foreach (Point p in bestPath)
 			{
 				path.Add(p.GetPos());
 			}
