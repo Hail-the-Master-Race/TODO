@@ -10,6 +10,7 @@ public class ServerListScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Object.DontDestroyOnLoad (GameObject.Find ("NetworkManager"));
 		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 		btnX = Screen.width  * (float) 0.2;
 		btnY = Screen.height * (float) 0.2;
@@ -38,6 +39,7 @@ public class ServerListScript : MonoBehaviour {
 					btnH * (float)0.25),
 	                networkManager.hostData [i].gameName)) {
 						Network.Connect (networkManager.hostData [i]);
+						networkManager.hostData = null;
 						Application.LoadLevel ("StartScene");
 				}
 			}

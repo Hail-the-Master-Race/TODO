@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxis ("Vertical");
         float rot = Input.GetAxis ("Mouse X");
 
+		// Disable the script if it doesn't belong to the player
 		if (networkManager.isOnline && !networkView.isMine)
 			enabled = false;
 		if (!networkManager.isOnline || (networkManager.isOnline && networkView.isMine))

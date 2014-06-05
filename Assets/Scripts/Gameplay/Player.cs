@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
 	
 	// add initialization logic here
 	void Start () {
-//		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
+		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 	}
 	
 	void Awake() {

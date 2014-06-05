@@ -20,8 +20,6 @@ public class GameControllerScript : MonoBehaviour
             .GetComponent<PlayerStats> ();
 
         PCStat.Init (PCPacket);
-
-
     }
 	
     void Update ()

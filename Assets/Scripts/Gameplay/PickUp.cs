@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class PickUp : MonoBehaviour {
-
+	private NetworkManagerScript networkManager;
 	public string type;
 
 	// Use this for initialization
 	void Start () {
-	
+		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,11 @@ public class PickUp : MonoBehaviour {
 					if(stats.currentHunger > stats.MaxHunger) stats.currentHunger = stats.MaxHunger;
 				break;
 			}
-			Network.Destroy (this.gameObject);
+			Debug.Log(networkManager.isOnline);
+			if (networkManager.isOnline)
+				Network.Destroy (this.gameObject);
+			else
+				Destroy (this.gameObject);
 		}
 	}
 }
