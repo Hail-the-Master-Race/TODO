@@ -20,9 +20,6 @@ public class UIScript : MonoBehaviour
 	
     public void LateStart ()
     {
-		PC = GameObject.FindGameObjectWithTag (Tags.player);
-		PCStats = PC.GetComponent<PlayerStats> ();
-	
 		GameController = GameObject.FindGameObjectWithTag (Tags.gameController)
             .GetComponent<GameControllerScript> ();
 

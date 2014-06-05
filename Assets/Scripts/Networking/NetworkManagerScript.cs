@@ -40,7 +40,7 @@ public class NetworkManagerScript : MonoBehaviour {
 	// Start Server
 	public void startServer () {
 		Network.InitializeServer (4, 25001, !Network.HavePublicAddress());
-		
+
 		// Register game to Unity Master server
 		// -- In theory, we could set up our own server, 
 		// -- but for now, this will make things a bit easier...
@@ -55,6 +55,8 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
+		GameObject.FindWithTag ("Player").tag = "Player1";
+
 		isOnline = true;
 	}
 
@@ -64,7 +66,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		isOnline = true;
 		// Spawn new player...
 		player = GameObject.Find ("PlayerSpawn").GetComponent<Player> ();
-		player.Spawn ();
+		player.Spawn (2);
 	}
 	
 	void OnMasterServerEvent (MasterServerEvent mse) {
