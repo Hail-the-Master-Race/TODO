@@ -22,8 +22,10 @@ public class EnemyGenerate : MonoBehaviour {
 
 	void GenerateEnemies()
 	{
-		for (int i = 0; i < numMobsBase + numMobsOffset; i++)
-			GenerateEnemy();
+		for (int i = 0; i < numMobsBase + numMobsOffset; i++) {
+			GenerateEnemy ();
+			Debug.Log("generating");
+		}
 	}
 
 	void GenerateEnemy()
@@ -34,8 +36,12 @@ public class EnemyGenerate : MonoBehaviour {
 			return;
 
 		Vector3 SpawnLocation = spawnRoom.getCenterSpawnPoint();
+
+		Transform newEnemy = (Transform) GameObject.Instantiate (Prefab, 
+		                                                         SpawnLocation, 
+		                                                         Quaternion.identity);
 		
-		EnemyAI temp = ((GameObject)GameObject.Instantiate (Prefab, SpawnLocation, Quaternion.identity)).GetComponent<EnemyAI>();
+		EnemyAI temp = newEnemy.gameObject.GetComponent<EnemyAI>();
 		temp.LateAwake ();
 	}
 }
