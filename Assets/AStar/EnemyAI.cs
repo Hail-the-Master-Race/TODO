@@ -45,21 +45,21 @@ public class EnemyAI : MonoBehaviour
 	{
 		//rotate to look at the player
 		transform.LookAt(new Vector3(target.position.x, 0, target.position.z));
-		//transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
+		//transform.Rotate(new Vector3(0,-90,0),Space.Self); //correcting the original rotation
 
-		float distance = Vector3.Distance (transform.position, target.position);
+		float distance = Vector3.Distance (new Vector3(transform.position.x,0,transform.position.z), new Vector3(target.position.x,0,target.position.z));
 
-		if (distance >= 5f) {
+		if (distance >= 10f) {
 			enemyAnimator.Play("Idle");
 			return;
 		}
 
-		if (distance < 5f && distance >= 2){//move if distance from target is greater than 1
+		if (distance < 2f && distance >= 1f){//move if distance from target is greater than 1
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 			enemyAnimator.Play ("Walk");
 		}
 
-		if (distance < 2) {
+		if (distance < 1f) {
 			speed = 0f;
 			enemyAnimator.Play("Lumbering");
 			return;
@@ -73,6 +73,7 @@ public class EnemyAI : MonoBehaviour
 			switch (state)
 			{
 			case State.IDLE:
+				MoveOrder (target.position);
 				break;
 				
 			case State.MOVING:
@@ -124,7 +125,8 @@ public class EnemyAI : MonoBehaviour
 		Vector3 motion = currNode - newPos;
 		motion.Normalize();
 		newPos += motion * m_speed;
-		
+
+		newPos = new Vector3 (newPos.x, 0, newPos.z);
 		transform.position = newPos;
 	}
 	

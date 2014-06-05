@@ -2802,7 +2802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb7091f29a38480eb56938d89b2e760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   speed: 3
+  route: []
 --- !u!114 &1155627360
 MonoBehaviour:
   m_ObjectHideFlags: 0
