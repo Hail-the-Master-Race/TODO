@@ -8,15 +8,17 @@ public class Level : MonoBehaviour {
 	public Room[] roomsList;
 	// array of rooms, to be ordered by starting interval
 	public Room[][] roomIntervals = new Room[4][];
+	// 0 = South Wall, 1 = West Wall,
+	// 2 = North Wall, 3 = East Wall
+	// used for corridor and intersection testing.
+
 	public Corridor[] HorzIntervals = new Corridor[0];
 	public Corridor[] VertIntervals = new Corridor[0];
 
-	// 0 = South Wall, 1 = West Wall,
 	private Room[] temp;
 
 	public int maxNumRooms = 1000;
-	// 2 = North Wall, 3 = East Wall
-	// used for corridor and intersection testing.
+
 
 	float delta = 6.0f; // corridor width
 
@@ -90,8 +92,8 @@ public class Level : MonoBehaviour {
 		System.Array.Resize (ref temp, j);
 		roomsList = temp;
 	}
-
-	public void CreateIntervals(){
+	// creates intervals for testing room intersectons
+	public void CreateRoomIntervals(){
 		print ("Creating Intervals!");
 		int j= roomsList.Length;
 		for (int i = 0; i < 4; i++){
@@ -105,7 +107,7 @@ public class Level : MonoBehaviour {
 		System.Array.Resize (ref VertIntervals, j * 2);
 		System.Array.Resize (ref HorzIntervals, j * 2);
 	}
-
+	// creates intervals for testing corridor intersection
 	public void CreateCordIntervals(){
 		print ("Creating Corridor Intervals!");
 		int horz = 0;
@@ -132,7 +134,7 @@ public class Level : MonoBehaviour {
 		HorzIntervals = HorzIntervals.OrderBy (r => r.start.x).ToArray ();
 		VertIntervals = VertIntervals.OrderBy (r => r.start.z).ToArray ();
 	}
-
+	// Makes doors in passage way X junctions
 	public void MakeDoors(){
 		Corridor cord;
 		Corridor inter;
@@ -203,12 +205,7 @@ public class Level : MonoBehaviour {
 	}
 
 
-
-
-
-//	pulbic corridor LSearch (float max, float min, int maxI, int minI, int i){
-//
-//	}
+	// attempts to draw a straight corridor between roooms/points. Can also be used to generate L junctions
 	public bool TestStraight(ref float sMaxC, ref float sMinC, float eMaxC, float eMinC){
 		if ((Mathf.Floor(sMaxC) - Mathf.Ceil(eMinC)) > delta && (Mathf.Floor(eMaxC) - Mathf.Ceil(sMinC)) > delta){
 			sMaxC = Mathf.Floor(Mathf.Min(sMaxC,eMaxC));
@@ -225,6 +222,8 @@ public class Level : MonoBehaviour {
 			return false;
 		}
 	}
+
+	// used for different corridor generation algorithm, not fully implimented
 	public Corridor DiagCord (float max, float min,int maxI, int minI, Room start, Room end,int i, int wall){
 		var interval = roomIntervals[wall];
 		Room temp;
@@ -257,6 +256,8 @@ public class Level : MonoBehaviour {
 		}
 	return null;
 	}
+
+	// for a given room finds possible pathways to its neighbors
 	public void SearchEdges(Room room, int wall){
 		var interval = roomIntervals[wall];
 		int i = 1+interval.ToList ().IndexOf (room);
@@ -273,9 +274,6 @@ public class Level : MonoBehaviour {
 		}
 		float max = room.bounds [maxI];
 		float min = room.bounds [minI];
-//		print (max + "/" + min);
-//		print ("x:" + room.xMax + "/" + room.xMin);
-//		print ("z:" + room.zMax + "/" + room.zMin);
 
 		bool search = true;
 		Corridor cord;
@@ -321,8 +319,6 @@ public class Level : MonoBehaviour {
 
 	// Use this for initialization
 	void GenerateRooms () {
-		//room building info
-		//hardcoded for now
 		roomsList = new Room[1000];
 		int maxRooms = 100;
 		int levelScale = 100;
@@ -348,23 +344,17 @@ public class Level : MonoBehaviour {
 			}
 		}
 		CullRooms (); // Removes overlapping rooms
-		//print ("center:" + roomsList[0].center);
 		IndexRooms (); // Indexes the rooms, fits array size to room numbers
-		//print ("center:" + roomsList[0].center);
 
 
-		CreateIntervals ();
+		CreateRoomIntervals ();
 		CreateEdges ();
 		CreateCordIntervals ();
 		MakeDoors ();
 		BuildRooms (); // generates all the rooms
 		BuildCorridors ();
 		print ("vec:" + Vector3.Cross (new Vector3 (1, 0, 0), new Vector3 (0, 1, 0)));
-//		Corridor derp = roomsList [0].corridors [0];
-//		print ("start vector :" + derp.start);
-//		print ("end vector :" + derp.end);
-//		print ("door vector :"+derp.doors[0]);
-//		print (derp.doors.Contains (new Vector3 (1, 2, 3)));
+
 
 
 

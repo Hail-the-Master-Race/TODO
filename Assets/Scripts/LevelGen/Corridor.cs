@@ -53,11 +53,6 @@ public class Corridor {
 		Vector3 current = start;
 		Vector3 goal = end;
 		inc = (end-start).normalized;
-//		if (inc.x < 0 || inc.z < 0){
-//			inc *= -1.0f;
-//			current = end;
-//			goal = start;
-//		}
 		current += inc;
 		while (current != goal){
 			if (doors.Contains(current)){
