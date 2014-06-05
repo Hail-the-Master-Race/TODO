@@ -3,7 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Node : MonoBehaviour {
-	
+	/* Pathfinding Algorithm: 
+	 * are there nodes in the set? if no -> return failer 
+	 * if so, get node with the lowest "score". if it is the target 
+	 * then return best path to this node. add this node to the set.
+	 * find all of the walkable nodes of this node. and then for each neighbor, calculate the cost
+	 * of reaching the neighbor via the current node. Update the score for the node and store
+	 * it in the set. 
+	 */
 	public string nodeTag;
 	
 	class Point

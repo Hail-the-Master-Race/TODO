@@ -4,28 +4,31 @@ using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour
 {
-	Transform target;
+	//my target object
+	public Transform target;
 	Transform myTransform; 
 	public float speed = 3f;
 
 	enum State
-	{ IDLE,
+	{ 
+	 IDLE,
 	 MOVING,
 	}
 
 	float m_speed;
-	float m_speed_multi = 5;
 	bool onNode = true;
 	Vector3 m_target = new Vector3(0, 0, 0);
 	Vector3 currNode;
 	int nodeIndex;
-	List<Vector3> path = new List<Vector3>();
+	//path to follow
+	public List<Vector3> route = new List<Vector3>();
 	Node control;
 	State state = State.IDLE;
 	float OldTime = 0;
 	float checkTime = 0;
 	float elapsedTime = 0;
 
+	//how to move our character
 	Animation enemyAnimator;
 
 	void Awake()
@@ -62,7 +65,7 @@ public class EnemyAI : MonoBehaviour
 			return;
 		}
 
-		m_speed = Time.deltaTime * m_speed_multi;
+		m_speed = Time.deltaTime * 5.0f;
 		elapsedTime += Time.deltaTime;
 		
 		if (elapsedTime > OldTime)
@@ -81,13 +84,13 @@ public class EnemyAI : MonoBehaviour
 					SetTarget();
 				}
 				
-				if (path != null)
+				if (route != null)
 				{
 					if (onNode)
 					{
 						onNode = false;
-						if (nodeIndex < path.Count)
-							currNode = path[nodeIndex];
+						if (nodeIndex < route.Count)
+							currNode = route[nodeIndex];
 					} else {
 						MoveToward();
 						enemyAnimator.Play ("Walk");
@@ -118,7 +121,6 @@ public class EnemyAI : MonoBehaviour
 			onNode = true;
 		}
 		
-		/***Move toward waypoint***/
 		Vector3 motion = currNode - newPos;
 		motion.Normalize();
 		newPos += motion * m_speed;
@@ -128,7 +130,7 @@ public class EnemyAI : MonoBehaviour
 	
 	private void SetTarget()
 	{
-		path = control.Path(transform.position, m_target);
+		route = control.Path(transform.position, m_target);
 		nodeIndex = 0;
 		onNode = true;
 	}
