@@ -52,7 +52,9 @@ public class Level : MonoBehaviour {
 		for (int i = 0; i < roomsList.Length; i++) {
 			for (int j = 0; j<4; j++){
 				cord = roomsList[i].corridors[j];
-				if (cord != null && cord.rIndex1 == i){
+				//if (cord != null && cord.rIndex1 == i){ // 2 way rendering of corridors
+				if (cord != null){
+
 					cord.BuildCorridor();
 				}
 			}
