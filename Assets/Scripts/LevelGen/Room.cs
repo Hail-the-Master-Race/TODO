@@ -74,19 +74,32 @@ public class Room{//: MonoBehaviour {
 		}
 
 
-		public void BuildWall(Vector3 start, Vector3 end, Vector3 inc){
-
+		public void BuildWall(Vector3 start, Vector3 end, Vector3 inc, int wall){
+			Corridor cord = corridors [wall];
+		Vector3 doorloc = Vector3.zero;
+			if (cord != null){
+				if(cord.rIndex1 == index) {
+					doorloc = cord.start;
+				} 
+			else {
+					doorloc = cord.end;
+				}
+			}
 			Vector3 current = start;
 			while (current != end) {
-			// not for use with prefab
-				GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
-				cube.AddComponent<Rigidbody> ();
-				cube.transform.localScale = new Vector3(1f,height,1f);
-				cube.transform.position = current;//	 + Vector3.up * .5f* height;
-				cube.rigidbody.isKinematic = true;
-			//prefab generation
-//				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
-				current = current + inc*1.0f;
+				if (cord != null && current == doorloc){
+					current = current + inc*1.0f;
+				}
+				else{
+					GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
+					cube.AddComponent<Rigidbody> ();
+					cube.transform.localScale = new Vector3(1f,height,1f);
+					cube.transform.position = current;//	 + Vector3.up * .5f* height;
+					cube.rigidbody.isKinematic = true;
+				//prefab generation
+	//				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
+					current = current + inc*1.0f;
+				}
 			}
 		}
 		public void BuildWalls(){
@@ -94,7 +107,7 @@ public class Room{//: MonoBehaviour {
 			for (int i = 0; i<4; i++) {
 				int j = i + 1;
 				if (i == 3) {j = 0;}
-				BuildWall (corners [i], corners [j], incs [i]);
+				BuildWall (corners [i], corners [j], incs [i],i);
 				}
 			}
 

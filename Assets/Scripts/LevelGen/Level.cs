@@ -8,6 +8,9 @@ public class Level : MonoBehaviour {
 	public Room[] roomsList;
 	// array of rooms, to be ordered by starting interval
 	public Room[][] roomIntervals = new Room[4][];
+	public Corridor[] HorzIntervals = new Corridor[0];
+	public Corridor[] VertIntervals = new Corridor[0];
+
 	// 0 = South Wall, 1 = West Wall,
 	private Room[] temp;
 
@@ -15,7 +18,7 @@ public class Level : MonoBehaviour {
 	// 2 = North Wall, 3 = East Wall
 	// used for corridor and intersection testing.
 
-	float delta = 4.0f; // corridor width
+	float delta = 8.0f; // corridor width
 
 
 	public Rigidbody prefab;
@@ -41,6 +44,19 @@ public class Level : MonoBehaviour {
 			}
 		}
 	}
+	public void BuildCorridors (){
+		Corridor cord;
+		for (int i = 0; i < roomsList.Length; i++) {
+			for (int j = 0; j<4; j++){
+				cord = roomsList[i].corridors[j];
+				if (cord != null && cord.rIndex1 == i){
+					cord.BuildCorridor();
+				}
+			}
+		}
+	}
+
+
 	public void CullRooms(){
 		int counter = 0;
 		Room rtest;
@@ -85,14 +101,117 @@ public class Level : MonoBehaviour {
 		roomIntervals[1] = roomsList.OrderBy (r => r.xMin).ToArray();
 		roomIntervals[2] = roomsList.OrderByDescending (r => r.zMax).ToArray();
 		roomIntervals[3] = roomsList.OrderByDescending (r => r.xMax).ToArray();
-		int derp = roomIntervals[3][5].index;
-		var test = roomIntervals [3].Single (item => item.index == derp);
-		//print ("Test: " + test.index +":"+derp);
+		System.Array.Resize (ref VertIntervals, j * 2);
+		System.Array.Resize (ref HorzIntervals, j * 2);
 	}
-	public bool TestEdge(ref float sMaxC, ref float sMinC, float eMaxC, float eMinC){
-		if ((sMaxC - eMinC) > delta && (eMaxC - sMinC) > delta){
-			sMaxC = Mathf.Min(sMaxC,eMaxC);
-			sMinC = Mathf.Max(sMinC,eMinC);
+
+	public void CreateCordIntervals(){
+		print ("Creating Corridor Intervals!");
+		int horz = 0;
+		int vert = 0;
+		Corridor cord;
+		for (int i = 0; i < roomsList.Length; i++) {
+			for (int j = 0; j <4; j++){
+				cord = roomsList[i].corridors[j];
+				if (cord != null && cord.rIndex1 == i){
+					if ((j % 2) == 0){ // vertical corridors
+						HorzIntervals[horz] = cord; 
+						horz++;
+					}
+					else { // horizontal corridors
+						VertIntervals[vert] = cord;
+						vert++;
+					}
+				}
+			}
+		}
+		print (roomsList.Length+"|"+horz+":"+vert);
+		System.Array.Resize (ref HorzIntervals, horz);
+		System.Array.Resize (ref VertIntervals, vert);
+		HorzIntervals = HorzIntervals.OrderBy (r => r.start.x).ToArray ();
+		VertIntervals = VertIntervals.OrderBy (r => r.start.z).ToArray ();
+	}
+
+	public void MakeDoors(){
+		Corridor cord;
+		Corridor inter;
+		Vector3 start, end;
+		Vector3 startTemp, endTemp;
+		for (int i = 0; i < roomsList.Length; i++) {
+			for (int j = 0; j<4; j++){
+				cord = roomsList[i].corridors[j];
+				if (cord != null && cord.rIndex1 == i){
+					int k = 0;
+					bool scan = true;
+					if ((j % 2) == 0){
+						start = cord.start;
+						end = cord.end;
+						if (start.z > end.z){
+							start = cord.end;
+							end = cord.start;
+						}
+						while(scan && k < VertIntervals.Length){
+							startTemp = VertIntervals[k].start;
+							endTemp = VertIntervals[k].end;
+							if (startTemp.x > endTemp.x){
+								startTemp = VertIntervals[k].end;
+								endTemp = VertIntervals[k].start;
+							}
+								
+							if (endTemp.z > end.z){
+								scan = false;
+							}
+							if (startTemp.z > start.z && 
+							    startTemp.x < start.x &&
+							    endTemp.x > start.x){
+								cord.doors.Add(new Vector3(start.x,0,startTemp.z));
+							}
+							k++;
+						}
+					}
+
+					else{
+						start = cord.start;
+						end = cord.end;
+						if (cord.start.x > cord.end.x){
+							start = cord.end;
+							end = cord.start;
+						}
+						while(scan &&  k < HorzIntervals.Length){
+							startTemp = HorzIntervals[k].start;
+							endTemp = HorzIntervals[k].end;
+							if (startTemp.z > endTemp.z){
+								startTemp = HorzIntervals[k].end;
+								endTemp = HorzIntervals[k].start;
+							}
+							if (endTemp.x > end.x){
+								scan = false;
+							}
+							if (startTemp.x > start.x && 
+							    startTemp.z < start.z &&
+							    endTemp.z > start.z){
+								cord.doors.Add(new Vector3(startTemp.x,0,start.z));
+							}
+							k++;
+
+							}
+						}
+					}
+				}
+			}
+	}
+
+
+
+
+
+//	pulbic corridor LSearch (float max, float min, int maxI, int minI, int i){
+//
+//	}
+	public bool TestStraight(ref float sMaxC, ref float sMinC, float eMaxC, float eMinC){
+		if ((Mathf.Floor(sMaxC) - Mathf.Ceil(eMinC)) > delta && (Mathf.Floor(eMaxC) - Mathf.Ceil(sMinC)) > delta){
+			sMaxC = Mathf.Floor(Mathf.Min(sMaxC,eMaxC));
+			sMinC = Mathf.Ceil(Mathf.Max(sMinC,eMinC));
 			return true;
 		}
 		else{
@@ -105,10 +224,41 @@ public class Level : MonoBehaviour {
 			return false;
 		}
 	}
+	public Corridor DiagCord (float max, float min,int maxI, int minI, Room start, Room end,int i, int wall){
+		var interval = roomIntervals[wall];
+		Room temp;
+		float farbound = end.bounds [wall];
+		float sMax = max;
+		float sMin = min;
+		bool search = true;
+		while (search && i < interval.Length){
+			temp = interval[i];
+			if (temp.bounds[(wall+2)%4] < farbound){ // check to see if we are too far
+				var test = TestStraight (ref sMax, ref sMin,temp.bounds[maxI],temp.bounds[minI]);
+				if (test) {
+					return null;
+				}
+				else{
+					i++;
+				}
+			}
+			else{ //we went too far
+				search = false;
+			}
+		}
+		if (max-min < delta){
+			return null;
+		}
+		else {
+			float corner1 = (sMax + sMin)/2;
+			// need to shift directions. 
+
+		}
+	return null;
+	}
 	public void SearchEdges(Room room, int wall){
 		var interval = roomIntervals[wall];
 		int i = 1+interval.ToList ().IndexOf (room);
-		//print ("Starting search for room:" + room.index+" at "+(i-1));
 		Room temp;
 		int maxI, minI;
 		// set up the walls
@@ -122,43 +272,41 @@ public class Level : MonoBehaviour {
 		}
 		float max = room.bounds [maxI];
 		float min = room.bounds [minI];
-		print (max + "/" + min);
-		print ("x:" + room.xMax + "/" + room.xMin);
-		print ("z:" + room.zMax + "/" + room.zMin);
+//		print (max + "/" + min);
+//		print ("x:" + room.xMax + "/" + room.xMin);
+//		print ("z:" + room.zMax + "/" + room.zMin);
 
 		bool search = true;
-		print ("Room center 1:" + room.center);
+		Corridor cord;
 		while (search && i < interval.Length){
-			//print("Searching interval:"+i);
 			temp = interval[i];
-			// first test for corners?
-			var test = TestEdge (ref max, ref min,temp.bounds[maxI],temp.bounds[minI]);
-			//print ("Room center "+i+":" + temp.center);
+			if (max >= temp.bounds[minI] && temp.bounds[maxI] >= min){ // check if straight shot is possible
+			var test = TestStraight (ref max, ref min,temp.bounds[maxI],temp.bounds[minI]); // test the edge for straight shot
+				if (test){
+					cord = new Corridor(room.index,temp.index,max, min, 
+					                          room.bounds[wall], temp.bounds[(wall+2)%4],wall);
+					if (roomsList[room.index].corridors[wall] == null){
+						roomsList[room.index].corridors[wall] = cord;
+						roomsList[temp.index].corridors[(wall+2)%4] = cord;
+						//cord.BuildCorridor(); // for testing / intersect
 
-			if (test){
-				//if (room.Corridors[wall] != null){ write update later?
-				roomsList[room.index].corridors[wall] = new Corridor(room.index,temp.index,
-				                              max, min, room.bounds[wall],
-				                              temp.bounds[(wall+2)%4],wall);
-				print ("found it");
-				//roomsList[room.index].corridors[wall].BuildCorridor();
-				var thi = roomsList[room.index].corridors[wall];
-				thi.BuildCorridor();
-//				print("Room: "+room.index+" to "+temp.index);
-//				print ("centers; " + room.center + "/" +temp.center);
-//				
-				print("Cord:" + thi.start + "/"+thi.end+"-"+thi.inc);
-//				print ("min/max:"+min+"/"+max);
-				search = false;
+					}
+
+				search = false;	// done searching
+				//cord.BuildCorridor(); // MST location
+
+				}
+				else{
+					if (max-min < delta){// no possible corridors found
+						search = false; 
+					}
+				}
 			}
-			else{
-				if (max-min < delta){// no possible corridors found
-					search = false; 
-				} // else keep searching
+			else{ // look for diagonal corridors
+				cord = DiagCord(max, min,maxI, minI, room, temp,i, wall);
 			}
 			i+=1;
 		}
-		//print ("ending search for "+ room.index+"with b:" + search + "and i:" + i);
 	}
 
 
@@ -203,9 +351,21 @@ public class Level : MonoBehaviour {
 		IndexRooms (); // Indexes the rooms, fits array size to room numbers
 		//print ("center:" + roomsList[0].center);
 
-		BuildRooms (); // generates all the rooms
+
 		CreateIntervals ();
 		CreateEdges ();
+		CreateCordIntervals ();
+		MakeDoors ();
+		BuildRooms (); // generates all the rooms
+		BuildCorridors ();
+		print ("vec:" + Vector3.Cross (new Vector3 (1, 0, 0), new Vector3 (0, 1, 0)));
+//		Corridor derp = roomsList [0].corridors [0];
+//		print ("start vector :" + derp.start);
+//		print ("end vector :" + derp.end);
+//		print ("door vector :"+derp.doors[0]);
+//		print (derp.doors.Contains (new Vector3 (1, 2, 3)));
+
+
 
 		
 	}

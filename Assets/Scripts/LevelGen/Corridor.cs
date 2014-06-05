@@ -17,12 +17,13 @@ public class Corridor {
 	public float eRange; //range of placement around end
 						 // if mid on SE then sRange = eRange
 	public float height = 10; 
+	public ArrayList doors = new ArrayList();
 
 
 
 	// Use this for initialization
 	public Corridor (int r1, int r2, float sMax, float sMin, float sWall, float eWall, int wall){
-		float center = (sMax + sMin)/2;
+		float center = Mathf.Ceil((sMax + sMin)/2);
 		if (wall % 2 == 0){
 			start = new Vector3(center,0,sWall);
 			mid = start + new Vector3(0,0,eWall-sWall/2);
@@ -49,18 +50,33 @@ public class Corridor {
 	}
 	public void BuildCorridor(){
 		Vector3 current = start;
+		Vector3 goal = end;
 		inc = (end-start).normalized;
+//		if (inc.x < 0 || inc.z < 0){
+//			inc *= -1.0f;
+//			current = end;
+//			goal = start;
+//		}
 		current += inc;
-		int i = 0;
-		while (current != end){
-			GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-			cube.AddComponent<Rigidbody> ();
-			cube.transform.localScale = new Vector3(1f,height,1f);
-			cube.transform.position = current;//	 + Vector3.up * .5f* height;
-			cube.rigidbody.isKinematic = true;
-			current += inc*1.0f;
-			i++;
+		while (current != goal){
+			if (doors.Contains(current)){
+				current += inc*1.0f;
+			}
+			else{
+				GameObject cube1 = GameObject.CreatePrimitive (PrimitiveType.Cube);
+				GameObject cube2 = GameObject.CreatePrimitive (PrimitiveType.Cube);
 
+				cube1.AddComponent<Rigidbody> ();
+				cube1.transform.localScale = new Vector3(1f,height,1f);
+				cube1.transform.position = current + 2*Vector3.Cross(inc,Vector3.up);//	 + Vector3.up * .5f* height;
+				cube1.rigidbody.isKinematic = true;
+
+				cube2.AddComponent<Rigidbody> ();
+				cube2.transform.localScale = new Vector3(1f,height,1f);
+				cube2.transform.position = current + 2*Vector3.Cross(inc,Vector3.down);//	 + Vector3.up * .5f* height;
+				cube2.rigidbody.isKinematic = true;
+				current += inc*1.0f;
+			}
 		}
 	}
 
