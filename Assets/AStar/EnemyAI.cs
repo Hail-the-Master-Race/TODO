@@ -38,11 +38,11 @@ public class EnemyAI : MonoBehaviour
 	void Update () 
 	{
 		//rotate to look at the player
-		transform.LookAt(target.position);
-		transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
+		transform.LookAt(new Vector3(target.position.x, 0, target.position.z));
+		//transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
 
 		if (Vector3.Distance(transform.position,target.position)<5f){//move if distance from target is greater than 1
-			transform.Translate(new Vector3(speed* Time.deltaTime,0,0) );
+			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 		}
 
 		m_speed = Time.deltaTime * m_speed_multi;
