@@ -12,7 +12,7 @@ public class Room{//: MonoBehaviour {
 	public Vector3[] corners = new Vector3[4];
 	public Vector3[] incs = new Vector3[4];
 	public float area;
-	public float center;
+	public Vector3 center;
 	public float height = 10; 
 
 
@@ -23,7 +23,7 @@ public class Room{//: MonoBehaviour {
 	public float zMax;
 
 	//pathway graphs
-	public ArrayList[] doorsList;
+	//public ArrayList[] doorsList;
 
 	public Room()
 	{
@@ -42,6 +42,7 @@ public class Room{//: MonoBehaviour {
 			xMax = ne.x;
 			zMax = ne.z;
 
+		center = new Vector3 (xMax - xMin, 0.0f, zMax - zMin);
 			//initialize the increiments
 			incs[0] = Vector3.right;
 			incs[1] = Vector3.back;

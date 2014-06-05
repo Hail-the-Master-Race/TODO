@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 
 public class Level : MonoBehaviour {
 	public Room[] roomsList;
+	// array of rooms, to be ordered by starting interval
+	public Room[][] roomIntervals = new Room[4][];
+	// 0 = North Wall, 1 = Easy Wall,
+	// 2 = South Wall, 3 = West Wall
+
 
 	public Rigidbody prefab;
 
@@ -41,17 +48,28 @@ public class Level : MonoBehaviour {
 			if (roomsList[i] != null){
 				temp[j] = roomsList[i];
 				temp[j].index = j;
+				//rooms.Add(roomsList[i]);
 				j++;
 		}
 		System.Array.Resize (ref temp, j);
 		roomsList = temp;
 	}
 
-//  todo
-//	public void BuildPaths(){
-//
-//	}
+	public void CreateIntervals(){
+		int j= roomsList.Length;
+		for (int i = 0; i < 4; i++){
+			roomIntervals[i] = new Room[0];
+			System.Array.Resize(ref roomIntervals[i],j);
+		}
+		roomIntervals[0] = roomsList.OrderByDescending (r => r.zMax).ToArray();
+		roomIntervals[1] = roomsList.OrderByDescending (r => r.xMax).ToArray();
+		roomIntervals[2] = roomsList.OrderBy (r => r.zMin).ToArray();
+		roomIntervals[3] = roomsList.OrderBy (r => r.xMin).ToArray();
+		int derp = roomIntervals[3][5].index;
+		var test = roomIntervals [3].Single (item => item.index == derp);
+		print ("Test: " + test.index +":"+derp);
 
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -81,9 +99,10 @@ public class Level : MonoBehaviour {
 				roomsList[i] = temp;
 			}
 		}
-		CullRooms (); // Removes overlapping rooms
+		//CullRooms (); // Removes overlapping rooms
 		IndexRooms (); // Indexes the rooms, fits array size to room numbers
-		BuildRooms (); // generates all the rooms
+		//BuildRooms (); // generates all the rooms
+		CreateIntervals ();
 
 		
 	}
