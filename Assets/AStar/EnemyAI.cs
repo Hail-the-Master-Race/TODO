@@ -26,7 +26,7 @@ public class EnemyAI : MonoBehaviour
 	float checkTime = 0;
 	float elapsedTime = 0;
 
-	void Awake()
+	public void LateAwake()
 	{
 		myTransform = transform;
 		GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");

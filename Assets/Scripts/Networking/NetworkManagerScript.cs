@@ -65,7 +65,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		Debug.Log ("Spawning your character...");
 		isOnline = true;
 		// Spawn new player...
-		player.spawnPlayer (new Vector3 (1, 1, 0));
+		player.Spawn ();
 	}
 	
 	void OnMasterServerEvent (MasterServerEvent mse) {
