@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour {
 			Player player = this.gameObject.transform.root.GetComponent<Player> ();
 			enemy.stats.currentHP -= player.stats.STR;
 			Debug.Log(enemy.stats.currentHP);
+			Debug.Log(player.stats.STR);
 		}
 
 	}

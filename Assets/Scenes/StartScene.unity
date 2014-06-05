@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61417f4435714691b95472e93fab813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numMobsBase: 5
+  numMobsBase: 20
   Prefab: {fileID: 400054, guid: e73df7fc0c2fa457a8e09fadb8328224, type: 2}
 --- !u!1 &51462022
 GameObject:
@@ -2373,7 +2373,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1597399175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 480, y: 316.999908, z: 0}
+  m_LocalPosition: {x: 551.739136, y: 316.999939, z: 0}
   m_LocalScale: {x: 1.00007999, y: 1.00007999, z: 1.00007999}
   m_Children: []
   m_Father: {fileID: 1860036711}
@@ -2407,7 +2407,7 @@ MonoBehaviour:
     absolute: 3
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 5
-  mWidth: 484
+  mWidth: 556
   mHeight: 30
   mDepth: 3
   autoResizeBoxCollider: 0
@@ -2463,7 +2463,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1600920826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -480, y: 360, z: 0}
+  m_LocalPosition: {x: -551.739136, y: 360, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1945654657}
@@ -2569,7 +2569,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.66666651
+  aspectRatio: 3.79999995
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -2633,7 +2633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9096088c1b3014ae19551fa4e7e0ab13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numItemsBase: 20
+  numItemsBase: 50
   Prefab: {fileID: 400000, guid: fdc6c1c0abef84d9cb3c044950f9614b, type: 2}
 --- !u!1 &1647264305
 GameObject:
@@ -2658,7 +2658,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647264305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 480, y: 344, z: 0}
+  m_LocalPosition: {x: 551.739136, y: 344, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1860036711}
@@ -2692,7 +2692,7 @@ MonoBehaviour:
     absolute: -1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 5
-  mWidth: 484
+  mWidth: 556
   mHeight: 30
   mDepth: 3
   autoResizeBoxCollider: 0
