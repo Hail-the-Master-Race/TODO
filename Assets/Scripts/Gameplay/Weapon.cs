@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
+	private NetworkManagerScript networkManager;
 
 	// Use this for initialization
 	void Start () {
-	
+		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 	}
 	
 	// Update is called once per frame
@@ -34,7 +35,7 @@ public class Weapon : MonoBehaviour {
 
 	void damagePlayer(Collider other) {
 		Debug.Log ("Enemy Collision");
-		if (other.gameObject.CompareTag ("Player")) {
+		if (other.gameObject.CompareTag (networkManager.playerTag)) {
 			Player player = (Player)other.gameObject.transform.root.GetComponent<Player> ();
 			Enemy enemy = (Enemy)this.gameObject.transform.root.GetComponent<Enemy> ();
 			player.stats.currentHP -= enemy.stats.damage;

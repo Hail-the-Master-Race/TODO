@@ -7,6 +7,7 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	// Janky janky janky...
 	public bool isOnline = false; 
+	public string playerTag;
 	private bool isPaused = false;
 	private bool refreshing;
 	public HostData[] hostData = null;
@@ -55,8 +56,8 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
-		GameObject.FindWithTag ("Player").tag = "Player1";
 
+		playerTag = "Player1";
 		isOnline = true;
 	}
 
@@ -67,6 +68,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		// Spawn new player...
 		player = GameObject.Find ("PlayerSpawn").GetComponent<Player> ();
 		player.Spawn (2);
+		playerTag = "Player2";
 	}
 	
 	void OnMasterServerEvent (MasterServerEvent mse) {

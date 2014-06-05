@@ -16,7 +16,7 @@ public class PickUp : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag(Tags.player)) {
+		if (other.gameObject.CompareTag(networkManager.playerTag)) {
 			PlayerStats stats = other.GetComponent<PlayerStats>();
 
 			switch(type) {

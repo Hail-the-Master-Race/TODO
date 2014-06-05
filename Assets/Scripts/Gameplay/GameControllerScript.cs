@@ -10,18 +10,24 @@ public class GameControllerScript : MonoBehaviour
 	private Player OurPlayerSpawner;
 	private EnemyGenerate enemyGenerator;
 	private ItemSpawn itemSpawner;
+	private NetworkManagerScript networkManager;
 
     void Awake ()
     {
 		OurUIScript      = GetComponent<UIScript> ();
 		OurPlayerSpawner = GameObject.Find("PlayerSpawn").GetComponent<Player> ();
 		enemyGenerator   = GameObject.Find("Enemy Generator").GetComponent<EnemyGenerate> ();
-		itemSpawner      = GameObject.Find ("Item Spawner").GetComponent<ItemSpawn> ();
+		itemSpawner      = GameObject.Find("Item Spawner").GetComponent<ItemSpawn> ();
+		networkManager   = GameObject.Find("NetworkManager").GetComponent<NetworkManagerScript> ();
     }
 
     void Start ()
     {
-		OurPlayerSpawner.Spawn (0);
+		if (networkManager.isOnline && Network.isClient)
+			return;
+
+		networkManager.playerTag = "Player1";
+		OurPlayerSpawner.Spawn (1);
 
 		OurUIScript.LateStart ();
 

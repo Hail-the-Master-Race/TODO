@@ -5,6 +5,7 @@ public class UIScript : MonoBehaviour
 {
     private GameObject PC;
     private PlayerStats PCStats;
+	private NetworkManagerScript networkManager;
 
     private GameControllerScript GameController;
 
@@ -22,6 +23,7 @@ public class UIScript : MonoBehaviour
     {
 		GameController = GameObject.FindGameObjectWithTag (Tags.gameController)
             .GetComponent<GameControllerScript> ();
+		networkManager = GameObject.Find ("NetworkManager").GetComponent<NetworkManagerScript> ();
 
         LabelPCName = GameObject.Find ("PC Info: Name")
             .GetComponent<UILabel> ();
@@ -38,7 +40,7 @@ public class UIScript : MonoBehaviour
 	
     public void OurUpdate ()
     {
-		if ((PC = GameObject.FindGameObjectWithTag (Tags.player)) == null)
+		if ((PC = GameObject.FindGameObjectWithTag (networkManager.playerTag)) == null)
 			return;
 		if (PCStats == null)
 			PCStats = PC.GetComponent<PlayerStats> ();

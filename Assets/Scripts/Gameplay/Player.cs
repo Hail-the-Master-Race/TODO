@@ -27,15 +27,12 @@ public class Player : MonoBehaviour {
 		Vector3 playerSpawnLocation = levelGen.GetRandomRoom().getCenterSpawnPoint();
 
 		Transform player = (Transform)GameObject.Instantiate (playerPrefab, playerSpawnLocation, Quaternion.identity);
-		if (num == 2) {
-			player.tag = "Player2";
-			return;
-		}
+		player.tag = "Player" + num.ToString();
 
 		// TODO: insure against empty/non-existent packet object
 		Character PCPacket = GameObject.Find ("PC Packet").GetComponent<Character> ();
-		
-		PlayerStats PCStat = GameObject.FindGameObjectWithTag (Tags.player)
+	
+		PlayerStats PCStat = GameObject.FindGameObjectWithTag (player.tag)
 			.GetComponent<PlayerStats> ();
 		
 		PCStat.Init (PCPacket);
