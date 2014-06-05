@@ -21,7 +21,7 @@ public class GameControllerScript : MonoBehaviour
 
     void Start ()
     {
-		OurPlayerSpawner.Spawn ();
+		OurPlayerSpawner.Spawn (0);
 
 		OurUIScript.LateStart ();
 
