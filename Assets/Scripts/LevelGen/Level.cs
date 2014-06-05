@@ -4,8 +4,25 @@ using System.Collections;
 
 public class Level : MonoBehaviour {
 	public Room[] roomsList;
+	private Room[] temp;
+
+	public int maxNumRooms = 1000;
 
 	public Rigidbody prefab;
+
+	void Awake()
+	{
+		roomsList = new Room[maxNumRooms];
+		temp = new Room[maxNumRooms];
+
+		GenerateRooms ();
+	}
+
+	public Room GetRandomRoom()
+	{
+		return roomsList [Random.Range (0, roomsList.Length)];
+	}
+
 
 	public void BuildRooms(){
 		for (int i = 0; i < roomsList.Length; i++){
@@ -35,7 +52,6 @@ public class Level : MonoBehaviour {
 		print ("Culled " + counter + " rooms!"); 
 	}
 	public void IndexRooms(){
-		Room[] temp = new Room[1000];
 		int j = 0;
 		for (int i = 0; i < roomsList.Length; i++)
 			if (roomsList[i] != null){
@@ -54,7 +70,7 @@ public class Level : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void GenerateRooms () {
 		//room building info
 		//hardcoded for now
 		roomsList = new Room[1000];

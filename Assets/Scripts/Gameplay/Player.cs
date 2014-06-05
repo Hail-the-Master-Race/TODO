@@ -14,18 +14,17 @@ public class Player : MonoBehaviour {
 	// add initialization logic here
 	
 	void Awake() {
-		levelGen = GameObject.FindGameObjectWithTag (Tags.levelGen).GetComponent<Level>();
-	}
 
-	void Start() {
-		Init ();
 	}
 	
-	private void Init() {
+
+	public void Spawn() {
+		levelGen = GameObject.FindGameObjectWithTag (Tags.levelGen).GetComponent<Level>();
+
 		if (!playerPrefab)
 			return;
 
-		Vector3 playerSpawnLocation = levelGen.roomsList[10].getCenterSpawnPoint();
+		Vector3 playerSpawnLocation = levelGen.GetRandomRoom().getCenterSpawnPoint();
 
 		GameObject.Instantiate (playerPrefab, playerSpawnLocation, Quaternion.identity);	
 	}
