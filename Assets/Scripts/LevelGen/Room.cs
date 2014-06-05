@@ -91,13 +91,13 @@ public class Room{//: MonoBehaviour {
 					current = current + inc*1.0f;
 				}
 				else{
-					GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
-					cube.AddComponent<Rigidbody> ();
-					cube.transform.localScale = new Vector3(1f,height,1f);
-					cube.transform.position = current;//	 + Vector3.up * .5f* height;
-					cube.rigidbody.isKinematic = true;
+//					GameObject cube = GameObject.CreatePrimitive (PrimitiveType.Cube);
+//					cube.AddComponent<Rigidbody> ();
+//					cube.transform.localScale = new Vector3(1f,height,1f);
+//					cube.transform.position = current;//	 + Vector3.up * .5f* height;
+//					cube.rigidbody.isKinematic = true;
 				//prefab generation
-	//				GameObject.Instantiate(wall_sec, current,Quaternion.identity);
+					GameObject.Instantiate(wall_sec, current,Quaternion.identity);
 					current = current + inc*1.0f;
 				}
 			}

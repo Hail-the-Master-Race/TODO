@@ -18,10 +18,11 @@ public class Level : MonoBehaviour {
 	// 2 = North Wall, 3 = East Wall
 	// used for corridor and intersection testing.
 
-	float delta = 8.0f; // corridor width
+	float delta = 6.0f; // corridor width
 
 
-	public Rigidbody prefab;
+	public Rigidbody Wall_prefab;
+	public Rigidbody Corridor_prefab;
 
 	void Awake()
 	{
@@ -283,7 +284,7 @@ public class Level : MonoBehaviour {
 			if (max >= temp.bounds[minI] && temp.bounds[maxI] >= min){ // check if straight shot is possible
 			var test = TestStraight (ref max, ref min,temp.bounds[maxI],temp.bounds[minI]); // test the edge for straight shot
 				if (test){
-					cord = new Corridor(room.index,temp.index,max, min, 
+					cord = new Corridor(Corridor_prefab, room.index,temp.index,max, min, 
 					                          room.bounds[wall], temp.bounds[(wall+2)%4],wall);
 					if (roomsList[room.index].corridors[wall] == null){
 						roomsList[room.index].corridors[wall] = cord;
@@ -340,7 +341,7 @@ public class Level : MonoBehaviour {
 			Vector3 c2 = new Vector3 (cx+x, 0f, cy+y);
 			Vector3 c3 = new Vector3 (cx+x, 0f, cy-y);
 			Vector3 c4 = new Vector3 (cx-x, 0f, cy-y);
-			Room temp = new Room (prefab, c1,c2,c3,c4);
+			Room temp = new Room (Wall_prefab, c1,c2,c3,c4);
 			// first round culling
 			if (temp.area > minArea && temp.area < maxArea) {
 				roomsList[i] = temp;
