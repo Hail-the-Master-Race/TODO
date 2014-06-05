@@ -76,7 +76,9 @@ public class Corridor {
 				//prefab code
 				GameObject.Instantiate(corridor_sec, current+2*Vector3.Cross(inc,Vector3.up),Quaternion.identity);
 				GameObject.Instantiate(corridor_sec, current+2*Vector3.Cross(inc,Vector3.down),Quaternion.identity);
-
+				GameObject empty = new GameObject ("corridornodes");
+				empty.tag = "node";
+				empty.transform.position = current + inc;
 				current += inc*1.0f;
 			}
 		}

@@ -99,8 +99,32 @@ public class Room{//: MonoBehaviour {
 				//prefab generation
 					GameObject.Instantiate(wall_sec, current,Quaternion.identity);
 					current = current + inc*1.0f;
+					
 				}
 			}
+		Vector3 newnodes = (current + center) / 2;
+		Vector3 newnodes2 = new Vector3((current.x + center.x)/2, center.y, center.z);
+		Vector3 newnodes3 = new Vector3((center.x + current.x)/2, (current.y + center.y)/2, center.z);
+
+
+		GameObject empty = new GameObject ("roomnodes");
+		empty.tag = "node";
+		empty.transform.position = center;
+		GameObject empty2 = new GameObject ("roomnodes2");
+		empty2.tag = "node";
+		empty2.transform.position = newnodes;
+		GameObject empty3 = new GameObject ("roomnodes3");
+		empty3.tag = "node";
+		empty3.transform.position = newnodes2;
+		GameObject empty4 = new GameObject ("roomnodes4");
+		empty4.tag = "node";
+		empty4.transform.position = newnodes3;
+//		GameObject empty5 = new GameObject ("roomnodes4");
+//		empty4.tag = "node";
+//		empty4.transform.position = new Vector3 (current.x, center.y, center.z);
+//		GameObject empty6 = new GameObject ("roomnodes4");
+//		empty4.tag = "node";
+//		empty4.transform.position = new Vector3 (current.x, center.y, center.z);
 		}
 		public void BuildWalls(){
 			// cycle through each wall

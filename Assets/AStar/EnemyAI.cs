@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
 	//my target object
 	public Transform target;
 	Transform myTransform; 
-	public float speed = 3f;
+	public float speed = 4f;
 	
 	enum State
 	{ 
@@ -49,18 +49,22 @@ public class EnemyAI : MonoBehaviour
 		
 		float distance = Vector3.Distance (new Vector3(transform.position.x,0,transform.position.z), new Vector3(target.position.x,0,target.position.z));
 		
-		if (distance >= 10f) {
+		if (distance >= 13f) {
+			MoveOrder(target.position);
+
 			enemyAnimator.Play("Idle");
 			return;
 		}
 		
 		if (distance < 2f && distance >= 1f){//move if distance from target is greater than 1
+			MoveOrder(target.position);
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 			enemyAnimator.Play ("Walk");
 		}
 		
 		if (distance < 1f) {
-			speed = 0f;
+			MoveOrder(target.position);
+//			speed = 0f;
 			enemyAnimator.Play("Lumbering");
 			return;
 		}
