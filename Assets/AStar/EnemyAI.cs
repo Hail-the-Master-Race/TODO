@@ -26,12 +26,15 @@ public class EnemyAI : MonoBehaviour
 	float checkTime = 0;
 	float elapsedTime = 0;
 
+	Animation enemyAnimator;
+
 	void Awake()
 	{
 		myTransform = transform;
 		GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
 		control = (Node)cam.GetComponent(typeof(Node));
 		target = GameObject.FindWithTag("Player").transform;
+		enemyAnimator = this.gameObject.GetComponent<Animation> ();
 
 	}
 	
@@ -41,8 +44,22 @@ public class EnemyAI : MonoBehaviour
 		transform.LookAt(new Vector3(target.position.x, 0, target.position.z));
 		//transform.Rotate(new Vector3(0,-90,0),Space.Self);//correcting the original rotation
 
-		if (Vector3.Distance(transform.position,target.position)<5f){//move if distance from target is greater than 1
+		float distance = Vector3.Distance (transform.position, target.position);
+
+		if (distance >= 5f) {
+			enemyAnimator.Play("Idle");
+			return;
+		}
+
+		if (distance < 5f && distance >= 2){//move if distance from target is greater than 1
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
+			enemyAnimator.Play ("Walk");
+		}
+
+		if (distance < 2) {
+			speed = 0f;
+			enemyAnimator.Play("Lumbering");
+			return;
 		}
 
 		m_speed = Time.deltaTime * m_speed_multi;
@@ -71,8 +88,10 @@ public class EnemyAI : MonoBehaviour
 						onNode = false;
 						if (nodeIndex < path.Count)
 							currNode = path[nodeIndex];
-					} else
+					} else {
 						MoveToward();
+						enemyAnimator.Play ("Walk");
+					}
 				}
 				break;
 			}
