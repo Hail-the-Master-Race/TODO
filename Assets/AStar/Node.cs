@@ -3,95 +3,93 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Node : MonoBehaviour {
-	/* Pathfinding Algorithm: 
-	 * are there nodes in the set? if no -> return failer 
-	 * if so, get node with the lowest "score". if it is the target 
+	/* Pathfinding Algorithm:
+	 * are there nodes in the set? if no -> return failer
+	 * if so, get node with the lowest "score". if it is the target
 	 * then return best path to this node. add this node to the set.
 	 * find all of the walkable nodes of this node. and then for each neighbor, calculate the cost
 	 * of reaching the neighbor via the current node. Update the score for the node and store
-	 * it in the set. 
+	 * it in the set.
 	 */
 	public string nodeTag;
-	
+
 	class Point
 	{
 		Vector3 enemy_pos;
 		string curr_state = "unset";
 		float path_score = 0;
 		Point enemy_prevPoint;
-		
+
 		List<Point> ConnectedPathPoints = new List<Point>();
 		List<Point> PotentialPathPoints = new List<Point>();
-		
+
 		public Point(Vector3 pos, string state = "unset")
 		{
 			enemy_pos = pos;
 			curr_state = state;
 		}
-		
+
 		public string GetState()
 		{
 			return curr_state;
 		}
-		
+
 		public Vector3 GetPos()
 		{
 			return enemy_pos;
 		}
-		
+
 		public List<Point> GetConnectedpath_points()
 		{
 			return ConnectedPathPoints;
 		}
-		
+
 		public Point GetPrevPoint()
 		{
 			return enemy_prevPoint;
 		}
-		
+
 		public float GetScore()
 		{
 			return path_score;
 		}
-		
+
 		public List<Point> GetPotentialPrevpath_points()
 		{
 			return PotentialPathPoints;
 		}
-		
+
 		public void AddConnectedPoint(Point point)
 		{
 			ConnectedPathPoints.Add(point);
 		}
-		
+
 		public void AddPotentialPrevPoint(Point point)
 		{
 			PotentialPathPoints.Add(point);
 		}
-		
+
 		public void SetPrevPoint(Point point)
 		{
 			enemy_prevPoint = point;
 		}
-		
+
 		public void SetState(string newState)
 		{
 			curr_state = newState;
 		}
-		
+
 		public void SetScore(float newScore)
 		{
 			path_score = newScore;
 		}
 	}
-	
+
 	public List<Vector3> Path(Vector3 startPos, Vector3 targetPos)
 	{
 		//Can I see the target
 		float targetDistance = Vector3.Distance(startPos, targetPos);
-		if (targetDistance > .7f)
-			targetDistance -= .7f;
-		//if the target and start are the same then just return path with the two nodes
+	  //if the target and start are the same then just return path with the two nodes
 		if (!Physics.Raycast(startPos, targetPos - startPos, targetDistance))
 		{
 			List<Vector3> path = new List<Vector3>();
@@ -111,10 +109,10 @@ public class Node : MonoBehaviour {
 			Point currNode = new Point(n.transform.position);
 			path_points.Add(currNode);
 		}
-		
+
 		Point endPoint = new Point(targetPos, "end");
 
-		foreach(Point p in path_points) 
+		foreach(Point p in path_points)
 		{
 			foreach (Point p2 in path_points)
 			{
@@ -130,7 +128,7 @@ public class Node : MonoBehaviour {
 				p.AddConnectedPoint(endPoint);
 			}
 		}
-		
+
 		//path_points startPos can see
 		foreach (Point p in path_points)
 		{
@@ -143,11 +141,11 @@ public class Node : MonoBehaviour {
 				p.SetScore(distance + Vector3.Distance(targetPos, p.GetPos()));
 			}
 		}
-		
+
 		//Go through until we find the exit or run out of connections
 		bool searchedAll = false;
 		bool targetFound = false;
-		
+
 		while(!searchedAll)
 		{
 			searchedAll = true;
@@ -158,7 +156,7 @@ public class Node : MonoBehaviour {
 				{
 					searchedAll = false;
 					List<Point> potentials = point.GetConnectedpath_points();
-					
+
 					foreach (Point potentialPoint in potentials)
 					{
 						if (potentialPoint.GetState() == "unset")
@@ -201,13 +199,13 @@ public class Node : MonoBehaviour {
 				c.SetPrevPoint(bestPrevPoint);
 			}
 		}
-		
+
 		if (targetFound)
 		{
 			List<Point> bestPath = null;
 			float lowestScore = 0;
 			bool firstRoute = true;
-			
+
 			foreach (Point p in endPoint.GetConnectedpath_points())
 			{
 				float score = 0;
@@ -240,7 +238,7 @@ public class Node : MonoBehaviour {
 					c_Point = c_Point.GetPrevPoint();
 				}
 			}
-			
+
 			bestPath.Reverse();
 			List<Vector3> path = new List<Vector3>();
 			foreach (Point p in bestPath)
@@ -248,7 +246,7 @@ public class Node : MonoBehaviour {
 				path.Add(p.GetPos());
 			}
 			return path;
-		} 
+		}
 		else
 		{
 			return null;
